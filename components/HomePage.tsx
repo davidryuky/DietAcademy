@@ -15,7 +15,7 @@ export const HomePage: React.FC = () => {
             <div className="hidden md:hidden bg-white p-2 border-b">
                 <a href="#">
                     <img 
-                        src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" 
+                        src="https://dietacademy.jp/img203/common/header/head-banner-mob-subscription.png" 
                         alt="ダイエットに特化した資格講座" 
                         className="w-full h-auto"
                     />
@@ -46,10 +46,10 @@ export const HomePage: React.FC = () => {
                 <AnimatedSection>
                     <MoreInfo />
                 </AnimatedSection>
-                <AnimatedSection>
-                    <FAQ />
-                </AnimatedSection>
             </PageContentLayout>
+            <AnimatedSection>
+                <FAQ />
+            </AnimatedSection>
         </>
     );
 };
