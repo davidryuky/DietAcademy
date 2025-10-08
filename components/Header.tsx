@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ className, onItemClick }) => (
     <ul className={className}>
-        <li><a href="/" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Home</a></li>
-        <li><a href="/test" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Test</a></li>
+        <li><a href="#/" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Home</a></li>
+        <li><a href="#/test" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Test</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コース案内​</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>メリット・活用法​</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>受講生の声</a></li>
@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
                 <div className="w-full max-w-7xl mx-auto px-4">
                     <div className="flex items-center justify-between py-2">
                         <div className="flex items-center">
-                            <a href="/" className="flex-shrink-0">
+                            <a href="#/" className="flex-shrink-0">
                                 <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" />
                             </a>
                              <a href="#" className="ml-5 transition-opacity hover:opacity-80">
