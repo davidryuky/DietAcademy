@@ -46,10 +46,10 @@ export const HomePage: React.FC = () => {
                 <AnimatedSection>
                     <MoreInfo />
                 </AnimatedSection>
+                <AnimatedSection className="my-16">
+                    <FAQ />
+                </AnimatedSection>
             </PageContentLayout>
-            <AnimatedSection>
-                <FAQ />
-            </AnimatedSection>
         </>
     );
 };
