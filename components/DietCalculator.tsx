@@ -19,7 +19,7 @@ const FormInputRow: React.FC<{ label: string; name: string; value: string; unit:
             id={name} 
             value={value} 
             onChange={onChange} 
-            className="w-24 rounded border bg-slate-50 border-slate-300 p-1 text-black text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" 
+            className="w-24 rounded-md border bg-white border-slate-300 p-1 text-slate-800 text-center transition duration-200 ease-in-out placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
             placeholder={placeholder}
         />
         <span className="text-sm text-slate-700">{unit}</span>
@@ -173,11 +173,11 @@ export const DietCalculator: React.FC = () => {
                         </div>
                         
                         <div className="space-y-2.5 pt-1">
-                            <FormInputRow label="年齢" name="age" value={formData.age} unit="歳" placeholder="" onChange={handleInputChange} />
-                            <FormInputRow label="身長" name="height" value={formData.height} unit="cm" placeholder="" onChange={handleInputChange} />
-                            <FormInputRow label="体重" name="weight" value={formData.weight} unit="kg" placeholder="" onChange={handleInputChange} />
-                            <FormInputRow label="目標体重" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="" onChange={handleInputChange} />
-                            <FormInputRow label="目標期間" name="months" value={formData.months} unit="ヶ月" placeholder="" onChange={handleInputChange} />
+                            <FormInputRow label="年齢" name="age" value={formData.age} unit="歳" placeholder="例: 30" onChange={handleInputChange} />
+                            <FormInputRow label="身長" name="height" value={formData.height} unit="cm" placeholder="例: 165" onChange={handleInputChange} />
+                            <FormInputRow label="体重" name="weight" value={formData.weight} unit="kg" placeholder="例: 60" onChange={handleInputChange} />
+                            <FormInputRow label="目標体重" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="例: 55" onChange={handleInputChange} />
+                            <FormInputRow label="目標期間" name="months" value={formData.months} unit="ヶ月" placeholder="例: 3" onChange={handleInputChange} />
                         </div>
 
                         {/* Activity Level Slider */}
