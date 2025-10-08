@@ -17,7 +17,7 @@ const sidebarLinks = [
 const SidebarLink: React.FC<{ href: string; text: string; }> = ({ href, text }) => (
     <a 
         href={href} 
-        className="group flex justify-between items-center w-full p-3 bg-white rounded-lg border border-slate-200 shadow-sm text-sm font-semibold text-slate-700 transition-all duration-300 hover:shadow-md hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600"
+        className="group flex justify-between items-center w-full p-3 bg-white rounded-lg border border-slate-200 shadow-sm text-sm font-semibold text-slate-700 transition-all duration-300 hover:shadow-md hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 hover:-translate-y-0.5 transform"
     >
         <span>{text}</span>
         <i className="fas fa-chevron-right text-slate-400 group-hover:text-blue-500 transition-colors duration-300 ml-2"></i>

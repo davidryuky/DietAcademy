@@ -51,9 +51,9 @@ export const Footer: React.FC = () => {
                 </div>
             </div>
             <div className="flex space-x-4 mt-6">
-              <a href="#" aria-label="YouTube" className="text-slate-400 hover:text-white transition-colors duration-300"><i className="fab fa-youtube text-2xl"></i></a>
-              <a href="#" aria-label="X" className="text-slate-400 hover:text-white transition-colors duration-300"><i className="fab fa-twitter text-2xl"></i></a>
-              <a href="#" aria-label="Facebook" className="text-slate-400 hover:text-white transition-colors duration-300"><i className="fab fa-facebook-f text-2xl"></i></a>
+              <a href="#" aria-label="YouTube" className="text-slate-400 hover:text-white transition-all duration-300 transform hover:scale-110"><i className="fab fa-youtube text-2xl"></i></a>
+              <a href="#" aria-label="X" className="text-slate-400 hover:text-white transition-all duration-300 transform hover:scale-110"><i className="fab fa-twitter text-2xl"></i></a>
+              <a href="#" aria-label="Facebook" className="text-slate-400 hover:text-white transition-all duration-300 transform hover:scale-110"><i className="fab fa-facebook-f text-2xl"></i></a>
             </div>
           </div>
         </div>
