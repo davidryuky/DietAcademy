@@ -148,7 +148,7 @@ export const DietCalculator: React.FC = () => {
                 {/* Left Side: Form */}
                 <div className="w-full md:w-3/5 p-6 md:p-8 relative">
                     <div
-                        className="md:hidden absolute inset-0 bg-no-repeat bg-contain bg-left opacity-30 pointer-events-none"
+                        className="md:hidden absolute inset-0 bg-no-repeat bg-contain bg-left opacity-60 pointer-events-none"
                         style={{ backgroundImage: "url('https://dietacademy.jp/img2023/calculate/calcu-girl.jpg')" }}
                     ></div>
                     <div className="relative">
@@ -200,7 +200,7 @@ export const DietCalculator: React.FC = () => {
                                         step="1"
                                         value={currentActivityIndex}
                                         onChange={handleActivityChange}
-                                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600"
+                                        className="w-full h-3 bg-gradient-to-r from-red-300 via-yellow-300 to-sky-400 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-blue-500"
                                     />
                                     <div className="flex justify-between text-xs text-slate-500 mt-1">
                                         <span>座り仕事</span>
