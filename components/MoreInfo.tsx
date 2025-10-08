@@ -17,15 +17,19 @@ export const MoreInfo: React.FC = () => {
     return (
         <div className="space-y-12">
             {/* Banner Section */}
-            <div className="text-center">
-                <h2 className="text-2xl font-bold text-blue-800 mb-6">ダイエットマスター<br className="sm:hidden" />資格取得</h2>
-                <div className="max-w-xs mx-auto p-4 border rounded-lg shadow-lg bg-white group">
-                    <a href="#" className="overflow-hidden block rounded-md">
-                        <img src="https://dietacademy.jp/img2023/toppage/banner-img6.jpg" alt="痩せる・太るには理由" className="w-full transition-transform duration-300 group-hover:scale-105"/>
-                    </a>
-                    <p className="text-sm mt-3 text-slate-600">痩せる・太るには理由がありますが</p>
-                    <h3 className="font-bold my-2 text-slate-800">人間が痩せるには、基本的に<br />二つの理由しかありません</h3>
-                    <a href="#" className="text-blue-600 hover:underline font-semibold text-sm">詳しく見る &raquo;</a>
+            <div>
+                <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">ダイエットマスター<br className="sm:hidden" />資格取得</h2>
+                <div className="border rounded-lg shadow-lg bg-white group overflow-hidden flex flex-col md:flex-row items-center">
+                    <div className="w-full md:w-1/3">
+                        <a href="#" className="block overflow-hidden">
+                            <img src="https://dietacademy.jp/img2023/toppage/banner-img6.jpg" alt="痩せる・太るには理由" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"/>
+                        </a>
+                    </div>
+                    <div className="p-6 text-center md:text-left md:w-2/3">
+                        <p className="text-sm text-slate-600">痩せる・太るには理由がありますが</p>
+                        <h3 className="font-bold my-2 text-slate-800 text-xl">人間が痩せるには、基本的に<br />二つの理由しかありません</h3>
+                        <a href="#" className="text-blue-600 hover:underline font-semibold text-sm inline-block mt-2">詳しく見る &raquo;</a>
+                    </div>
                 </div>
             </div>
             

@@ -14,9 +14,9 @@ const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ 
 const DesktopActionButton: React.FC<{ href: string; icon: string; text: string; className?: string }> = ({ href, icon, text, className }) => (
     <a
         href={href}
-        className={`flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 shadow-sm ${className}`}
+        className={`flex items-center justify-center px-5 py-2.5 text-base font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 ${className}`}
     >
-        <i className={`fas ${icon} mr-2`}></i>
+        <i className={`fas ${icon} mr-2.5`}></i>
         <span>{text}</span>
     </a>
 );
@@ -92,9 +92,9 @@ export const Header: React.FC = () => {
                              </a>
                         </div>
                         
-                        <div className="flex items-center space-x-3">
-                           <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-orange-500 hover:bg-orange-600 text-white border border-orange-600" />
-                           <DesktopActionButton href="#" icon="fa-right-to-bracket" text="会員ログイン" className="bg-slate-700 hover:bg-slate-800 text-white border border-slate-800" />
+                        <div className="flex items-center space-x-4">
+                           <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-orange-500 hover:bg-orange-600 text-white" />
+                           <DesktopActionButton href="#" icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
                         </div>
                     </div>
                 </div>

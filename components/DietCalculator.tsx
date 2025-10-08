@@ -84,8 +84,8 @@ const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
 
 const FormInputRow: React.FC<{ label: string; name: string; value: string; unit: string; placeholder: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; }> = ({ label, name, value, unit, placeholder, onChange }) => (
     <div className="flex items-center space-x-2">
-        <span className="text-blue-500 text-xs w-3 text-center">►</span>
-        <label htmlFor={name} className="w-24 flex-shrink-0 text-sm text-slate-700">{label}：</label>
+        <i className="fas fa-caret-right text-blue-500 fa-sm w-4 text-center"></i>
+        <label htmlFor={name} className="w-20 flex-shrink-0 text-sm text-slate-700">{label}：</label>
         <input 
             type="number" 
             name={name} 
@@ -184,10 +184,10 @@ export const DietCalculator: React.FC = () => {
                     <p className="text-sm text-slate-600 mb-6 max-w-md">
                         ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
                     </p>
-                    <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+                    <form onSubmit={handleSubmit} className="space-y-3 max-w-md">
                         <p className="text-sm text-slate-500">（数値は半角で入力）</p>
 
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-3">
                             <label className="flex items-center cursor-pointer text-sm">
                                 <input type="radio" name="gender" value="female" checked={formData.gender === 'female'} onChange={handleGenderChange} className="sr-only peer"/>
                                 <span className="w-4 h-4 rounded-full border border-slate-400 mr-2 flex items-center justify-center peer-checked:border-blue-500 peer-checked:bg-blue-100 transition">
@@ -205,14 +205,14 @@ export const DietCalculator: React.FC = () => {
                             <span className="text-sm text-slate-500">（性別をチェック）</span>
                         </div>
                         
-                        <div className="space-y-3 pt-2">
+                        <div className="space-y-2.5 pt-1">
                             <FormInputRow label="年齢" name="age" value={formData.age} unit="歳" placeholder="" onChange={handleInputChange} />
                             <FormInputRow label="身長" name="height" value={formData.height} unit="cm" placeholder="" onChange={handleInputChange} />
                             <FormInputRow label="体重" name="weight" value={formData.weight} unit="kg" placeholder="" onChange={handleInputChange} />
                             <FormInputRow label="目標体重" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="" onChange={handleInputChange} />
                             <div className="flex items-center space-x-2">
-                                <span className="text-blue-500 text-xs w-3 text-center">►</span>
-                                <label htmlFor="months" className="w-24 flex-shrink-0 text-sm text-slate-700"></label>
+                                <i className="fas fa-caret-right text-blue-500 fa-sm w-4 text-center"></i>
+                                <label htmlFor="months" className="w-20 flex-shrink-0 text-sm text-slate-700"></label>
                                 <input type="number" name="months" id="months" value={formData.months} onChange={handleInputChange} className="w-24 rounded border bg-slate-50 border-slate-300 p-1 text-black text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
                                 <span className="text-sm text-slate-700">ヶ月で、なりたい！</span>
                             </div>
