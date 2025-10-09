@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ className, onItemClick }) => (
     <ul className={className}>
-        <li><a href="#/" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Home</a></li>
-        <li><a href="#/test" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Test</a></li>
+        <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Home</Link></li>
+        <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Test</Link></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コース案内​</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>メリット・活用法​</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>受講生の声</a></li>
@@ -61,9 +62,9 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
                 <div className="w-full max-w-7xl mx-auto px-4">
                     <div className="flex items-center justify-between py-2">
                         <div className="flex items-center">
-                            <a href="#/" className="flex-shrink-0">
+                            <Link to="/" className="flex-shrink-0">
                                 <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" />
-                            </a>
+                            </Link>
                              <a href="#" className="ml-5 transition-opacity hover:opacity-80">
                                 <img alt="ダイエットに特化した資格講座" src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" />
                              </a>

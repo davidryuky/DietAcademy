@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // Centralize the links for the mobile drawer
 const mobileMenuLinks = [
@@ -26,13 +27,29 @@ interface MobileDrawerProps {
     onClose: () => void;
 }
 
-const renderLink = (link, key, onClose) => (
-    <li key={key} className={`${link.isBold ? 'font-bold text-base' : ''} transition-colors hover:text-blue-500`}>
-        <a href={link.href} onClick={onClose} className="block py-2">
-            {link.text}
-        </a>
-    </li>
-);
+const renderLink = (link, key, onClose) => {
+    const isRoutable = link.href.startsWith('#/');
+    const toPath = link.href.substring(1); // remove '#'
+
+    if (!isRoutable) {
+        return (
+            <li key={key} className={`${link.isBold ? 'font-bold text-base' : ''} transition-colors hover:text-blue-500`}>
+                <a href={link.href} onClick={onClose} className="block py-2">
+                    {link.text}
+                </a>
+            </li>
+        );
+    }
+
+    return (
+        <li key={key} className={`${link.isBold ? 'font-bold text-base' : ''} transition-colors hover:text-blue-500`}>
+            <Link to={toPath} onClick={onClose} className="block py-2">
+                {link.text}
+            </Link>
+        </li>
+    );
+}
+
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) => {
     useEffect(() => {
