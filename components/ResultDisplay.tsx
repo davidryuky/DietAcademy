@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { ResultData } from '../types';
 
 const BmiGauge: React.FC<{ bmi: number }> = ({ bmi }) => {
@@ -106,11 +106,57 @@ const MetricDisplay: React.FC<{ icon: string; label: string; value: string; unit
     </div>
 );
 
+const LeadGenerationForm: React.FC = () => {
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+    const handlePlanSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // Here you would typically send the email to a server
+        setFormSubmitted(true);
+    };
+
+    if (formSubmitted) {
+        return (
+            <div className="text-center p-6 bg-green-50 border border-green-200 rounded-lg">
+                <i className="fas fa-check-circle text-4xl text-green-500 mb-3"></i>
+                <h3 className="text-lg font-bold text-green-800">ありがとうございます！</h3>
+                <p className="text-sm text-green-700">
+                    あなたの受信トレイに無料ダイエットプランを送信しました。今日からあなたの健康的な旅を始めましょう！
+                </p>
+            </div>
+        );
+    }
+    
+    return (
+        <div className="text-center p-6 bg-blue-50 border border-blue-200 rounded-lg">
+            <h3 className="text-lg font-bold text-blue-800">次のステップへ進みましょう！</h3>
+            <p className="text-sm text-blue-700 mt-2 mb-4">
+                この結果に基づいた無料のスターターダイエットプランをメールで受け取り、目標達成への第一歩を踏み出しましょう。
+            </p>
+            <form onSubmit={handlePlanSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                <input
+                    type="email"
+                    placeholder="メールアドレスを入力"
+                    required
+                    className="flex-grow px-4 py-2 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                />
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-sm hover:bg-blue-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                    <i className="fas fa-paper-plane mr-2"></i>
+                    無料プランを送信
+                </button>
+            </form>
+        </div>
+    );
+};
+
 export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
     return (
         <div className="bg-white rounded-lg w-full">
             {data.warningMessage && (
-                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm text-yellow-800" role="alert">
+                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm text-yellow-800" role="alert">
                     <div className="flex">
                         <div className="flex-shrink-0">
                             <i className="fas fa-exclamation-triangle mr-3 mt-1"></i>
@@ -123,7 +169,7 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                  <div className="p-4 bg-slate-50 rounded-lg">
                      <p className="font-medium text-slate-600 text-center mb-1">あなたのBMI値</p>
                      <p className="text-4xl font-bold text-blue-600 text-center mb-3">{data.bmi.toFixed(2)}</p>
@@ -139,7 +185,7 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
                 </div>
             </div>
             
-            <hr className="my-6 border-slate-200" />
+            <hr className="my-4 border-slate-200" />
 
             <div>
                 <h4 className="text-lg font-bold text-slate-700 mb-4 text-center">カロリープラン ({data.months}ヶ月目標)</h4>
@@ -150,6 +196,10 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
                 </div>
                 <CalorieBreakdownChart tdee={data.tdee} intake={data.dailyIntake} bmr={data.bmr} />
             </div>
+
+            <hr className="my-4 border-slate-200" />
+            
+            <LeadGenerationForm />
 
         </div>
     );

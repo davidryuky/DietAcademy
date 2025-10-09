@@ -4,41 +4,48 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-900 text-slate-300">
       <div className="w-full max-w-7xl mx-auto pt-16 pb-8 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* About Section */}
-          <div className="space-y-4">
-            <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-8" />
+        {/*
+          Mobile: flex-col with links in a 2-col grid
+          MD+: grid layout, using `md:contents` to flatten the link wrapper
+        */}
+        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* About Section - Centered on mobile */}
+          <div className="space-y-4 text-center md:text-left">
+            <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-8 mx-auto md:mx-0" />
             <p className="text-sm text-slate-400">
               元祖ダイエット機関として、誰もが納得できる正攻法なダイエットの知識と理論を学び、あなたの目標達成をサポートします。
             </p>
           </div>
-          
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">クイックリンク</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors duration-300">コース案内</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">メリット・活用法</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">受講生の声</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">よくある質問</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">コラム</a></li>
-            </ul>
-          </div>
 
-          {/* Legal Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">会社情報</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors duration-300">概要</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">サイト利用規約</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">特定商取引法に基づく表示</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">サイトマップ</a></li>
-            </ul>
+          {/* Links Wrapper: 2-col on mobile, disappears on md+ to become part of parent grid */}
+          <div className="grid grid-cols-2 gap-8 md:contents">
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">クイックリンク</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors duration-300">コース案内</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">メリット・活用法</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">受講生の声</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">よくある質問</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">コラム</a></li>
+              </ul>
+            </div>
+
+            {/* Legal Links */}
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">会社情報</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors duration-300">概要</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">サイト利用規約</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">特定商取引法に基づく表示</a></li>
+                <li><a href="#" className="hover:text-white transition-colors duration-300">サイトマップ</a></li>
+              </ul>
+            </div>
           </div>
           
-          {/* Contact & Social */}
-          <div>
+          {/* Contact & Social - Centered on mobile */}
+          <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold text-white mb-4">お問い合わせ</h4>
             <div className="space-y-4 text-sm">
                 <div className="flex items-center">

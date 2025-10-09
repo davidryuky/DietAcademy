@@ -42,7 +42,7 @@ export const ResultModal: React.FC<ResultModalProps> = ({ isOpen, onClose, data 
         className="bg-slate-50 rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto transform animate-scale-up flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 bg-white p-4 border-b z-10 flex justify-between items-center flex-shrink-0">
+        <div className="sticky top-0 bg-white p-3 border-b z-10 flex justify-between items-center flex-shrink-0">
             <h2 className="text-xl font-bold text-slate-800">あなたのダイエットプラン</h2>
             <button 
               onClick={onClose} 
@@ -52,7 +52,7 @@ export const ResultModal: React.FC<ResultModalProps> = ({ isOpen, onClose, data 
                 <i className="fas fa-times text-xl"></i>
             </button>
         </div>
-        <div className="p-6">
+        <div className="p-4">
             <ResultCard data={data} />
         </div>
       </div>
