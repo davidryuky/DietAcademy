@@ -10,7 +10,7 @@ export const FAQ: React.FC = () => {
           <div className="flex items-center justify-center gap-3">
             <i className="fas fa-question-circle text-3xl text-blue-500"></i>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-800">
-              ダイエットについて よくある質問 
+              ダイエットについて よくある質問
             </h2>
           </div>
           <p className="mt-3 text-lg text-slate-500 max-w-2xl mx-auto">
