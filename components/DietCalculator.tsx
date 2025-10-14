@@ -36,8 +36,8 @@ const ModernFormInput: React.FC<{
                     placeholder={placeholder}
                 />
             </div>
-            {/* Unit. bg-slate-100/70, rounded-r-md */}
-            <span className="inline-flex items-center justify-center w-16 bg-slate-100/70 text-slate-600 text-sm border border-l-0 border-slate-200 rounded-r-md">
+            {/* Unit. bg-slate-100, rounded-r-md */}
+            <span className="inline-flex items-center justify-center w-16 bg-slate-100 text-slate-600 text-sm border border-l-0 border-slate-200 rounded-r-md">
                 {unit}
             </span>
         </div>
