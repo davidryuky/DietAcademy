@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { ResultData } from '../types';
 
 const BmiGauge: React.FC<{ bmi: number }> = ({ bmi }) => {
@@ -106,51 +106,27 @@ const MetricDisplay: React.FC<{ icon: string; label: string; value: string; unit
     </div>
 );
 
-const LeadGenerationForm: React.FC = () => {
-    const [formSubmitted, setFormSubmitted] = useState(false);
-
-    const handlePlanSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        // Here you would typically send the email to a server
-        setFormSubmitted(true);
-    };
-
-    if (formSubmitted) {
-        return (
-            <div className="text-center p-6 bg-green-50 border border-green-200 rounded-lg">
-                <i className="fas fa-check-circle text-4xl text-green-500 mb-3"></i>
-                <h3 className="text-lg font-bold text-green-800">ありがとうございます！</h3>
-                <p className="text-sm text-green-700">
-                    あなたの受信トレイに無料ダイエットプランを送信しました。今日からあなたの健康的な旅を始めましょう！
-                </p>
-            </div>
-        );
-    }
-    
+const CallToAction: React.FC = () => {
     return (
-        <div className="text-center p-6 bg-blue-50 border border-blue-200 rounded-lg">
-            <h3 className="text-lg font-bold text-blue-800">次のステップへ進みましょう！</h3>
-            <p className="text-sm text-blue-700 mt-2 mb-4">
-                この結果に基づいた無料のスターターダイエットプランをメールで受け取り、目標達成への第一歩を踏み出しましょう。
+        <div className="text-center p-6 bg-emerald-50 border-t-4 border-emerald-300 rounded-lg mt-4">
+            <i className="fas fa-leaf text-4xl text-emerald-500 mb-3"></i>
+            <h3 className="text-xl font-bold text-emerald-800">一歩先のパーソナル診断へ</h3>
+            <p className="text-sm text-emerald-700 mt-2 mb-6 max-w-md mx-auto">
+                あなたのライフスタイルや目標に合わせた、より詳細なプランニングで、ダイエットの成功を確実にしませんか？
             </p>
-            <form onSubmit={handlePlanSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-                <input
-                    type="email"
-                    placeholder="メールアドレスを入力"
-                    required
-                    className="flex-grow px-4 py-2 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                />
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-sm hover:bg-blue-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                    <i className="fas fa-paper-plane mr-2"></i>
-                    無料プランを送信
-                </button>
-            </form>
+            <a
+                href="https://dietacademy.jp/diet-diagnose-form/contact.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-emerald-500/50 transform hover:-translate-y-1"
+            >
+                <i className="fas fa-file-signature mr-3 text-xl"></i>
+                <span>さらに詳しいダイエット診断はこちらから</span>
+            </a>
         </div>
     );
 };
+
 
 export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
     return (
@@ -199,7 +175,7 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
 
             <hr className="my-4 border-slate-200" />
             
-            <LeadGenerationForm />
+            <CallToAction />
 
         </div>
     );
