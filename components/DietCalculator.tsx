@@ -9,9 +9,9 @@ const activityLevels = [
   { value: 1.725, label: '激しい運動（週6〜7日）' }, // Very Active
 ];
 
-const FormInputRow: React.FC<{ label: string; name: string; value: string; unit: string; placeholder: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; }> = ({ label, name, value, unit, placeholder, onChange }) => (
+const FormInputRow: React.FC<{ icon: string; label: string; name: string; value: string; unit: string; placeholder: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; }> = ({ icon, label, name, value, unit, placeholder, onChange }) => (
     <div className="flex items-center space-x-2">
-        <i className="fas fa-caret-right text-blue-500 fa-sm w-4 text-center"></i>
+        <i className={`fas ${icon} text-slate-500 fa-fw w-5 text-center`}></i>
         <label htmlFor={name} className="w-20 flex-shrink-0 text-sm text-slate-700">{label}：</label>
         <input 
             type="number" 
@@ -19,7 +19,7 @@ const FormInputRow: React.FC<{ label: string; name: string; value: string; unit:
             id={name} 
             value={value} 
             onChange={onChange} 
-            className="w-24 rounded-md border bg-white border-slate-300 p-1 text-slate-800 text-center transition duration-200 ease-in-out placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
+            className="w-28 rounded-md border bg-white border-slate-300 p-1 text-slate-800 text-center transition duration-200 ease-in-out placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
             placeholder={placeholder}
         />
         <span className="text-sm text-slate-700">{unit}</span>
@@ -146,14 +146,14 @@ export const DietCalculator: React.FC = () => {
         <section id="calculator" className="bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden">
             <div className="flex flex-col md:flex-row">
                 {/* Left Side: Form */}
-                <div className="w-full md:w-3/5 p-6 md:p-8 relative">
+                <div className="w-full md:w-3/5 p-8 md:p-10 relative">
                     <div
-                        className="md:hidden absolute inset-0 bg-no-repeat bg-contain bg-left opacity-60 pointer-events-none"
+                        className="md:hidden absolute inset-0 bg-no-repeat bg-cover bg-center opacity-60 pointer-events-none"
                         style={{ backgroundImage: "url('https://dietacademy.jp/img2023/calculate/calcu-girl.jpg')" }}
                     ></div>
                     <div className="relative">
                         <img src="https://dietacademy.jp/img2023/toppage/keisan-copy.png" alt="○ヶ月で○kgやせたい？" className="mb-4 w-full max-w-md"/>
-                        <p className="text-sm text-slate-600 mb-6 max-w-md">
+                        <p className="text-base text-slate-600 mb-6 max-w-md">
                             ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
                         </p>
                         <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
@@ -178,17 +178,17 @@ export const DietCalculator: React.FC = () => {
                             </div>
                             
                             <div className="space-y-2.5 pt-1">
-                                <FormInputRow label="年齢" name="age" value={formData.age} unit="歳" placeholder="例: 30" onChange={handleInputChange} />
-                                <FormInputRow label="身長" name="height" value={formData.height} unit="cm" placeholder="例: 165" onChange={handleInputChange} />
-                                <FormInputRow label="体重" name="weight" value={formData.weight} unit="kg" placeholder="例: 60" onChange={handleInputChange} />
-                                <FormInputRow label="目標体重" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="例: 55" onChange={handleInputChange} />
-                                <FormInputRow label="目標期間" name="months" value={formData.months} unit="ヶ月" placeholder="例: 3" onChange={handleInputChange} />
+                                <FormInputRow icon="fa-birthday-cake" label="年齢" name="age" value={formData.age} unit="歳" placeholder="例: 30" onChange={handleInputChange} />
+                                <FormInputRow icon="fa-ruler-vertical" label="身長" name="height" value={formData.height} unit="cm" placeholder="例: 165" onChange={handleInputChange} />
+                                <FormInputRow icon="fa-weight-scale" label="体重" name="weight" value={formData.weight} unit="kg" placeholder="例: 60" onChange={handleInputChange} />
+                                <FormInputRow icon="fa-bullseye" label="目標体重" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="例: 55" onChange={handleInputChange} />
+                                <FormInputRow icon="fa-calendar-alt" label="目標期間" name="months" value={formData.months} unit="ヶ月" placeholder="例: 3" onChange={handleInputChange} />
                             </div>
 
                             {/* Activity Level Slider */}
                             <div className="space-y-2 pt-2">
-                                <div className="flex items-baseline space-x-2">
-                                   <i className="fas fa-caret-right text-blue-500 fa-sm w-4 text-center"></i>
+                                <div className="flex items-center space-x-2">
+                                   <i className="fas fa-person-running text-slate-500 fa-fw w-5 text-center"></i>
                                    <label className="text-sm text-slate-700">活動レベル：</label>
                                    <span className="font-semibold text-blue-600 text-sm">{activityLevels[currentActivityIndex]?.label || ''}</span>
                                 </div>
@@ -237,7 +237,7 @@ export const DietCalculator: React.FC = () => {
                 </div>
                 {/* Right Side: Image */}
                 <div className="hidden md:block md:w-2/5 relative min-h-[300px]">
-                    <img src="https://dietacademy.jp/img2023/calculate/calcu-girl.jpg" alt="Diet model" className="absolute inset-0 w-full h-full object-cover object-center" />
+                    <img src="https://dietacademy.jp/img2023/calculate/calcu-girl.jpg" alt="Diet model" className="absolute inset-0 w-full h-full object-cover object-left" />
                 </div>
             </div>
             
