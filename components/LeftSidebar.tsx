@@ -31,11 +31,14 @@ export const LeftSidebar: React.FC = () => {
                 {sidebarLinks.map((link, index) => (
                     <SidebarLink key={index} href={link.href} text={link.text} />
                 ))}
-                 <div className="mt-6 p-4 bg-slate-800 text-white rounded-lg text-center shadow-lg">
-                     <i className="fas fa-phone-alt mb-2 text-xl text-blue-300"></i>
+                 <a 
+                    href="tel:0120945528" 
+                    className="block mt-6 p-4 bg-slate-800 text-white rounded-lg text-center shadow-lg transition-all duration-300 hover:bg-slate-700 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-50 focus:ring-blue-500"
+                 >
+                     <i className="fas fa-phone-alt mb-2 text-2xl text-blue-300 animate-[pulse-glow_3s_ease-in-out_infinite]"></i>
                      <p className="font-bold text-xl tracking-wider">0120-945-528</p>
                      <p className="text-xs text-slate-300 mt-1">お気軽にお問い合わせください</p>
-                 </div>
+                 </a>
             </div>
         </aside>
     );

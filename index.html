@@ -29,6 +29,15 @@
       -moz-osx-font-smoothing: grayscale;
     }
     
+    @keyframes pulse-glow {
+      0%, 100% {
+        text-shadow: 0 0 5px rgba(147, 197, 253, 0.4); /* blue-300 with opacity */
+      }
+      50% {
+        text-shadow: 0 0 15px rgba(147, 197, 253, 0.7);
+      }
+    }
+
     @keyframes fadeInUp {
       from {
         opacity: 0;
