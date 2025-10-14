@@ -1,16 +1,47 @@
 import React from 'react';
 
-const ThreeColumnItem: React.FC<{ title: string; children: React.ReactNode; className: string; }> = ({ title, children, className }) => (
-    <div className="flex-1 border rounded-lg overflow-hidden shadow-sm bg-white flex flex-col">
-        <dl className="flex flex-col h-full">
-            <dt className={`p-4 text-white font-bold text-center text-lg ${className}`}>
-               {title}
-            </dt>
-            <dd className="p-4 text-sm text-center text-slate-600 flex-grow flex flex-col justify-center">
-                <div>{children}</div>
-            </dd>
-        </dl>
+const FeatureCard: React.FC<{
+  title: string;
+  icon: string;
+  iconColorClass: string;
+  borderColorClass: string;
+  children: React.ReactNode;
+}> = ({ title, icon, iconColorClass, borderColorClass, children }) => (
+    <div className={`flex-1 bg-white p-6 rounded-lg shadow-md border-t-4 ${borderColorClass} hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-start space-x-5`}>
+        <div className="flex-shrink-0 mt-1">
+            <i className={`fas ${icon} text-4xl ${iconColorClass}`}></i>
+        </div>
+        <div>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">{title}</h3>
+            <div className="text-slate-700 font-medium space-y-2">
+                {children}
+            </div>
+        </div>
     </div>
+);
+
+
+const InfoButton: React.FC<{
+  href: string;
+  title: React.ReactNode;
+  className: string;
+  iconClassName: string;
+}> = ({ href, title, className, iconClassName }) => (
+  <a
+    href={href}
+    className={`flex-1 block group rounded-lg shadow-md text-white overflow-hidden transition-all duration-300 transform hover:shadow-xl hover:-translate-y-1 ${className}`}
+  >
+    <div className="p-6 h-full flex justify-between items-center min-h-[100px]">
+      <div className="flex-grow">
+        <h3 className="text-2xl font-bold leading-tight">{title}</h3>
+      </div>
+      <div className="ml-4 flex-shrink-0">
+        <i
+          className={`fas fa-play-circle text-5xl opacity-80 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100 ${iconClassName}`}
+        ></i>
+      </div>
+    </div>
+  </a>
 );
 
 export const MoreInfo: React.FC = () => {
@@ -41,28 +72,46 @@ export const MoreInfo: React.FC = () => {
                 <a href="#" className="inline-block transition-opacity hover:opacity-80"><img src="https://dietacademy.jp/img2023/toppage/btn-voices.jpg" alt="受講生の体験談" className="mx-auto md:hidden max-w-full h-auto"/></a>
             </div>
 
-            {/* Three Column Section */}
+            {/* Feature Cards Section */}
             <div className="flex flex-col md:flex-row gap-6">
-                <ThreeColumnItem title="受講及びダイエット期間" className="bg-orange-500">
-                    平均 半月〜3ヶ月で学んで痩せることができます。
-                    <br />
-                    <span className="text-xs block mt-1 text-slate-500">新陳代謝がひとまわりする期間を想定しています</span>
-                </ThreeColumnItem>
-                <ThreeColumnItem title="受講及びダイエット方法" className="bg-cyan-500">
-                    スマホやタブレットでいつでもどこでも動画中心で学習できます！
-                    <br />
-                    <span className="text-xs block mt-1 text-slate-500">イラストを多用した分かりやすい内容です。</span>
-                </ThreeColumnItem>
+                <FeatureCard 
+                    title="受講及びダイエット期間" 
+                    icon="fa-calendar-check" 
+                    iconColorClass="text-orange-500" 
+                    borderColorClass="border-orange-500"
+                >
+                    <p>平均 半月〜3ヶ月で学んで痩せることができます。</p>
+                    <p className="text-xs text-slate-500">
+                        新陳代謝がひとまわりする期間を想定しています
+                    </p>
+                </FeatureCard>
+                <FeatureCard 
+                    title="受講及びダイエット方法" 
+                    icon="fa-mobile-screen-button" 
+                    iconColorClass="text-cyan-500"
+                    borderColorClass="border-cyan-500"
+                >
+                    <p>スマホやタブレットでいつでもどこでも動画中心で学習できます！</p>
+                    <p className="text-xs text-slate-500">
+                        イラストを多用した分かりやすい内容です。
+                    </p>
+                </FeatureCard>
             </div>
 
             {/* Bottom Buttons */}
             <div className="flex flex-col md:flex-row gap-6">
-                <a href="#" className="flex-1 block group">
-                    <img src="https://dietacademy.jp/img2023/toppage/btn-katsuyaku.jpg" alt="ダイエットマスターの活躍" className="w-full rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:brightness-105" />
-                </a>
-                <a href="#" className="flex-1 block group">
-                    <img src="https://dietacademy.jp/img2023/toppage/btn-effect.jpg" alt="ダイエットマスターはこんな方に効果的です" className="w-full rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:brightness-105" />
-                </a>
+                 <InfoButton
+                    href="#"
+                    title="ダイエットマスターの活躍"
+                    className="bg-gradient-to-br from-sky-500 to-blue-600"
+                    iconClassName="text-blue-200"
+                />
+                <InfoButton
+                    href="#"
+                    title={<>ダイエットマスターの理論は<br />こんな方に効果的です</>}
+                    className="bg-gradient-to-br from-teal-500 to-cyan-600"
+                    iconClassName="text-cyan-200"
+                />
             </div>
         </div>
     );
