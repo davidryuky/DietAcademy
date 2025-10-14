@@ -88,10 +88,15 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
             {/* Mobile Header - Redesigned for a cleaner and more professional look */}
             <div className="md:hidden w-full bg-white shadow-md">
                  {/* Top Bar: Logo & Menu Toggle */}
-                 <div className="flex items-center justify-between px-4 py-3">
-                    <Link to="/" className="flex-shrink-0">
-                        <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-7"/>
-                    </Link>
+                 <div className="flex items-center justify-between px-4 py-1">
+                    <div className="flex items-center gap-3">
+                        <Link to="/" className="flex-shrink-0">
+                            <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-12"/>
+                        </Link>
+                        <a href="#" className="transition-opacity hover:opacity-80">
+                           <img src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" alt="ダイエットに特化した資格講座" className="h-12"/>
+                        </a>
+                    </div>
                     
                     <button 
                         onClick={onMenuToggle} 
