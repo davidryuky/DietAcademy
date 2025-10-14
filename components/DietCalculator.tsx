@@ -9,23 +9,40 @@ const activityLevels = [
   { value: 1.725, label: '激しい運動（週6〜7日）' }, // Very Active
 ];
 
-const FormInputRow: React.FC<{ icon: string; label: string; name: string; value: string; unit: string; placeholder: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; }> = ({ icon, label, name, value, unit, placeholder, onChange }) => (
-    <div className="flex items-center space-x-2">
-        <i className={`fas ${icon} text-slate-500 fa-fw w-5 text-center`}></i>
-        <label htmlFor={name} className="w-20 flex-shrink-0 text-sm text-slate-700">{label}：</label>
-        <input 
-            type="number" 
-            name={name} 
-            id={name} 
-            value={value} 
-            onChange={onChange} 
-            className="w-28 rounded-md border bg-white border-slate-300 p-1 text-slate-800 text-center transition duration-200 ease-in-out placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
-            placeholder={placeholder}
-        />
-        <span className="text-sm text-slate-700">{unit}</span>
+const ModernFormInput: React.FC<{
+    icon: string;
+    name: string;
+    value: string;
+    unit: string;
+    placeholder: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}> = ({ icon, name, value, unit, placeholder, onChange }) => (
+    <div className="group">
+        <div className="flex items-stretch focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 transition-all duration-300 rounded-md">
+            {/* Input with icon. bg-white, rounded-l-md */}
+            <div className="flex-grow flex items-stretch bg-white shadow-inner border border-r-0 border-slate-200 rounded-l-md">
+                <span className="inline-flex items-center pl-3 pr-2 text-slate-400">
+                    <i className={`fas ${icon} fa-fw`}></i>
+                </span>
+                <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    name={name}
+                    id={name}
+                    value={value}
+                    onChange={onChange}
+                    className="w-full bg-transparent p-2 text-slate-800 text-center placeholder:text-slate-400 focus:outline-none"
+                    placeholder={placeholder}
+                />
+            </div>
+            {/* Unit. bg-slate-100/70, rounded-r-md */}
+            <span className="inline-flex items-center justify-center w-16 bg-slate-100/70 text-slate-600 text-sm border border-l-0 border-slate-200 rounded-r-md">
+                {unit}
+            </span>
+        </div>
     </div>
 );
-
 
 export const DietCalculator: React.FC = () => {
     const [formData, setFormData] = useState<DietFormData>({
@@ -44,11 +61,14 @@ export const DietCalculator: React.FC = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        // Allow only numbers
+        if (/^\d*$/.test(value)) {
+           setFormData(prev => ({ ...prev, [name]: value }));
+        }
     };
     
-    const handleGenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData(prev => ({ ...prev, gender: e.target.value as 'female' | 'male'}));
+    const handleGenderChange = (gender: 'female' | 'male') => {
+        setFormData(prev => ({ ...prev, gender }));
     };
 
     const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,8 +103,7 @@ export const DietCalculator: React.FC = () => {
 
         const heightInMeters = numHeight / 100;
         const bmi = numWeight / (heightInMeters * heightInMeters);
-
-        // Switched to Mifflin-St Jeor equation for better accuracy
+        
         let bmr: number;
         if (gender === 'male') {
             bmr = (10 * numWeight) + (6.25 * numHeight) - (5 * numAge) + 5;
@@ -98,7 +117,6 @@ export const DietCalculator: React.FC = () => {
         const dailyCalorieDeficit = totalCaloriesToLose / (numMonths * 30);
         
         const tdee = bmr * activityLevel;
-        
         const calculatedDailyIntake = tdee - dailyCalorieDeficit;
         
         let warningMessage: string | undefined = undefined;
@@ -143,56 +161,50 @@ export const DietCalculator: React.FC = () => {
     };
 
     return (
-        <section id="calculator" className="bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden">
+        <section id="calculator" className="rounded-lg shadow-lg border border-slate-200 overflow-hidden">
             <div className="flex flex-col md:flex-row">
                 {/* Left Side: Form */}
-                <div className="w-full md:w-3/5 p-8 md:p-10 relative">
+                <div className="w-full md:w-3/5 p-6 md:p-8 relative">
                     <div
-                        className="md:hidden absolute inset-0 bg-no-repeat bg-cover bg-center opacity-60 pointer-events-none"
+                        className="md:hidden absolute inset-0 bg-no-repeat bg-cover bg-center opacity-50 pointer-events-none"
                         style={{ backgroundImage: "url('https://dietacademy.jp/img2023/calculate/calcu-girl.jpg')" }}
                     ></div>
                     <div className="relative">
                         <img src="https://dietacademy.jp/img2023/toppage/keisan-copy.png" alt="○ヶ月で○kgやせたい？" className="mb-4 w-full max-w-md"/>
-                        <p className="text-base text-slate-600 mb-6 max-w-md">
+                        <p className="text-base text-slate-600 mb-6 max-w-lg" style={{textShadow: '0 1px 2px rgba(255,255,255,0.5)'}}>
                             ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
                         </p>
-                        <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
-                            <p className="text-sm text-slate-500">（数値は半角で入力）</p>
-
-                            <div className="flex items-center space-x-3">
-                                <label className="flex items-center cursor-pointer text-sm">
-                                    <input type="radio" name="gender" value="female" checked={formData.gender === 'female'} onChange={handleGenderChange} className="sr-only peer"/>
-                                    <span className="w-4 h-4 rounded-full border border-slate-400 mr-2 flex items-center justify-center peer-checked:border-blue-500 peer-checked:bg-blue-100 transition">
-                                        <span className="w-2 h-2 rounded-full bg-transparent peer-checked:bg-blue-500 transition"></span>
-                                    </span>
-                                    女性
-                                </label>
-                                 <label className="flex items-center cursor-pointer text-sm">
-                                    <input type="radio" name="gender" value="male" checked={formData.gender === 'male'} onChange={handleGenderChange} className="sr-only peer"/>
-                                    <span className="w-4 h-4 rounded-full border border-slate-400 mr-2 flex items-center justify-center peer-checked:border-blue-500 peer-checked:bg-blue-100 transition">
-                                         <span className="w-2 h-2 rounded-full bg-transparent peer-checked:bg-blue-500 transition"></span>
-                                    </span>
-                                    男性
-                                </label>
-                                <span className="text-sm text-slate-500">（性別をチェック）</span>
+                        <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
+                            {/* Gender Toggle */}
+                            <div className="relative flex items-center justify-center w-full max-w-xs p-1 bg-slate-200/70 rounded-full mx-auto">
+                                <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
+                                <button type="button" onClick={() => handleGenderChange('female')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'female' ? 'text-slate-800' : 'text-slate-500'}`}>
+                                    <i className="fas fa-venus mr-2 text-pink-500"></i> 女性
+                                </button>
+                                <button type="button" onClick={() => handleGenderChange('male')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'male' ? 'text-slate-800' : 'text-slate-500'}`}>
+                                    <i className="fas fa-mars mr-2 text-blue-500"></i> 男性
+                                </button>
                             </div>
                             
-                            <div className="space-y-2.5 pt-1">
-                                <FormInputRow icon="fa-birthday-cake" label="年齢" name="age" value={formData.age} unit="歳" placeholder="例: 30" onChange={handleInputChange} />
-                                <FormInputRow icon="fa-ruler-vertical" label="身長" name="height" value={formData.height} unit="cm" placeholder="例: 165" onChange={handleInputChange} />
-                                <FormInputRow icon="fa-weight-scale" label="体重" name="weight" value={formData.weight} unit="kg" placeholder="例: 60" onChange={handleInputChange} />
-                                <FormInputRow icon="fa-bullseye" label="目標体重" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="例: 55" onChange={handleInputChange} />
-                                <FormInputRow icon="fa-calendar-alt" label="目標期間" name="months" value={formData.months} unit="ヶ月" placeholder="例: 3" onChange={handleInputChange} />
+                            {/* Input Grid */}
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+                                <ModernFormInput icon="fa-birthday-cake" name="age" value={formData.age} unit="歳" placeholder="年齢" onChange={handleInputChange} />
+                                <ModernFormInput icon="fa-ruler-vertical" name="height" value={formData.height} unit="cm" placeholder="身長" onChange={handleInputChange} />
+                                <ModernFormInput icon="fa-weight-scale" name="weight" value={formData.weight} unit="kg" placeholder="現在の体重" onChange={handleInputChange} />
+                                <ModernFormInput icon="fa-bullseye" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="目標体重" onChange={handleInputChange} />
+                                <div className="col-span-2">
+                                    <ModernFormInput icon="fa-calendar-alt" name="months" value={formData.months} unit="ヶ月" placeholder="目標期間" onChange={handleInputChange} />
+                                </div>
                             </div>
 
                             {/* Activity Level Slider */}
-                            <div className="space-y-2 pt-2">
-                                <div className="flex items-center space-x-2">
+                            <div className="space-y-3 pt-2">
+                               <div className="flex items-center space-x-2">
                                    <i className="fas fa-person-running text-slate-500 fa-fw w-5 text-center"></i>
                                    <label className="text-sm text-slate-700">活動レベル：</label>
                                    <span className="font-semibold text-blue-600 text-sm">{activityLevels[currentActivityIndex]?.label || ''}</span>
                                 </div>
-                                <div className="px-5">
+                                <div className="px-1">
                                     <input
                                         type="range"
                                         min="0"
@@ -200,7 +212,7 @@ export const DietCalculator: React.FC = () => {
                                         step="1"
                                         value={currentActivityIndex}
                                         onChange={handleActivityChange}
-                                        className="w-full h-3 bg-gradient-to-r from-red-300 via-yellow-300 to-sky-400 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-blue-500"
+                                        className="w-full h-2 bg-gradient-to-r from-rose-400 to-sky-400 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-blue-500"
                                     />
                                     <div className="flex justify-between text-xs text-slate-500 mt-1">
                                         <span>座り仕事</span>
@@ -209,10 +221,10 @@ export const DietCalculator: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="pt-3">
+                            <div className="pt-4 text-center">
                                  <button 
                                     type="submit" 
-                                    className="w-full max-w-xs flex items-center justify-center px-10 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:scale-105 disabled:bg-slate-400 disabled:scale-100 disabled:cursor-not-allowed"
+                                    className="w-full max-w-sm flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-500/50 transform hover:-translate-y-1 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-md disabled:cursor-not-allowed disabled:translate-y-0"
                                     disabled={isLoading}
                                 >
                                     {isLoading ? (
@@ -225,12 +237,12 @@ export const DietCalculator: React.FC = () => {
                                         </Fragment>
                                     ) : (
                                         <Fragment>
-                                           <i className="fas fa-calculator mr-2"></i>
-                                           計算する
+                                           <i className="fas fa-wand-magic-sparkles mr-3"></i>
+                                           あなたのプランを計算
                                         </Fragment>
                                     )}
                                 </button>
-                                 {error && <p className="text-red-600 text-sm mt-3 text-center font-semibold" role="alert">{error}</p>}
+                                 {error && <p className="text-red-600 text-sm mt-4 font-semibold" role="alert">{error}</p>}
                             </div>
                         </form>
                     </div>
