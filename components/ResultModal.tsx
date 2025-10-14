@@ -52,7 +52,7 @@ export const ResultModal: React.FC<ResultModalProps> = ({ isOpen, onClose, data 
                 <i className="fas fa-times text-xl"></i>
             </button>
         </div>
-        <div className="p-4">
+        <div className="p-3">
             <ResultCard data={data} />
         </div>
       </div>

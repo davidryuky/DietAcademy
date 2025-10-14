@@ -55,7 +55,7 @@ const CalorieBreakdownChart: React.FC<{ tdee: number; intake: number; bmr: numbe
     const intakePercent = (intake / tdee) * 100;
     
     return (
-        <div className="w-full p-4 bg-slate-50 rounded-lg mt-4">
+        <div className="w-full p-3 bg-slate-50 rounded-lg mt-3">
             <div className="relative w-full h-8 bg-blue-100 rounded mb-2">
                 <div 
                     className="absolute top-0 bottom-0 h-full bg-green-300 rounded-l" 
@@ -97,8 +97,8 @@ const CalorieBreakdownChart: React.FC<{ tdee: number; intake: number; bmr: numbe
 };
 
 const MetricDisplay: React.FC<{ icon: string; label: string; value: string; unit: string; iconBg: string; }> = ({ icon, label, value, unit, iconBg }) => (
-    <div className="bg-slate-50 p-4 rounded-lg flex flex-col items-center text-center h-full">
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white ${iconBg} mb-3 flex-shrink-0`}>
+    <div className="bg-slate-50 p-3 rounded-lg flex flex-col items-center text-center h-full">
+        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white ${iconBg} mb-2 flex-shrink-0`}>
             <i className={`fas ${icon} text-xl`}></i>
         </div>
         <p className="text-sm text-slate-600 flex-grow">{label}</p>
@@ -108,10 +108,10 @@ const MetricDisplay: React.FC<{ icon: string; label: string; value: string; unit
 
 const CallToAction: React.FC = () => {
     return (
-        <div className="text-center p-6 bg-emerald-50 border-t-4 border-emerald-300 rounded-lg mt-4">
+        <div className="text-center p-4 bg-emerald-50 border-t-4 border-emerald-300 rounded-lg mt-3">
             <i className="fas fa-leaf text-4xl text-emerald-500 mb-3"></i>
             <h3 className="text-xl font-bold text-emerald-800">一歩先のパーソナル診断へ</h3>
-            <p className="text-sm text-emerald-700 mt-2 mb-6 max-w-md mx-auto">
+            <p className="text-sm text-emerald-700 mt-2 mb-4 max-w-md mx-auto">
                 あなたのライフスタイルや目標に合わせた、より詳細なプランニングで、ダイエットの成功を確実にしませんか？
             </p>
             <a
@@ -132,7 +132,7 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
     return (
         <div className="bg-white rounded-lg w-full">
             {data.warningMessage && (
-                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm text-yellow-800" role="alert">
+                <div className="mb-3 p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm text-yellow-800" role="alert">
                     <div className="flex">
                         <div className="flex-shrink-0">
                             <i className="fas fa-exclamation-triangle mr-3 mt-1"></i>
@@ -145,7 +145,7 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                  <div className="p-4 bg-slate-50 rounded-lg">
                      <p className="font-medium text-slate-600 text-center mb-1">あなたのBMI値</p>
                      <p className="text-4xl font-bold text-blue-600 text-center mb-3">{data.bmi.toFixed(2)}</p>
@@ -161,11 +161,11 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
                 </div>
             </div>
             
-            <hr className="my-4 border-slate-200" />
+            <hr className="my-3 border-slate-200" />
 
             <div>
-                <h4 className="text-lg font-bold text-slate-700 mb-4 text-center">カロリープラン ({data.months}ヶ月目標)</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <h4 className="text-lg font-bold text-slate-700 mb-2 text-center">カロリープラン ({data.months}ヶ月目標)</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <MetricDisplay icon="fa-bed" label="基礎代謝量 (BMR)" value={Math.round(data.bmr).toLocaleString()} unit="kcal" iconBg="bg-orange-500" />
                     <MetricDisplay icon="fa-person-running" label="1日の消費カロリー (TDEE)" value={Math.round(data.tdee).toLocaleString()} unit="kcal" iconBg="bg-blue-500" />
                     <MetricDisplay icon="fa-utensils" label="1日の摂取カロリー目安" value={Math.round(data.dailyIntake).toLocaleString()} unit="kcal" iconBg="bg-green-500" />
@@ -173,7 +173,7 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
                 <CalorieBreakdownChart tdee={data.tdee} intake={data.dailyIntake} bmr={data.bmr} />
             </div>
 
-            <hr className="my-4 border-slate-200" />
+            <hr className="my-3 border-slate-200" />
             
             <CallToAction />
 
