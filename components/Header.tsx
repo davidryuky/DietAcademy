@@ -23,10 +23,11 @@ const DesktopActionButton: React.FC<{ href: string; icon: string; text: string; 
     </a>
 );
 
-const MobileHeaderButton: React.FC<{ href: string; icon?: string; text: string; className?: string; }> = ({ href, icon, text, className }) => (
-    <a href={href} className={`flex-1 flex flex-col items-center justify-center text-white p-2 rounded-md shadow-sm text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 ${className}`}>
-       {icon && <i className={`fas ${icon} text-lg mb-1`}></i>}
-       <span className="text-[10px] font-bold leading-tight tracking-tight uppercase">{text}</span>
+// Redesigned Mobile Action Button for a cleaner, modern look
+const MobileActionButton: React.FC<{ href: string; icon: string; text: string; colorClass: string; }> = ({ href, icon, text, colorClass }) => (
+    <a href={href} className={`flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none ${colorClass}`}>
+       <i className={`fas ${icon} fa-fw text-2xl`}></i>
+       <span className="text-xs font-semibold mt-1.5 tracking-tight">{text}</span>
     </a>
 );
 
@@ -84,29 +85,32 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
             </nav>
 
 
-            {/* Mobile Header */}
-            <div className="md:hidden w-full bg-white border-t-4 border-pink-500 shadow-md">
-                 <div className="flex items-center justify-between px-2 py-2 space-x-2 border-b-2 border-sky-300">
+            {/* Mobile Header - Redesigned for a cleaner and more professional look */}
+            <div className="md:hidden w-full bg-white shadow-md">
+                 {/* Top Bar: Logo & Menu Toggle */}
+                 <div className="flex items-center justify-between px-4 py-3">
+                    <Link to="/" className="flex-shrink-0">
+                        <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-7"/>
+                    </Link>
+                    
                     <button 
                         onClick={onMenuToggle} 
-                        className="flex flex-col items-center justify-center w-16 text-slate-700 flex-shrink-0"
-                        aria-label="Open menu"
+                        className="relative z-20 flex flex-col items-center justify-center w-10 h-10"
+                        aria-label="メニューを開閉する"
                         aria-expanded={isMenuOpen}
                     >
-                        <i className="fas fa-bars text-3xl"></i>
-                        <span className="text-xs font-bold text-pink-500">MENU</span>
+                        <span className={`block w-6 h-0.5 bg-slate-800 rounded-full transition-transform duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}></span>
+                        <span className={`block w-6 h-0.5 bg-slate-800 rounded-full mt-1.5 transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                        <span className={`block w-6 h-0.5 bg-slate-800 rounded-full mt-1.5 transition-transform duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}></span>
                     </button>
-                    
-                    <div className="flex-shrink-0">
-                         <img src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" alt="2004年創業" className="h-10"/>
-                    </div>
+                </div>
 
-                    <div className="flex-grow flex items-stretch space-x-1.5">
-                        <MobileHeaderButton href="#" text="コース案内" className="bg-pink-600 hover:bg-pink-700" />
-                        <MobileHeaderButton href="#" text="活用法" className="bg-blue-600 hover:bg-blue-700" />
-                        <MobileHeaderButton href="#" icon="fa-file-signature" text="資料請求" className="bg-orange-600 hover:bg-orange-700" />
-                        <MobileHeaderButton href="#" icon="fa-right-to-bracket" text="ログイン" className="bg-slate-700 hover:bg-slate-800" />
-                    </div>
+                {/* Bottom Bar: Action Buttons */}
+                <div className="grid grid-cols-4 border-t border-slate-200 bg-slate-50/50">
+                    <MobileActionButton href="#" text="コース案内" icon="fa-book-open" colorClass="text-sky-600" />
+                    <MobileActionButton href="#" text="活用法" icon="fa-lightbulb" colorClass="text-teal-600" />
+                    <MobileActionButton href="#" text="資料請求" icon="fa-file-signature" colorClass="text-orange-500" />
+                    <MobileActionButton href="#" text="ログイン" icon="fa-right-to-bracket" colorClass="text-slate-600" />
                 </div>
             </div>
         </header>
