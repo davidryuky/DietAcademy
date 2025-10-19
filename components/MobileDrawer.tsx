@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const mobileMenuLinks = [
     { type: 'heading', text: 'メニュー' },
     { type: 'link', text: 'Home', href: '#/', isBold: true },
-    { type: 'link', text: 'Test', href: '#/test', isBold: true },
+    { type: 'link', text: '🤖 TEST', href: '#/test', isBold: true },
     { type: 'link', text: 'コース案内', href: '#', isBold: true },
     { type: 'link', text: 'メリット・活用法', href: '#', isBold: true },
     { type: 'divider' },
