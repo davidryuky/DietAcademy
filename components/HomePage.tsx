@@ -12,10 +12,10 @@ export const HomePage: React.FC = () => {
             <Hero />
 
             {/* Mobile-only Banner */}
-            <div className="hidden md:hidden bg-white p-2 border-b">
+            <div className="block md:hidden bg-white p-2 border-b">
                 <a href="#">
                     <img 
-                        src="https://dietacademy.jp/img203/common/header/head-banner-mob-subscription.png" 
+                        src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" 
                         alt="ダイエットに特化した資格講座" 
                         className="w-full h-auto"
                     />

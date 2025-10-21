@@ -5,8 +5,8 @@ const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ 
     <ul className={className}>
         <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Home</Link></li>
         <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>🤖 TEST</Link></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コース案内​</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>メリット・活用法​</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コース案内</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>メリット・活用法</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>受講生の声</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>よくある質問</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コラム</a></li>
@@ -25,7 +25,7 @@ const DesktopActionButton: React.FC<{ href: string; icon: string; text: string; 
 
 // Redesigned Mobile Action Button for a cleaner, modern look
 const MobileActionButton: React.FC<{ href: string; icon: string; text: string; colorClass: string; }> = ({ href, icon, text, colorClass }) => (
-    <a href={href} className={`flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none ${colorClass}`}>
+    <a href={href} className={`flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 rounded-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 ${colorClass}`}>
        <i className={`fas ${icon} fa-fw text-2xl`}></i>
        <span className="text-xs font-semibold mt-1.5 tracking-tight">{text}</span>
     </a>

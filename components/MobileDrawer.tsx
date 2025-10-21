@@ -1,8 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+// Type definitions for menu items
+type LinkItem = { type: 'link'; text: string; href: string; isBold?: boolean; };
+type HeadingItem = { type: 'heading'; text: string; };
+type DividerItem = { type: 'divider'; };
+type ImageItem = { type: 'image'; src: string; alt: string; };
+type MobileMenuItem = LinkItem | HeadingItem | DividerItem | ImageItem;
+
 // Centralize the links for the mobile drawer
-const mobileMenuLinks = [
+const mobileMenuLinks: MobileMenuItem[] = [
     { type: 'heading', text: 'メニュー' },
     { type: 'link', text: 'Home', href: '#/', isBold: true },
     { type: 'link', text: '🤖 TEST', href: '#/test', isBold: true },
@@ -27,7 +34,7 @@ interface MobileDrawerProps {
     onClose: () => void;
 }
 
-const renderLink = (link, key, onClose) => {
+const renderLink = (link: LinkItem, key: number, onClose: () => void) => {
     const isRoutable = link.href.startsWith('#/');
     const toPath = link.href.substring(1); // remove '#'
 
@@ -86,12 +93,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                                 case 'heading':
                                     return <h3 key={index} id="mobile-menu-heading" className="text-lg font-bold mb-4 border-b pb-2 text-slate-700">{item.text}</h3>;
                                 case 'link':
-                                    // @ts-ignore
                                     return renderLink(item, index, onClose);
                                 case 'divider':
                                     return <li key={index} className="border-t my-2"></li>;
                                 case 'image':
-                                     // @ts-ignore
                                     return <li key={index} className="pt-4"><img src={item.src} alt={item.alt} /></li>;
                                 default:
                                     return null;
