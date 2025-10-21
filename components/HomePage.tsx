@@ -11,8 +11,8 @@ export const HomePage: React.FC = () => {
         <>
             <Hero />
 
-            {/* Mobile-only Banner */}
-            <div className="block md:hidden bg-white p-2 border-b">
+            {/* Mobile-only Banner - Hidden as it is redundant with the header component */}
+            <div className="hidden">
                 <a href="#">
                     <img 
                         src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" 
