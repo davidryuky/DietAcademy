@@ -13,9 +13,6 @@ export const FAQ: React.FC = () => {
           </div>
           {/* Content Body */}
           <div className="p-4 md:p-5">
-              <p className="text-center text-lg text-slate-500 mb-8 max-w-2xl mx-auto">
-                  ダイエットに関するよくある疑問や不明点を解決します。
-              </p>
               <div className="space-y-4">
                   {faqData.map((item, index) => (
                       <FAQItem key={index} question={item.question} answer={item.answer} />
