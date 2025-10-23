@@ -59,7 +59,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                 aria-modal="true"
             >
                 <nav>
-                    <ul className="flex flex-col text-slate-700 divide-y divide-slate-200">
+                    <ul className="flex flex-col text-slate-700 divide-y divide-slate-200 pb-16">
                         {/* Home Link with special styling */}
                         <li>
                             <Link to="/" onClick={onClose} className="flex items-center px-6 py-4 text-base font-bold bg-blue-50 text-blue-700 transition-colors hover:bg-blue-100">
@@ -79,7 +79,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                         ))}
                         
                         {/* Phone Image at the bottom */}
-                        <li className="p-6">
+                        <li className="px-6 pt-6">
                            <a href="tel:0120945528">
                               <img src="https://dietacademy.jp/img2023/common/left-menu/tel.gif" alt="電話番号: 0120-945-528" className="transition-opacity hover:opacity-80" />
                            </a>
