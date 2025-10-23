@@ -16,12 +16,13 @@ const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ 
 const DesktopActionButton: React.FC<{ href: string; icon: string; text: string; className?: string }> = ({ href, icon, text, className }) => (
     <a
         href={href}
-        className={`flex items-center justify-center px-5 py-2.5 text-base font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 ${className}`}
+        className={`flex items-center justify-center px-6 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 ${className}`}
     >
-        <i className={`fas ${icon} mr-2.5`}></i>
+        <i className={`fas ${icon} text-xl mr-3`}></i>
         <span>{text}</span>
     </a>
 );
+
 
 // Redesigned Mobile Action Button for a cleaner, modern look
 const MobileActionButton: React.FC<{ href: string; icon: string; text: string; colorClass: string; }> = ({ href, icon, text, colorClass }) => (
