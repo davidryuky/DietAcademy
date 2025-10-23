@@ -33,12 +33,16 @@ export const LeftSidebar: React.FC = () => {
                 ))}
                  <a 
                     href="tel:0120945528" 
-                    className="block mt-6 p-4 bg-slate-800 text-white rounded-lg text-center shadow-lg transition-all duration-300 hover:bg-slate-700 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-50 focus:ring-blue-500"
+                    className="block mt-6 px-2 py-4 bg-blue-50 border border-blue-200 rounded-xl shadow-md text-center transition-all duration-300 hover:shadow-lg hover:border-blue-300 hover:-translate-y-1"
                  >
-                     <i className="fas fa-phone-alt mb-2 text-2xl text-blue-300 animate-[pulse-glow_3s_ease-in-out_infinite]"></i>
-                     <p className="text-xs text-slate-300 mb-1">お気軽にお問い合わせください</p>
-                     <p className="font-bold text-2xl tracking-wider">0120-945-528</p>
-                     <p className="text-xs text-slate-300 mt-1">受付時間 10:00 ~ 18:00</p>
+                    <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center bg-white rounded-full shadow">
+                       <i className="fas fa-phone-volume text-xl text-blue-600"></i>
+                    </div>
+                    <p className="text-sm font-semibold text-slate-600">お気軽にお問い合わせください</p>
+                    <p className="font-bold text-3xl text-slate-800 my-1 tracking-tight">0120-945-528</p>
+                    <div className="text-xs text-blue-700 font-semibold bg-blue-100 inline-block px-2 py-1 rounded-full mt-1">
+                        受付時間 10:00 ~ 18:00
+                    </div>
                  </a>
             </div>
         </aside>
