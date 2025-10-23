@@ -118,7 +118,7 @@ const CallToAction: React.FC = () => {
                 href="https://dietacademy.jp/diet-diagnose-form/contact.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-emerald-500/50 transform hover:-translate-y-1"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-emerald-500/50 animate-pulse-cta"
             >
                 <i className="fas fa-file-signature mr-3 text-xl"></i>
                 <span>さらに詳しいダイエット診断はこちらから</span>

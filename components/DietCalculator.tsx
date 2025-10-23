@@ -1,13 +1,6 @@
-import React, { useState, useCallback, Fragment, useMemo } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 import type { DietFormData, ResultData } from '../types';
 import { ResultModal } from './ResultModal';
-
-const activityLevels = [
-  { value: 1.2, label: '座り仕事が中心' }, // Sedentary
-  { value: 1.375, label: '軽い運動（週1〜3日）' }, // Lightly Active
-  { value: 1.55, label: '中程度の運動（週3〜5日）' }, // Moderately Active
-  { value: 1.725, label: '激しい運動（週6〜7日）' }, // Very Active
-];
 
 const ModernFormInput: React.FC<{
     icon: string;
@@ -52,7 +45,6 @@ export const DietCalculator: React.FC = () => {
         weight: '',
         targetWeight: '',
         months: '',
-        activityLevel: 1.2,
     });
     const [results, setResults] = useState<ResultData | null>(null);
     const [error, setError] = useState<string>('');
@@ -71,20 +63,8 @@ export const DietCalculator: React.FC = () => {
         setFormData(prev => ({ ...prev, gender }));
     };
 
-    const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const index = parseInt(e.target.value, 10);
-        if (!isNaN(index) && index >= 0 && index < activityLevels.length) {
-            const newMultiplier = activityLevels[index].value;
-            setFormData(prev => ({ ...prev, activityLevel: newMultiplier }));
-        }
-    };
-
-    const currentActivityIndex = useMemo(() => {
-        return activityLevels.findIndex(level => level.value === formData.activityLevel);
-    }, [formData.activityLevel]);
-
     const calculateDietPlan = useCallback(() => {
-        const { age, height, weight, targetWeight, months, gender, activityLevel } = formData;
+        const { age, height, weight, targetWeight, months, gender } = formData;
         const numAge = parseInt(age, 10);
         const numHeight = parseInt(height, 10);
         const numWeight = parseInt(weight, 10);
@@ -116,6 +96,8 @@ export const DietCalculator: React.FC = () => {
         const totalCaloriesToLose = weightToLose * 7200;
         const dailyCalorieDeficit = totalCaloriesToLose / (numMonths * 30);
         
+        // Using a fixed activity level multiplier for a sedentary lifestyle (1.2) for simplicity.
+        const activityLevel = 1.2;
         const tdee = bmr * activityLevel;
         const calculatedDailyIntake = tdee - dailyCalorieDeficit;
         
@@ -126,7 +108,7 @@ export const DietCalculator: React.FC = () => {
         }
         
         if ((tdee - bmr) <= 0 && weightToLose > 0) {
-            setError('現在の設定では、活動レベルを上げない限り健康的な体重減少は困難です。より長い期間を設定するか、専門家にご相談ください。');
+            setError('現在の設定では、健康的な体重減少は困難です。より長い期間を設定するか、専門家にご相談ください。');
             return null;
         }
 
@@ -194,30 +176,6 @@ export const DietCalculator: React.FC = () => {
                                 <ModernFormInput icon="fa-bullseye" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="目標体重" onChange={handleInputChange} />
                                 <div className="col-span-2">
                                     <ModernFormInput icon="fa-calendar-alt" name="months" value={formData.months} unit="ヶ月" placeholder="ヶ月で、なりたい！" onChange={handleInputChange} />
-                                </div>
-                            </div>
-
-                            {/* Activity Level Slider */}
-                            <div className="space-y-2 pt-1">
-                               <div className="flex items-center space-x-2">
-                                   <i className="fas fa-person-running text-slate-500 fa-fw w-5 text-center"></i>
-                                   <label className="text-sm text-slate-700">活動レベル：</label>
-                                   <span className="font-semibold text-blue-600 text-sm">{activityLevels[currentActivityIndex]?.label || ''}</span>
-                                </div>
-                                <div className="px-1">
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max={activityLevels.length - 1}
-                                        step="1"
-                                        value={currentActivityIndex}
-                                        onChange={handleActivityChange}
-                                        className="w-full h-2 bg-gradient-to-r from-rose-400 to-sky-400 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-blue-500"
-                                    />
-                                    <div className="flex justify-between text-xs text-slate-500 mt-1">
-                                        <span>座り仕事</span>
-                                        <span>活発</span>
-                                    </div>
                                 </div>
                             </div>
 

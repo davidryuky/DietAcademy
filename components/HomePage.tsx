@@ -79,7 +79,7 @@ export const HomePage: React.FC = () => {
                             <h2 className="text-2xl md:text-3xl font-bold">ダイエットプランの結果はいかがでしたか？</h2>
                         </div>
                         <div className="p-4 md:p-5">
-                            <div className="text-base text-slate-700 space-y-2 max-w-4xl mx-auto">
+                            <div className="text-base text-slate-700 space-y-4 max-w-4xl mx-auto">
                                 {/* BMI Explanation */}
                                 <div className="p-3 bg-slate-50 border-l-4 border-blue-400 rounded-r-md">
                                     <p className="font-semibold">
@@ -90,18 +90,25 @@ export const HomePage: React.FC = () => {
                                     </p>
                                 </div>
                                 
-                                <p className="text-center md:text-left pt-1">
-                                    <strong>BMI値は例え身長が同じでも体格（肩幅やお腹回り、腰回りなど）により体重が変わって来るようにBMI値も大きく変わってきます。</strong>
-                                </p>
-                                
-                                {/* Points with Links */}
-                                <div className="space-y-2 pt-1">
-                                    <p className="p-2 bg-green-50 rounded-md border border-green-200">
-                                       <strong className="text-green-800">※基礎代謝量</strong>は、<a href="https://dietacademy.jp/calculate/harris.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">ハリス・ベネディクト方程式</a>を元に性別、年齢、身長、体重から計算しています。
+                                {/* Unified Information Block */}
+                                <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-sm md:text-base space-y-4">
+                                    <p>
+                                        <strong>BMI値は例え身長が同じでも体格（肩幅やお腹回り、腰回りなど）により体重が変わって来るようにBMI値も大きく変わってきます。</strong>
                                     </p>
-                                    <p className="p-2 bg-orange-50 rounded-md border border-orange-200">
-                                        <strong className="text-orange-800">※運動消費エネルギー</strong>は、厚生労働省の定める<a href="https://dietacademy.jp/calculate/mets.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">Mets数値</a>（運動の種類によって数値は変わります）により計算しています。
-                                    </p>
+                                    <div className="space-y-3">
+                                        <p className="flex items-start">
+                                            <i className="fas fa-info-circle text-blue-500 mt-1 mr-2.5 flex-shrink-0"></i>
+                                            <span>
+                                                <span className="font-semibold">基礎代謝量</span>は、<a href="https://dietacademy.jp/calculate/harris.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">ハリス・ベネデクト方程式</a>を元に性別、年齢、身長、体重から計算しています。
+                                            </span>
+                                        </p>
+                                        <p className="flex items-start">
+                                            <i className="fas fa-info-circle text-blue-500 mt-1 mr-2.5 flex-shrink-0"></i>
+                                            <span>
+                                                <span className="font-semibold">運動消費エネルギー</span>は、厚生労働省の定める<a href="https://dietacademy.jp/calculate/mets.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">Mets数値</a>（運動の種類によって数値は変わります）により計算しています。
+                                            </span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

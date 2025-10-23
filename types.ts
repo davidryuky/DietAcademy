@@ -5,7 +5,6 @@ export interface DietFormData {
   weight: string;
   targetWeight: string;
   months: string;
-  activityLevel: number;
 }
 
 export interface ResultData {
