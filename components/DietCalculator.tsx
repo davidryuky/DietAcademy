@@ -174,7 +174,7 @@ export const DietCalculator: React.FC = () => {
                         <p className="text-base text-slate-600 mb-6 max-w-lg" style={{textShadow: '0 1px 2px rgba(255,255,255,0.5)'}}>
                             ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
                         </p>
-                        <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
+                        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
                             {/* Gender Toggle */}
                             <div className="relative flex items-center justify-center w-full max-w-xs p-1 bg-slate-200/70 rounded-full mx-auto">
                                 <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
@@ -187,7 +187,7 @@ export const DietCalculator: React.FC = () => {
                             </div>
                             
                             {/* Input Grid */}
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-4">
                                 <ModernFormInput icon="fa-birthday-cake" name="age" value={formData.age} unit="歳" placeholder="年齢" onChange={handleInputChange} />
                                 <ModernFormInput icon="fa-ruler-vertical" name="height" value={formData.height} unit="cm" placeholder="身長" onChange={handleInputChange} />
                                 <ModernFormInput icon="fa-weight-scale" name="weight" value={formData.weight} unit="kg" placeholder="現在の体重" onChange={handleInputChange} />
@@ -198,7 +198,7 @@ export const DietCalculator: React.FC = () => {
                             </div>
 
                             {/* Activity Level Slider */}
-                            <div className="space-y-3 pt-2">
+                            <div className="space-y-2 pt-1">
                                <div className="flex items-center space-x-2">
                                    <i className="fas fa-person-running text-slate-500 fa-fw w-5 text-center"></i>
                                    <label className="text-sm text-slate-700">活動レベル：</label>
@@ -221,7 +221,7 @@ export const DietCalculator: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="pt-4 text-center">
+                            <div className="pt-2 text-center">
                                  <button 
                                     type="submit" 
                                     className="w-full max-w-sm flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-500/50 transform hover:-translate-y-1 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-md disabled:cursor-not-allowed disabled:translate-y-0"
