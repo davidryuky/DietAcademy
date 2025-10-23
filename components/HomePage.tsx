@@ -74,7 +74,7 @@ export const HomePage: React.FC = () => {
                 </AnimatedSection>
                 <AnimatedSection className="my-12">
                     <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-                        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-4 flex items-center justify-center text-center shadow-md">
+                        <div className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white p-4 flex items-center justify-center text-center shadow-md">
                             <i className="fas fa-clipboard-check text-3xl mr-4 hidden sm:block"></i>
                             <h2 className="text-2xl md:text-3xl font-bold">ダイエットプランの結果はいかがでしたか？</h2>
                         </div>
