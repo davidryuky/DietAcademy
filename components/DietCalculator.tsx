@@ -21,7 +21,7 @@ const ModernFormInput: React.FC<{
         <div className="flex items-stretch focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 transition-all duration-300 rounded-md">
             {/* Input with icon. bg-white, rounded-l-md */}
             <div className="flex-grow flex items-stretch bg-white shadow-inner border border-r-0 border-slate-200 rounded-l-md">
-                <span className="inline-flex items-center pl-3 pr-2 text-slate-400">
+                <span className="inline-flex items-center pl-2 pr-1 text-slate-400">
                     <i className={`fas ${icon} fa-fw`}></i>
                 </span>
                 <input
@@ -32,7 +32,7 @@ const ModernFormInput: React.FC<{
                     id={name}
                     value={value}
                     onChange={onChange}
-                    className="w-full bg-transparent p-2 text-slate-800 text-center placeholder:text-slate-400 focus:outline-none"
+                    className="w-full bg-transparent p-2 text-slate-800 text-center placeholder:text-slate-400 focus:outline-none placeholder:text-sm placeholder:tracking-tighter"
                     placeholder={placeholder}
                 />
             </div>
@@ -187,13 +187,13 @@ export const DietCalculator: React.FC = () => {
                             </div>
                             
                             {/* Input Grid */}
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                                 <ModernFormInput icon="fa-birthday-cake" name="age" value={formData.age} unit="歳" placeholder="年齢" onChange={handleInputChange} />
                                 <ModernFormInput icon="fa-ruler-vertical" name="height" value={formData.height} unit="cm" placeholder="身長" onChange={handleInputChange} />
                                 <ModernFormInput icon="fa-weight-scale" name="weight" value={formData.weight} unit="kg" placeholder="現在の体重" onChange={handleInputChange} />
                                 <ModernFormInput icon="fa-bullseye" name="targetWeight" value={formData.targetWeight} unit="kgに" placeholder="目標体重" onChange={handleInputChange} />
                                 <div className="col-span-2">
-                                    <ModernFormInput icon="fa-calendar-alt" name="months" value={formData.months} unit="ヶ月" placeholder="目標期間" onChange={handleInputChange} />
+                                    <ModernFormInput icon="fa-calendar-alt" name="months" value={formData.months} unit="ヶ月" placeholder="ヶ月で、なりたい！" onChange={handleInputChange} />
                                 </div>
                             </div>
 

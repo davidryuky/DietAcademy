@@ -27,19 +27,37 @@ export const HomePage: React.FC = () => {
                     <DietCalculator />
                 </AnimatedSection>
                 <AnimatedSection className="my-12">
-                    <div className="p-6 bg-white rounded-lg shadow-sm border border-slate-200">
-                        <h2 className="text-xl font-bold text-center mb-4 text-slate-700">ダイエットプランの結果はいかがでしたか？</h2>
-                        <div className="text-sm text-slate-600 space-y-4 text-center max-w-3xl mx-auto">
-                            <p>
-                                <strong className="text-blue-600">BMI値（Body Mass Index）とは、</strong>
-                                世界で最も広く使われている肥満判定用の体格指数です。
-                            </p>
-                            <p className="font-semibold bg-slate-100 p-2 rounded-md">
-                                BMI＝体重(kg) ÷ 身長(m) ÷ 身長(m)
-                            </p>
-                            <p>
-                                BMI値は、身長が同じでも体格（肩幅や筋肉量など）によって変わるため、あなたの体型を客観的に知るための重要な指標となります。
-                            </p>
+                    <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-4 flex items-center justify-center text-center shadow-md">
+                            <i className="fas fa-clipboard-check text-3xl mr-4 hidden sm:block"></i>
+                            <h2 className="text-2xl md:text-3xl font-bold">ダイエットプランの結果はいかがでしたか？</h2>
+                        </div>
+                        <div className="p-4 md:p-5">
+                            <div className="text-base text-slate-700 space-y-2 max-w-4xl mx-auto">
+                                {/* BMI Explanation */}
+                                <div className="p-3 bg-slate-50 border-l-4 border-blue-400 rounded-r-md">
+                                    <p className="font-semibold">
+                                        BMI値とは（Body Mass Index）の略で、世界で最も広く使われている肥満判定用の体格指数です。
+                                    </p>
+                                    <p className="mt-2 text-center text-lg font-mono bg-slate-200/70 py-1.5 px-3 rounded-md tracking-wide">
+                                        BMI = 体重(kg) ÷ 身長(m) ÷ 身長(m)
+                                    </p>
+                                </div>
+                                
+                                <p className="text-center md:text-left pt-1">
+                                    <strong>BMI値は例え身長が同じでも体格（肩幅やお腹回り、腰回りなど）により体重が変わって来るようにBMI値も大きく変わってきます。</strong>
+                                </p>
+                                
+                                {/* Points with Links */}
+                                <div className="space-y-2 pt-1">
+                                    <p className="p-2 bg-green-50 rounded-md border border-green-200">
+                                       <strong className="text-green-800">※基礎代謝量</strong>は、<a href="https://dietacademy.jp/calculate/harris.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">ハリス・ベネディクト方程式</a>を元に性別、年齢、身長、体重から計算しています。
+                                    </p>
+                                    <p className="p-2 bg-orange-50 rounded-md border border-orange-200">
+                                        <strong className="text-orange-800">※運動消費エネルギー</strong>は、厚生労働省の定める<a href="https://dietacademy.jp/calculate/mets.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">Mets数値</a>（運動の種類によって数値は変わります）により計算しています。
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </AnimatedSection>
