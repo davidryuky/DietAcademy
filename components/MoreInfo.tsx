@@ -30,7 +30,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
       <h3 className="font-bold my-2 text-slate-800 text-xl">{mainText}</h3>
       <a 
         href={buttonLink} 
-        className="inline-flex items-center justify-center px-6 py-2.5 mt-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transform hover:-translate-y-0.5"
+        className="inline-flex items-center justify-center px-6 py-2.5 mt-4 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:-translate-y-0.5"
       >
         {buttonText} <i className="fas fa-arrow-right ml-2 text-sm"></i>
       </a>

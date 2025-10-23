@@ -170,7 +170,7 @@ export const DietCalculator: React.FC = () => {
                         style={{ backgroundImage: "url('https://dietacademy.jp/img2023/calculate/calcu-girl.jpg')" }}
                     ></div>
                     <div className="relative">
-                        <img src="https://dietacademy.jp/img2023/toppage/keisan-copy.png" alt="○ヶ月で○kgやせたい？" className="mb-4 w-full max-w-md"/>
+                        <img src="https://dietacademy.jp/img2023/toppage/keisan-copy.png" alt="○ヶ月で○kgやせたい？" className="mb-4 w-full"/>
                         <p className="text-base text-slate-600 mb-6 max-w-lg" style={{textShadow: '0 1px 2px rgba(255,255,255,0.5)'}}>
                             ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
                         </p>
