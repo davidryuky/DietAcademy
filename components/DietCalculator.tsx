@@ -1,4 +1,5 @@
-import React, { useState, useCallback, Fragment } from 'react';
+import React, { useState, useCallback, Fragment, useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import type { DietFormData, ResultData } from '../types';
 import { ResultModal } from './ResultModal';
 
@@ -37,6 +38,40 @@ const ModernFormInput: React.FC<{
     </div>
 );
 
+const InfoTooltip: React.FC<{
+  buttonRef: React.RefObject<HTMLButtonElement>;
+}> = ({ buttonRef }) => {
+    const tooltipRef = useRef<HTMLDivElement>(null);
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+
+    useEffect(() => {
+        if (buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect();
+            setPosition({
+                top: rect.top - 8, // 8px gap above the button
+                left: rect.left + rect.width / 2, // Center horizontally
+            });
+        }
+    }, [buttonRef]);
+
+    return ReactDOM.createPortal(
+        <div
+            ref={tooltipRef}
+            style={{
+                top: `${position.top}px`,
+                left: `${position.left}px`,
+            }}
+            className="fixed w-80 p-4 bg-slate-800 text-white text-sm rounded-lg shadow-xl z-50 transform -translate-x-1/2 -translate-y-full animate-fade-in"
+            role="tooltip"
+        >
+            <p className="text-center">ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。</p>
+            <div className="absolute left-1/2 -translate-x-1/2 top-full -mt-px w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800"></div>
+        </div>,
+        document.body
+    );
+};
+
+
 export const DietCalculator: React.FC = () => {
     const [formData, setFormData] = useState<DietFormData>({
         gender: 'female',
@@ -50,6 +85,10 @@ export const DietCalculator: React.FC = () => {
     const [error, setError] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isInfoVisible, setIsInfoVisible] = useState(false);
+    
+    const infoButtonRef = useRef<HTMLButtonElement>(null);
+
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -153,23 +192,42 @@ export const DietCalculator: React.FC = () => {
                     ></div>
                     <div className="relative">
                         <div className="mb-8 text-left">
-                            <h2 className="text-3xl font-bold bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent inline-block leading-tight" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.2)' }}>
-                                ダイエットマスターなら<br />
-                                短期間で、誰でも痩せる!<br />
-                                あなたの希望は何ヶ月で何kg?
-                            </h2>
+                           <div className="flex items-start gap-2">
+                                <h2 className="text-3xl font-bold bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent inline-block leading-tight" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.2)' }}>
+                                    ダイエットマスターなら<br />
+                                    短期間で、誰でも痩せる!<br />
+                                    あなたの希望は何ヶ月で何kg?
+                                </h2>
+                                <div className="relative flex-shrink-0">
+                                    <button
+                                        ref={infoButtonRef}
+                                        type="button"
+                                        onMouseEnter={() => setIsInfoVisible(true)}
+                                        onMouseLeave={() => setIsInfoVisible(false)}
+                                        className="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
+                                        aria-label="計算についての情報を表示"
+                                    >
+                                        <i className="fas fa-info-circle text-xl"></i>
+                                    </button>
+                                     {isInfoVisible && (
+                                        <InfoTooltip buttonRef={infoButtonRef} />
+                                    )}
+                                </div>
+                            </div>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto md:mx-0">
                             {/* Gender Toggle */}
-                            <div className="relative flex items-center justify-center w-full max-w-xs p-1 bg-slate-200/70 rounded-full mx-auto">
-                                <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
-                                <button type="button" onClick={() => handleGenderChange('female')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'female' ? 'text-slate-800' : 'text-slate-500'}`}>
-                                    <i className="fas fa-venus mr-2 text-pink-400"></i> 女性
-                                </button>
-                                <button type="button" onClick={() => handleGenderChange('male')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'male' ? 'text-slate-800' : 'text-slate-500'}`}>
-                                    <i className="fas fa-mars mr-2 text-sky-500"></i> 男性
-                                </button>
+                             <div className="flex items-center justify-center">
+                                <div className="relative flex items-center justify-center flex-grow max-w-xs p-1 bg-slate-200/70 rounded-full">
+                                    <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
+                                    <button type="button" onClick={() => handleGenderChange('female')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'female' ? 'text-slate-800' : 'text-slate-500'}`}>
+                                        <i className="fas fa-venus mr-2 text-pink-400"></i> 女性
+                                    </button>
+                                    <button type="button" onClick={() => handleGenderChange('male')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'male' ? 'text-slate-800' : 'text-slate-500'}`}>
+                                        <i className="fas fa-mars mr-2 text-sky-500"></i> 男性
+                                    </button>
+                                </div>
                             </div>
                             
                             {/* Input Grid */}
