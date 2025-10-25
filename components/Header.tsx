@@ -101,7 +101,7 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
                     
                     <button 
                         onClick={onMenuToggle} 
-                        className="relative z-20 flex flex-col items-center justify-center w-10 h-10"
+                        className="relative z-50 flex flex-col items-center justify-center w-10 h-10"
                         aria-label="メニューを開閉する"
                         aria-expanded={isMenuOpen}
                     >

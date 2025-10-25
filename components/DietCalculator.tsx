@@ -39,109 +39,83 @@ const ModernFormInput: React.FC<{
 );
 
 const InfoTooltip: React.FC<{
-  buttonRef: React.RefObject<HTMLButtonElement>;
-  onClose: () => void;
-}> = ({ buttonRef, onClose }) => {
+    targetRef: React.RefObject<HTMLElement>;
+    onClose: () => void;
+}> = ({ targetRef, onClose }) => {
     const tooltipRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
-    const [orientation, setOrientation] = useState<'top' | 'left'>('top');
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [position, setPosition] = useState({ top: 0, left: 0, arrowClass: '', arrowStyle: {} });
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    useEffect(() => {
-        const handleInteraction = (event: MouseEvent | Event) => {
-            if (event.type === 'scroll') {
-                onClose();
-                return;
-            }
-            if (
-                tooltipRef.current &&
-                !tooltipRef.current.contains((event as MouseEvent).target as Node) &&
-                buttonRef.current &&
-                !buttonRef.current.contains((event as MouseEvent).target as Node)
-            ) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node) && targetRef.current && !targetRef.current.contains(event.target as Node)) {
                 onClose();
             }
         };
+        const handleScroll = () => onClose();
 
-        document.addEventListener('mousedown', handleInteraction);
-        window.addEventListener('scroll', handleInteraction, true);
-
+        document.addEventListener('mousedown', handleClickOutside);
+        window.addEventListener('scroll', handleScroll, true);
         return () => {
-            document.removeEventListener('mousedown', handleInteraction);
-            window.removeEventListener('scroll', handleInteraction, true);
+            document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('scroll', handleScroll, true);
         };
-    }, [onClose, buttonRef]);
-
-    useEffect(() => {
-        if (buttonRef.current) {
-            const rect = buttonRef.current.getBoundingClientRect();
-            const tooltipWidth = 320; 
-            const screenPadding = 16;
-
-            if (isMobile) {
-                const spaceOnLeft = rect.left - 16 - screenPadding;
-                if (spaceOnLeft >= tooltipWidth) {
-                    setOrientation('left');
-                    setPosition({
-                        top: rect.top + rect.height / 2,
-                        left: rect.left - 16,
-                    });
-                } else {
-                    setOrientation('top');
-                    setPosition({
-                        top: rect.top - 8,
-                        left: Math.max(
-                            screenPadding + tooltipWidth / 2,
-                            Math.min(
-                                rect.left + rect.width / 2,
-                                window.innerWidth - screenPadding - tooltipWidth / 2
-                            )
-                        ),
-                    });
-                }
-            } else {
-                setOrientation('top');
-                setPosition({
-                    top: rect.top - 8,
-                    left: rect.left + rect.width / 2,
-                });
-            }
-        }
-    }, [buttonRef, isMobile]);
+    }, [onClose, targetRef]);
     
-    const transformClass = orientation === 'left' 
-        ? '-translate-x-full -translate-y-1/2' 
-        : '-translate-x-1/2 -translate-y-full';
+    useEffect(() => {
+        const updatePosition = () => {
+            if (!targetRef.current || !tooltipRef.current) return;
+            
+            const targetRect = targetRef.current.getBoundingClientRect();
+            const tooltipRect = tooltipRef.current.getBoundingClientRect();
+            const isMobile = window.innerWidth < 768;
+            
+            let top, left, arrowClass, arrowStyle = {};
+            
+            if (isMobile) {
+                // Center tooltip on screen for mobile
+                top = window.innerHeight / 2 - tooltipRect.height / 2;
+                left = window.innerWidth / 2 - tooltipRect.width / 2;
+                
+                // Position arrow on the left, pointing to the button
+                const buttonCenterY = targetRect.top + targetRect.height / 2;
+                const arrowTop = buttonCenterY - top;
 
-    const arrowJsx = orientation === 'left' ? (
-        <div className="absolute top-1/2 -translate-y-1/2 left-full w-0 h-0 border-y-8 border-y-transparent border-l-8 border-l-slate-800"></div>
-    ) : (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800"></div>
-    );
+                arrowClass = 'absolute -left-2 top-0 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-slate-700';
+                arrowStyle = { top: `${arrowTop}px` };
+
+            } else {
+                 // Position above on desktop
+                 top = targetRect.top - tooltipRect.height - 10;
+                 left = targetRect.left + targetRect.width / 2 - tooltipRect.width / 2;
+                 arrowClass = 'absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-slate-700';
+            }
+
+            setPosition({ top, left, arrowClass, arrowStyle });
+        };
+        
+        // A small timeout to ensure the tooltip has rendered and has dimensions
+        const timer = setTimeout(updatePosition, 0);
+
+        window.addEventListener('resize', updatePosition);
+        return () => {
+             clearTimeout(timer);
+             window.removeEventListener('resize', updatePosition);
+        }
+
+    }, [targetRef]);
 
     return ReactDOM.createPortal(
-        <div
+        <div 
             ref={tooltipRef}
-            style={{
-                top: `${position.top}px`,
-                left: `${position.left}px`,
-            }}
-            className={`fixed w-80 p-4 bg-slate-800 text-white text-sm rounded-lg shadow-xl z-50 transform ${transformClass} animate-fade-in`}
-            role="tooltip"
+            className="fixed z-50 bg-slate-700 text-white text-sm rounded-lg shadow-xl p-3 max-w-[280px] animate-fade-in"
+            style={{ top: `${position.top}px`, left: `${position.left}px` }}
         >
-            <p className="text-center">ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。</p>
-            {arrowJsx}
+             ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
+            <div className={position.arrowClass} style={position.arrowStyle}></div>
         </div>,
         document.body
     );
 };
-
 
 export const DietCalculator: React.FC = () => {
     const [formData, setFormData] = useState<DietFormData>({
@@ -157,9 +131,7 @@ export const DietCalculator: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isInfoVisible, setIsInfoVisible] = useState(false);
-    
     const infoButtonRef = useRef<HTMLButtonElement>(null);
-
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -257,40 +229,29 @@ export const DietCalculator: React.FC = () => {
                 <div className="w-full md:w-3/5 p-6 md:p-8 relative">
                     <div
                         className="md:hidden absolute inset-0 bg-no-repeat bg-cover bg-center opacity-50 pointer-events-none"
-                        style={{ backgroundImage: "url('https://dietacademy.jp/img2023/calculate/calcu-girl.jpg')" }}
+                        style={{ backgroundImage: "url('https://i.postimg.cc/j2LMDz8W/calcu-girl-1-copiar.png')" }}
                     ></div>
                     <div className="relative">
                         <div className="mb-8 text-left">
-                           <div className="flex items-start gap-2">
-                                <h2 className="text-3xl font-bold bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent inline-block leading-tight" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.2)' }}>
-                                    ダイエットマスターなら<br />
-                                    短期間で、誰でも痩せる!<br />
-                                    あなたの希望は何ヶ月で何kg?
-                                </h2>
-                                <div className="relative flex-shrink-0">
-                                    <button
-                                        ref={infoButtonRef}
-                                        type="button"
-                                        onClick={() => setIsInfoVisible(prev => !prev)}
-                                        className="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
-                                        aria-label="計算についての情報を表示"
-                                        aria-expanded={isInfoVisible}
-                                    >
-                                        <i className="fas fa-info-circle text-xl"></i>
-                                    </button>
-                                     {isInfoVisible && (
-                                        <InfoTooltip 
-                                            buttonRef={infoButtonRef} 
-                                            onClose={() => setIsInfoVisible(false)} 
-                                        />
-                                    )}
-                                </div>
-                            </div>
+                           <h2 className="text-[1.4rem] sm:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-rose-300 to-pink-400 bg-clip-text text-transparent leading-tight">
+                                ダイエットマスターなら<br />
+                                短期間で、誰でも痩せる!<br />
+                                あなたの希望は何ヶ月で何kg?
+                            </h2>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto md:mx-0">
                             {/* Gender Toggle */}
-                             <div className="flex items-center justify-center">
+                             <div className="flex items-center justify-center gap-3">
+                                 <button
+                                     ref={infoButtonRef}
+                                     type="button"
+                                     onClick={() => setIsInfoVisible(prev => !prev)}
+                                     className="flex-shrink-0 w-10 h-10 rounded-full bg-slate-200 text-slate-600 hover:bg-slate-300 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-rose-300"
+                                     aria-label="計算についての情報を表示"
+                                 >
+                                     <i className="fas fa-info"></i>
+                                 </button>
                                 <div className="relative flex items-center justify-center flex-grow max-w-xs p-1 bg-slate-200/70 rounded-full">
                                     <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
                                     <button type="button" onClick={() => handleGenderChange('female')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'female' ? 'text-slate-800' : 'text-slate-500'}`}>
@@ -313,35 +274,37 @@ export const DietCalculator: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="pt-2 text-center">
-                                 <button 
-                                    type="submit" 
-                                    className="w-full max-w-sm flex items-center justify-center px-10 py-4 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-rose-400/50 transform hover:-translate-y-1 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-md disabled:cursor-not-allowed disabled:translate-y-0"
-                                    disabled={isLoading}
-                                >
-                                    {isLoading ? (
-                                        <Fragment>
-                                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            計算中...
-                                        </Fragment>
-                                    ) : (
-                                        <Fragment>
-                                           <i className="fas fa-wand-magic-sparkles mr-3"></i>
-                                           あなたのプランを計算
-                                        </Fragment>
-                                    )}
-                                </button>
-                                 {error && <p className="text-red-600 text-sm mt-4 font-semibold" role="alert">{error}</p>}
+                            <div className="pt-2">
+                                <div className="flex items-center justify-center gap-3">
+                                    <button 
+                                        type="submit" 
+                                        className="w-full max-w-sm flex items-center justify-center px-10 py-4 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-rose-400/50 transform hover:-translate-y-1 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-md disabled:cursor-not-allowed disabled:translate-y-0"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? (
+                                            <Fragment>
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                計算中...
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                               <i className="fas fa-wand-magic-sparkles mr-3"></i>
+                                               あなたのプランを計算
+                                            </Fragment>
+                                        )}
+                                    </button>
+                                </div>
+                                 {error && <p className="text-red-600 text-sm mt-4 font-semibold text-center" role="alert">{error}</p>}
                             </div>
                         </form>
                     </div>
                 </div>
                 {/* Right Side: Image */}
                 <div className="hidden md:block md:w-2/5 relative min-h-[300px]">
-                    <img src="https://dietacademy.jp/img2023/calculate/calcu-girl.jpg" alt="Diet model" className="absolute inset-0 w-full h-full object-cover object-left" />
+                    <img src="https://i.postimg.cc/j2LMDz8W/calcu-girl-1-copiar.png" alt="Diet model" className="absolute inset-0 w-full h-full object-cover object-left" />
                 </div>
             </div>
             
@@ -350,6 +313,7 @@ export const DietCalculator: React.FC = () => {
                 onClose={() => setIsModalOpen(false)}
                 data={results}
             />
+            {isInfoVisible && <InfoTooltip targetRef={infoButtonRef} onClose={() => setIsInfoVisible(false)} />}
         </section>
     );
 };

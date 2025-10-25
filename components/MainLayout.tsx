@@ -13,7 +13,9 @@ export const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }
       <Header isMenuOpen={isMenuOpen} onMenuToggle={toggleMenu} />
       <MobileDrawer isOpen={isMenuOpen} onClose={toggleMenu} />
       {/* Page-specific content will be rendered here */}
-      {children}
+      <main className={isMenuOpen ? 'hidden' : ''}>
+        {children}
+      </main>
       <Footer />
       <ScrollToTopButton />
     </div>
