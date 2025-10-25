@@ -152,11 +152,15 @@ export const DietCalculator: React.FC = () => {
                         style={{ backgroundImage: "url('https://dietacademy.jp/img2023/calculate/calcu-girl.jpg')" }}
                     ></div>
                     <div className="relative">
-                        <img src="https://dietacademy.jp/img2023/toppage/keisan-copy.png" alt="○ヶ月で○kgやせたい？" className="mb-4 w-full"/>
-                        <p className="text-base text-slate-600 mb-6 max-w-lg" style={{textShadow: '0 1px 2px rgba(255,255,255,0.5)'}}>
-                            ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。
-                        </p>
-                        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
+                        <div className="mb-8 text-left">
+                            <h2 className="text-3xl font-bold bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent inline-block leading-tight" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.2)' }}>
+                                ダイエットマスターなら<br />
+                                短期間で、誰でも痩せる!<br />
+                                あなたの希望は何ヶ月で何kg?
+                            </h2>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto md:mx-0">
                             {/* Gender Toggle */}
                             <div className="relative flex items-center justify-center w-full max-w-xs p-1 bg-slate-200/70 rounded-full mx-auto">
                                 <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
