@@ -43,16 +43,34 @@ const InfoTooltip: React.FC<{
 }> = ({ buttonRef }) => {
     const tooltipRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+    // Update isMobile state on window resize
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Update tooltip position based on screen size and button position
     useEffect(() => {
         if (buttonRef.current) {
             const rect = buttonRef.current.getBoundingClientRect();
-            setPosition({
-                top: rect.top - 8, // 8px gap above the button
-                left: rect.left + rect.width / 2, // Center horizontally
-            });
+            if (isMobile) {
+                // Position to the left of the button for mobile
+                setPosition({
+                    top: rect.top + rect.height / 2,
+                    left: rect.left - 16, // 16px gap
+                });
+            } else {
+                // Position above the button for desktop
+                setPosition({
+                    top: rect.top - 8,
+                    left: rect.left + rect.width / 2,
+                });
+            }
         }
-    }, [buttonRef]);
+    }, [buttonRef, isMobile]);
 
     return ReactDOM.createPortal(
         <div
@@ -61,11 +79,17 @@ const InfoTooltip: React.FC<{
                 top: `${position.top}px`,
                 left: `${position.left}px`,
             }}
-            className="fixed w-80 p-4 bg-slate-800 text-white text-sm rounded-lg shadow-xl z-50 transform -translate-x-1/2 -translate-y-full animate-fade-in"
+            className={`fixed w-80 p-4 bg-slate-800 text-white text-sm rounded-lg shadow-xl z-50 transform ${isMobile ? '-translate-x-full -translate-y-1/2' : '-translate-x-1/2 -translate-y-full'} animate-fade-in`}
             role="tooltip"
         >
             <p className="text-center">ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。</p>
-            <div className="absolute left-1/2 -translate-x-1/2 top-full -mt-px w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800"></div>
+            {isMobile ? (
+                // Right-pointing arrow for mobile (positioned on the right edge of the tooltip)
+                <div className="absolute top-1/2 -translate-y-1/2 left-full -ml-px w-0 h-0 border-y-8 border-y-transparent border-l-8 border-l-slate-800"></div>
+            ) : (
+                // Upward-pointing arrow for desktop (positioned on the bottom edge)
+                <div className="absolute left-1/2 -translate-x-1/2 top-full -mt-px w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800"></div>
+            )}
         </div>,
         document.body
     );
