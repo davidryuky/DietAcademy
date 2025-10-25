@@ -40,30 +40,73 @@ const ModernFormInput: React.FC<{
 
 const InfoTooltip: React.FC<{
   buttonRef: React.RefObject<HTMLButtonElement>;
-}> = ({ buttonRef }) => {
+  onClose: () => void;
+}> = ({ buttonRef, onClose }) => {
     const tooltipRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [orientation, setOrientation] = useState<'top' | 'left'>('top');
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-    // Update isMobile state on window resize
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Update tooltip position based on screen size and button position
+    useEffect(() => {
+        const handleInteraction = (event: MouseEvent | Event) => {
+            if (event.type === 'scroll') {
+                onClose();
+                return;
+            }
+            if (
+                tooltipRef.current &&
+                !tooltipRef.current.contains((event as MouseEvent).target as Node) &&
+                buttonRef.current &&
+                !buttonRef.current.contains((event as MouseEvent).target as Node)
+            ) {
+                onClose();
+            }
+        };
+
+        document.addEventListener('mousedown', handleInteraction);
+        window.addEventListener('scroll', handleInteraction, true);
+
+        return () => {
+            document.removeEventListener('mousedown', handleInteraction);
+            window.removeEventListener('scroll', handleInteraction, true);
+        };
+    }, [onClose, buttonRef]);
+
     useEffect(() => {
         if (buttonRef.current) {
             const rect = buttonRef.current.getBoundingClientRect();
+            const tooltipWidth = 320; 
+            const screenPadding = 16;
+
             if (isMobile) {
-                // Position to the left of the button for mobile
-                setPosition({
-                    top: rect.top + rect.height / 2,
-                    left: rect.left - 16, // 16px gap
-                });
+                const spaceOnLeft = rect.left - 16 - screenPadding;
+                if (spaceOnLeft >= tooltipWidth) {
+                    setOrientation('left');
+                    setPosition({
+                        top: rect.top + rect.height / 2,
+                        left: rect.left - 16,
+                    });
+                } else {
+                    setOrientation('top');
+                    setPosition({
+                        top: rect.top - 8,
+                        left: Math.max(
+                            screenPadding + tooltipWidth / 2,
+                            Math.min(
+                                rect.left + rect.width / 2,
+                                window.innerWidth - screenPadding - tooltipWidth / 2
+                            )
+                        ),
+                    });
+                }
             } else {
-                // Position above the button for desktop
+                setOrientation('top');
                 setPosition({
                     top: rect.top - 8,
                     left: rect.left + rect.width / 2,
@@ -71,6 +114,16 @@ const InfoTooltip: React.FC<{
             }
         }
     }, [buttonRef, isMobile]);
+    
+    const transformClass = orientation === 'left' 
+        ? '-translate-x-full -translate-y-1/2' 
+        : '-translate-x-1/2 -translate-y-full';
+
+    const arrowJsx = orientation === 'left' ? (
+        <div className="absolute top-1/2 -translate-y-1/2 left-full w-0 h-0 border-y-8 border-y-transparent border-l-8 border-l-slate-800"></div>
+    ) : (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800"></div>
+    );
 
     return ReactDOM.createPortal(
         <div
@@ -79,17 +132,11 @@ const InfoTooltip: React.FC<{
                 top: `${position.top}px`,
                 left: `${position.left}px`,
             }}
-            className={`fixed w-80 p-4 bg-slate-800 text-white text-sm rounded-lg shadow-xl z-50 transform ${isMobile ? '-translate-x-full -translate-y-1/2' : '-translate-x-1/2 -translate-y-full'} animate-fade-in`}
+            className={`fixed w-80 p-4 bg-slate-800 text-white text-sm rounded-lg shadow-xl z-50 transform ${transformClass} animate-fade-in`}
             role="tooltip"
         >
             <p className="text-center">ダイエットを始める上で、あなたが最低限知っておかなければならない、あなたの基礎代謝量や摂取カロリー、またBMI、そしてあなたのダイエット期間などが自動計算により確認できます。</p>
-            {isMobile ? (
-                // Right-pointing arrow for mobile (positioned on the right edge of the tooltip)
-                <div className="absolute top-1/2 -translate-y-1/2 left-full -ml-px w-0 h-0 border-y-8 border-y-transparent border-l-8 border-l-slate-800"></div>
-            ) : (
-                // Upward-pointing arrow for desktop (positioned on the bottom edge)
-                <div className="absolute left-1/2 -translate-x-1/2 top-full -mt-px w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800"></div>
-            )}
+            {arrowJsx}
         </div>,
         document.body
     );
@@ -116,7 +163,6 @@ export const DietCalculator: React.FC = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        // Allow only numbers
         if (/^\d*$/.test(value)) {
            setFormData(prev => ({ ...prev, [name]: value }));
         }
@@ -159,7 +205,6 @@ export const DietCalculator: React.FC = () => {
         const totalCaloriesToLose = weightToLose * 7200;
         const dailyCalorieDeficit = totalCaloriesToLose / (numMonths * 30);
         
-        // Using a fixed activity level multiplier for a sedentary lifestyle (1.2) for simplicity.
         const activityLevel = 1.2;
         const tdee = bmr * activityLevel;
         const calculatedDailyIntake = tdee - dailyCalorieDeficit;
@@ -226,15 +271,18 @@ export const DietCalculator: React.FC = () => {
                                     <button
                                         ref={infoButtonRef}
                                         type="button"
-                                        onMouseEnter={() => setIsInfoVisible(true)}
-                                        onMouseLeave={() => setIsInfoVisible(false)}
+                                        onClick={() => setIsInfoVisible(prev => !prev)}
                                         className="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
                                         aria-label="計算についての情報を表示"
+                                        aria-expanded={isInfoVisible}
                                     >
                                         <i className="fas fa-info-circle text-xl"></i>
                                     </button>
                                      {isInfoVisible && (
-                                        <InfoTooltip buttonRef={infoButtonRef} />
+                                        <InfoTooltip 
+                                            buttonRef={infoButtonRef} 
+                                            onClose={() => setIsInfoVisible(false)} 
+                                        />
                                     )}
                                 </div>
                             </div>
