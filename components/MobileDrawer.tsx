@@ -47,14 +47,14 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
         <>
             {/* Overlay */}
             <div 
-                className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 md:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
+                className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
                 onClick={onClose}
                 aria-hidden="true"
             ></div>
 
             {/* Drawer Panel */}
             <div 
-                className={`fixed top-0 left-0 h-screen w-3/4 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 md:hidden border-r border-slate-200 overflow-y-auto ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+                className={`fixed top-0 left-0 h-screen w-3/4 bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50 md:hidden border-r border-slate-300 overflow-y-auto ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
                 role="dialog"
                 aria-modal="true"
             >
@@ -62,8 +62,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                     <ul className="flex flex-col text-slate-700 divide-y divide-slate-200 pb-16">
                         {/* Home Link with special styling */}
                         <li>
-                            <Link to="/" onClick={onClose} className="flex items-center px-6 py-4 text-base font-bold bg-blue-50 text-blue-700 transition-colors hover:bg-blue-100">
-                                <i className="fas fa-home mr-4 w-5 text-center text-blue-600"></i>
+                            <Link to="/" onClick={onClose} className="flex items-center px-6 py-4 text-base font-bold bg-rose-50 text-rose-700 transition-colors hover:bg-rose-100">
+                                <i className="fas fa-home mr-4 w-5 text-center text-rose-600"></i>
                                 Home
                             </Link>
                         </li>
@@ -71,9 +71,9 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                         {/* Dynamically generated menu items */}
                         {menuItems.map((item, index) => (
                             <li key={index}>
-                                <a href={item.href} onClick={onClose} className="group flex items-center justify-between px-6 py-4 text-base font-semibold transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 hover:translate-x-1">
+                                <a href={item.href} onClick={onClose} className="group flex items-center justify-between px-6 py-4 text-base font-semibold transition-all duration-200 hover:bg-rose-50 hover:text-rose-600 hover:translate-x-1">
                                     <span>{item.text}</span>
-                                    <i className="fas fa-chevron-right text-slate-400 group-hover:text-blue-500 transition-colors ml-2"></i>
+                                    <i className="fas fa-chevron-right text-slate-400 group-hover:text-rose-500 transition-colors ml-2"></i>
                                 </a>
                             </li>
                         ))}

@@ -17,10 +17,10 @@ const sidebarLinks = [
 const SidebarLink: React.FC<{ href: string; text: string; }> = ({ href, text }) => (
     <a 
         href={href} 
-        className="group flex justify-between items-center w-full p-3 bg-white rounded-lg border border-slate-200 shadow-sm text-sm font-semibold text-slate-700 transition-all duration-300 hover:shadow-md hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 hover:-translate-y-0.5 transform"
+        className="group flex justify-between items-center w-full p-3 bg-white rounded-lg border border-slate-200 shadow-sm text-sm font-semibold text-slate-700 transition-all duration-300 hover:shadow-md hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 hover:-translate-y-0.5 transform"
     >
         <span>{text}</span>
-        <i className="fas fa-chevron-right text-slate-400 group-hover:text-blue-500 transition-colors duration-300 ml-2"></i>
+        <i className="fas fa-chevron-right text-slate-400 group-hover:text-rose-500 transition-colors duration-300 ml-2"></i>
     </a>
 );
 
@@ -33,14 +33,14 @@ export const LeftSidebar: React.FC = () => {
                 ))}
                  <a 
                     href="tel:0120945528" 
-                    className="block mt-6 px-2 py-4 bg-blue-50 border border-blue-200 rounded-xl shadow-md text-center transition-all duration-300 hover:shadow-lg hover:border-blue-300 hover:-translate-y-1"
+                    className="block mt-6 px-2 py-4 bg-rose-50 border border-rose-200 rounded-xl shadow-md text-center transition-all duration-300 hover:shadow-lg hover:border-rose-300 hover:-translate-y-1"
                  >
                     <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center bg-white rounded-full shadow">
-                       <i className="fas fa-phone-volume text-xl text-blue-600"></i>
+                       <i className="fas fa-phone-volume text-xl text-rose-500"></i>
                     </div>
                     <p className="text-sm font-semibold text-slate-600">お気軽にお問い合わせください</p>
                     <p className="font-bold text-3xl text-slate-800 my-1 tracking-tight">0120-945-528</p>
-                    <div className="text-xs text-blue-700 font-semibold bg-blue-100 inline-block px-2 py-1 rounded-full mt-1">
+                    <div className="text-xs text-rose-600 font-semibold bg-rose-100 inline-block px-2 py-1 rounded-full mt-1">
                         受付時間 10:00 ~ 18:00
                     </div>
                  </a>

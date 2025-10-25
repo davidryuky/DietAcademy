@@ -11,7 +11,7 @@ const ModernFormInput: React.FC<{
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({ icon, name, value, unit, placeholder, onChange }) => (
     <div className="group">
-        <div className="flex items-stretch focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 transition-all duration-300 rounded-md">
+        <div className="flex items-stretch focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-rose-400 transition-all duration-300 rounded-md">
             {/* Input with icon. bg-white, rounded-l-md */}
             <div className="flex-grow flex items-stretch bg-white shadow-inner border border-r-0 border-slate-200 rounded-l-md">
                 <span className="inline-flex items-center pl-2 pr-1 text-slate-400">
@@ -161,10 +161,10 @@ export const DietCalculator: React.FC = () => {
                             <div className="relative flex items-center justify-center w-full max-w-xs p-1 bg-slate-200/70 rounded-full mx-auto">
                                 <div className={`absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-md transition-transform duration-300 ease-in-out ${formData.gender === 'male' ? 'translate-x-full' : 'translate-x-0'}`}></div>
                                 <button type="button" onClick={() => handleGenderChange('female')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'female' ? 'text-slate-800' : 'text-slate-500'}`}>
-                                    <i className="fas fa-venus mr-2 text-pink-500"></i> 女性
+                                    <i className="fas fa-venus mr-2 text-pink-400"></i> 女性
                                 </button>
                                 <button type="button" onClick={() => handleGenderChange('male')} className={`relative z-10 flex-1 py-2 text-center rounded-full transition-colors duration-300 font-semibold ${formData.gender === 'male' ? 'text-slate-800' : 'text-slate-500'}`}>
-                                    <i className="fas fa-mars mr-2 text-blue-500"></i> 男性
+                                    <i className="fas fa-mars mr-2 text-sky-500"></i> 男性
                                 </button>
                             </div>
                             
@@ -182,7 +182,7 @@ export const DietCalculator: React.FC = () => {
                             <div className="pt-2 text-center">
                                  <button 
                                     type="submit" 
-                                    className="w-full max-w-sm flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-500/50 transform hover:-translate-y-1 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-md disabled:cursor-not-allowed disabled:translate-y-0"
+                                    className="w-full max-w-sm flex items-center justify-center px-10 py-4 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-rose-400/50 transform hover:-translate-y-1 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-md disabled:cursor-not-allowed disabled:translate-y-0"
                                     disabled={isLoading}
                                 >
                                     {isLoading ? (

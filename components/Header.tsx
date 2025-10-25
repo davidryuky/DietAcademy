@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ className, onItemClick }) => (
     <ul className={className}>
-        <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>Home</Link></li>
-        <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>🤖 TEST</Link></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コース案内</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>メリット・活用法</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>受講生の声</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>よくある質問</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:text-blue-400 hover:bg-slate-700 rounded-md" onClick={onItemClick}>コラム</a></li>
+        <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>Home</Link></li>
+        <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>🤖 TEST</Link></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>コース案内</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>メリット・活用法</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>受講生の声</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>よくある質問</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>コラム</a></li>
     </ul>
 );
 
@@ -26,7 +26,7 @@ const DesktopActionButton: React.FC<{ href: string; icon: string; text: string; 
 
 // Redesigned Mobile Action Button for a cleaner, modern look
 const MobileActionButton: React.FC<{ href: string; icon: string; text: string; colorClass: string; }> = ({ href, icon, text, colorClass }) => (
-    <a href={href} className={`flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 rounded-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 ${colorClass}`}>
+    <a href={href} className={`flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 rounded-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-rose-400 ${colorClass}`}>
        <i className={`fas ${icon} fa-fw text-2xl`}></i>
        <span className="text-xs font-semibold mt-1.5 tracking-tight">{text}</span>
     </a>
@@ -73,7 +73,7 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
                         </div>
                         
                         <div className="flex items-center space-x-4">
-                           <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-orange-500 hover:bg-orange-600 text-white" />
+                           <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white" />
                            <DesktopActionButton href="#" icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
                         </div>
                     </div>
@@ -81,7 +81,7 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
             </div>
 
             {/* Desktop Navigation Bar */}
-            <nav className="hidden md:block bg-slate-800 text-white font-medium">
+            <nav className="hidden md:block bg-gradient-to-r from-rose-300 to-pink-400 text-white font-semibold shadow-md">
                 <NavLinks className="w-full max-w-7xl mx-auto flex justify-center space-x-6 py-1" />
             </nav>
 
@@ -113,9 +113,9 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
 
                 {/* Bottom Bar: Action Buttons */}
                 <div className="grid grid-cols-4 border-t border-slate-200 bg-slate-50/50">
-                    <MobileActionButton href="#" text="コース案内" icon="fa-book-open" colorClass="text-sky-600" />
-                    <MobileActionButton href="#" text="活用法" icon="fa-lightbulb" colorClass="text-teal-600" />
-                    <MobileActionButton href="#" text="資料請求" icon="fa-file-signature" colorClass="text-orange-500" />
+                    <MobileActionButton href="#" text="コース案内" icon="fa-book-open" colorClass="text-rose-400" />
+                    <MobileActionButton href="#" text="活用法" icon="fa-lightbulb" colorClass="text-pink-400" />
+                    <MobileActionButton href="#" text="資料請求" icon="fa-file-signature" colorClass="text-fuchsia-400" />
                     <MobileActionButton href="#" text="ログイン" icon="fa-right-to-bracket" colorClass="text-slate-600" />
                 </div>
             </div>

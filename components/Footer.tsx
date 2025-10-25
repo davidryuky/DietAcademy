@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-slate-800 text-slate-300">
+    <footer className="bg-gradient-to-r from-rose-200 to-pink-300 text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.15)' }}>
       <div className="w-full max-w-7xl mx-auto px-4">
         {/* Footer Links Section */}
         <div className="py-8">
@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
                           href={link.href} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="text-sm font-medium hover:text-white transition-colors duration-300"
+                          className="text-base font-semibold hover:underline transition-all duration-300"
                         >
                           {link.text}
                         </a>
@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
         </div>
       
         {/* Copyright Section */}
-        <div className="py-5 border-t border-slate-700 text-center text-xs text-slate-400 space-y-1">
+        <div className="py-5 border-t border-white/30 text-center text-sm font-bold space-y-2">
           <p>Copyright© 日本ダイエットアカデミー協会</p>
           <p>運営：一般社団法人国家資格対策センター</p>
           <p>&copy; KSTC All rights reserved.</p>

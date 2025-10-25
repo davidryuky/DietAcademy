@@ -53,7 +53,7 @@ export const faqData = [
             <>
                 <p>あなたが飲んでいたサプリメントはどんなサプリメントですか？<br /><strong>最近の流行りとして、機能性表示食品や特定保健用食品(トクホ)などと安心感を与える商品が多い</strong>と思いますが、大した違いはありません。<br /><strong>健康を促進するというところが限界で、詳しくはネットで検索して調べてみて下さい。 広告を見て注文しようとすると、定期縛りの契約になってしまうサプリが殆どです。</strong></p>
                 <p>もし、サプリを飲んで痩せたと効果を実感されたのであれば、その期間の食事量やケーキやお菓子、またアルコールの摂取量などを思い出してみてください。 無制限に食べていたのに、飲んでいたのに痩せたということでは無いと思います。</p>
-                <p>現在もSNSやインターネットで簡単に入手できる「ダイエットに効果がある」とされる、いわゆる輸入ダイエット薬などには、日本で認可されていない薬剤なども混ざっているものも多く救急車で搬送されたり、死者までも出た事例がいくつもあります。<br /><strong>薬剤系には最大の注意を払って下さい。</strong><br /> <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/daietto/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">※厚労省HP 健康被害事例</a> </p>
+                <p>現在もSNSやインターネットで簡単に入手できる「ダイエットに効果がある」とされる、いわゆる輸入ダイエット薬などには、日本で認可されていない薬剤なども混ざっているものも多く救急車で搬送されたり、死者までも出た事例がいくつもあります。<br /><strong>薬剤系には最大の注意を払って下さい。</strong><br /> <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/daietto/index.html" target="_blank" rel="noopener noreferrer" className="text-rose-500 hover:underline">※厚労省HP 健康被害事例</a> </p>
             </>
         )
     },
@@ -94,7 +94,7 @@ export const faqData = [
             <>
                 <p>ダイエットを目的とし、ついでに資格も取れたら【一石二鳥】だと考え、<strong>受講された殆どの方はダイエットに成功され資格も取得しカッコいい体型</strong>になられています！<br />当アカデミーは<strong>ダイエット全般の基本中の基本を様々な知識や理論</strong>としてお伝えしていますので、<strong>いまネットの広告で氾濫しているような置き換え系ダイエットや薬剤系のダイエットは推奨しておりません。</strong></p>
                 <p><strong><span className="text-red-600">真剣に考えて下さい！</span><br />生涯、ジュースやスムージーを夕食替りにするのですか？<br />美味しいお肉やお魚とは生涯さよならするのでしょうか？<br />それではいかにも悲し過ぎます。</strong><br /><strong>美味しいものを食べたい欲望(食欲)は誰もが持てる公平な権利です。</strong>それを犠牲にすることはありません。<strong>食べ過ぎなければ、それで済む話です。</strong></p>
-                <p>またネットでは簡単に 10kg痩せたとか、脂肪便が大量に出て便器が壊れたとか、それは無いでしょ⁉️というような宣伝も見掛けるようになりました。<br /><strong>宣伝広告がだんだんエスカレートしているような気がしてなりません。</strong> そんなに<strong>簡単に痩せるという薬剤は厚労省の認可を受けているのでしょうか⁉️</strong> 10年15年前から厚労省に認可されてない薬剤による<strong>健康被害は重大な問題を引き起こしています。</strong><br /> <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/daietto/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">※厚労省HP 健康被害事例</a> <br /></p>
+                <p>またネットでは簡単に 10kg痩せたとか、脂肪便が大量に出て便器が壊れたとか、それは無いでしょ⁉️というような宣伝も見掛けるようになりました。<br /><strong>宣伝広告がだんだんエスカレートしているような気がしてなりません。</strong> そんなに<strong>簡単に痩せるという薬剤は厚労省の認可を受けているのでしょうか⁉️</strong> 10年15年前から厚労省に認可されてない薬剤による<strong>健康被害は重大な問題を引き起こしています。</strong><br /> <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/daietto/index.html" target="_blank" rel="noopener noreferrer" className="text-rose-500 hover:underline">※厚労省HP 健康被害事例</a> <br /></p>
                 <p>私共ダイエットアカデミーは、<strong>誰もが納得の出来る正攻法なダイエットの知識や理論を看板に掲げ、元祖ダイエット機関として、皆様と共に学んでいけることを信念としております。</strong></p>
             </>
         )

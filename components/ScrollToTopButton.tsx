@@ -36,7 +36,7 @@ export const ScrollToTopButton: React.FC = () => {
         onClick={scrollToTop}
         className={`
           ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
-          bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+          bg-rose-400 hover:bg-rose-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400
           text-white font-bold rounded-full w-12 h-12 flex items-center justify-center
           shadow-lg transition-all duration-300 ease-in-out transform
         `}

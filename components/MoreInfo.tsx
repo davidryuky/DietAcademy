@@ -30,7 +30,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
       <h3 className="font-bold my-2 text-slate-800 text-xl">{mainText}</h3>
       <a 
         href={buttonLink} 
-        className="inline-flex items-center justify-center px-6 py-2.5 mt-4 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:-translate-y-0.5"
+        className="inline-flex items-center justify-center px-6 py-2.5 mt-4 bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400 transform hover:-translate-y-0.5"
       >
         {buttonText} <i className="fas fa-arrow-right ml-2 text-sm"></i>
       </a>
@@ -42,7 +42,7 @@ export const MoreInfo: React.FC = () => {
     return (
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
             {/* Section Header */}
-            <div className="bg-gradient-to-r from-teal-400 to-emerald-500 text-white p-4 flex items-center justify-center text-center shadow-md">
+            <div className="bg-gradient-to-r from-rose-300 to-pink-300 text-white p-4 flex items-center justify-center text-center shadow-md">
                 <i className="fas fa-award text-3xl mr-4 hidden sm:block"></i>
                 <h2 className="text-2xl md:text-3xl font-bold">ダイエットマスター資格取得</h2>
             </div>

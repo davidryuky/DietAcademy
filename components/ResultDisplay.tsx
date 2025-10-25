@@ -23,7 +23,7 @@ const BmiGauge: React.FC<{ bmi: number }> = ({ bmi }) => {
         <div className="w-full">
             <div className="relative h-2 w-full rounded-full bg-gradient-to-r from-cyan-500 via-green-500 to-red-500">
                 <div 
-                    className="absolute top-1/2 -mt-3 w-6 h-6 rounded-full bg-white border-2 border-blue-600 shadow-md transform -translate-x-1/2" 
+                    className="absolute top-1/2 -mt-3 w-6 h-6 rounded-full bg-white border-2 border-rose-400 shadow-md transform -translate-x-1/2" 
                     style={{ left: `${percentage}%` }}
                 ></div>
             </div>
@@ -37,14 +37,14 @@ const BmiGauge: React.FC<{ bmi: number }> = ({ bmi }) => {
 const WeightProgressBar: React.FC<{ current: number; target: number }> = ({ current, target }) => (
     <div className="relative pt-8">
         <div className="h-2.5 w-full rounded-full bg-slate-200">
-            <div className="h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-green-400" style={{ width: '100%' }}></div>
+            <div className="h-2.5 rounded-full bg-gradient-to-r from-rose-300 to-pink-300" style={{ width: '100%' }}></div>
         </div>
         <div className="absolute -top-1 text-center" style={{ left: '0%', transform: 'translateX(-10%)' }}>
             <span className="text-xs font-bold text-slate-700">{current}kg</span>
             <span className="block text-[10px] text-slate-500">現在</span>
         </div>
         <div className="absolute -top-1 text-center" style={{ right: '0%', transform: 'translateX(10%)' }}>
-            <span className="text-xs font-bold text-green-600">{target}kg</span>
+            <span className="text-xs font-bold text-pink-500">{target}kg</span>
             <span className="block text-[10px] text-slate-500">目標</span>
         </div>
     </div>
@@ -56,9 +56,9 @@ const CalorieBreakdownChart: React.FC<{ tdee: number; intake: number; bmr: numbe
     
     return (
         <div className="w-full p-3 bg-slate-50 rounded-lg mt-3">
-            <div className="relative w-full h-8 bg-blue-100 rounded mb-2">
+            <div className="relative w-full h-8 bg-rose-100 rounded mb-2">
                 <div 
-                    className="absolute top-0 bottom-0 h-full bg-green-300 rounded-l" 
+                    className="absolute top-0 bottom-0 h-full bg-pink-200 rounded-l" 
                     style={{ width: `${Math.min(100, intakePercent)}%` }}
                     title={`摂取カロリー: ${Math.round(intake)} kcal`}
                 ></div>
@@ -72,14 +72,14 @@ const CalorieBreakdownChart: React.FC<{ tdee: number; intake: number; bmr: numbe
             <div className="text-xs text-slate-600 space-y-1">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                        <span className="w-3 h-3 rounded-sm bg-green-300 mr-2"></span>
+                        <span className="w-3 h-3 rounded-sm bg-pink-200 mr-2"></span>
                         <span>摂取カロリー目安</span>
                     </div>
                     <span className="font-semibold">{Math.round(intake)} kcal</span>
                 </div>
                  <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                        <span className="w-3 h-3 rounded-sm bg-blue-100 mr-2"></span>
+                        <span className="w-3 h-3 rounded-sm bg-rose-100 mr-2"></span>
                         <span>消費カロリー (TDEE)</span>
                     </div>
                     <span className="font-semibold">{Math.round(tdee)} kcal</span>
@@ -108,17 +108,17 @@ const MetricDisplay: React.FC<{ icon: string; label: string; value: string; unit
 
 const CallToAction: React.FC = () => {
     return (
-        <div className="text-center p-4 bg-emerald-50 border-t-4 border-emerald-300 rounded-lg mt-3">
-            <i className="fas fa-leaf text-4xl text-emerald-500 mb-3"></i>
-            <h3 className="text-xl font-bold text-emerald-800">一歩先のパーソナル診断へ</h3>
-            <p className="text-sm text-emerald-700 mt-2 mb-4 max-w-md mx-auto">
+        <div className="text-center p-4 bg-rose-50 border-t-4 border-rose-200 rounded-lg mt-3">
+            <i className="fas fa-leaf text-4xl text-rose-400 mb-3"></i>
+            <h3 className="text-xl font-bold text-rose-700">一歩先のパーソナル診断へ</h3>
+            <p className="text-sm text-rose-600 mt-2 mb-4 max-w-md mx-auto">
                 あなたのライフスタイルや目標に合わせた、より詳細なプランニングで、ダイエットの成功を確実にしませんか？
             </p>
             <a
                 href="https://dietacademy.jp/diet-diagnose-form/contact.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-emerald-500/50 animate-pulse-cta"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-rose-400/50 animate-pulse-cta"
             >
                 <i className="fas fa-file-signature mr-3 text-xl"></i>
                 <span>さらに詳しいダイエット診断はこちらから</span>
@@ -148,13 +148,13 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                  <div className="p-4 bg-slate-50 rounded-lg">
                      <p className="font-medium text-slate-600 text-center mb-1">あなたのBMI値</p>
-                     <p className="text-4xl font-bold text-blue-600 text-center mb-3">{data.bmi.toFixed(2)}</p>
+                     <p className="text-4xl font-bold text-rose-500 text-center mb-3">{data.bmi.toFixed(2)}</p>
                      <BmiGauge bmi={data.bmi} />
                 </div>
                  <div className="p-4 bg-slate-50 rounded-lg">
                     <p className="font-medium text-slate-600 text-center mb-2">減量目標</p>
                     <p className="text-center">
-                        <span className="text-4xl font-bold text-green-600">-{data.weightToLose.toFixed(1)}</span>
+                        <span className="text-4xl font-bold text-pink-500">-{data.weightToLose.toFixed(1)}</span>
                         <span className="text-lg font-medium text-slate-800"> kg</span>
                     </p>
                      <WeightProgressBar current={data.currentWeight} target={data.targetWeight} />
@@ -166,9 +166,9 @@ export const ResultCard: React.FC<{ data: ResultData }> = ({ data }) => {
             <div>
                 <h4 className="text-lg font-bold text-slate-700 mb-2 text-center">カロリープラン ({data.months}ヶ月目標)</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <MetricDisplay icon="fa-bed" label="基礎代謝量 (BMR)" value={Math.round(data.bmr).toLocaleString()} unit="kcal" iconBg="bg-orange-500" />
-                    <MetricDisplay icon="fa-person-running" label="1日の消費カロリー (TDEE)" value={Math.round(data.tdee).toLocaleString()} unit="kcal" iconBg="bg-blue-500" />
-                    <MetricDisplay icon="fa-utensils" label="1日の摂取カロリー目安" value={Math.round(data.dailyIntake).toLocaleString()} unit="kcal" iconBg="bg-green-500" />
+                    <MetricDisplay icon="fa-bed" label="基礎代謝量 (BMR)" value={Math.round(data.bmr).toLocaleString()} unit="kcal" iconBg="bg-rose-400" />
+                    <MetricDisplay icon="fa-person-running" label="1日の消費カロリー (TDEE)" value={Math.round(data.tdee).toLocaleString()} unit="kcal" iconBg="bg-pink-400" />
+                    <MetricDisplay icon="fa-utensils" label="1日の摂取カロリー目安" value={Math.round(data.dailyIntake).toLocaleString()} unit="kcal" iconBg="bg-fuchsia-400" />
                 </div>
                 <CalorieBreakdownChart tdee={data.tdee} intake={data.dailyIntake} bmr={data.bmr} />
             </div>

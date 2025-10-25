@@ -74,14 +74,14 @@ export const HomePage: React.FC = () => {
                 </AnimatedSection>
                 <AnimatedSection className="my-12">
                     <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-                        <div className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white p-4 flex items-center justify-center text-center shadow-md">
+                        <div className="bg-gradient-to-r from-rose-400 to-pink-400 text-white p-4 flex items-center justify-center text-center shadow-md">
                             <i className="fas fa-clipboard-check text-3xl mr-4 hidden sm:block"></i>
                             <h2 className="text-2xl md:text-3xl font-bold">ダイエットプランの結果はいかがでしたか？</h2>
                         </div>
                         <div className="p-4 md:p-5">
                             <div className="text-base text-slate-700 space-y-4 max-w-4xl mx-auto">
                                 {/* BMI Explanation */}
-                                <div className="p-3 bg-slate-50 border-l-4 border-blue-400 rounded-r-md">
+                                <div className="p-3 bg-slate-50 border-l-4 border-rose-300 rounded-r-md">
                                     <p className="font-semibold">
                                         BMI値とは（Body Mass Index）の略で、世界で最も広く使われている肥満判定用の体格指数です。
                                     </p>
@@ -97,15 +97,15 @@ export const HomePage: React.FC = () => {
                                     </p>
                                     <div className="space-y-3">
                                         <p className="flex items-start">
-                                            <i className="fas fa-info-circle text-blue-500 mt-1 mr-2.5 flex-shrink-0"></i>
+                                            <i className="fas fa-info-circle text-rose-400 mt-1 mr-2.5 flex-shrink-0"></i>
                                             <span>
-                                                <span className="font-semibold">基礎代謝量</span>は、<a href="https://dietacademy.jp/calculate/harris.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">ハリス・ベネデクト方程式</a>を元に性別、年齢、身長、体重から計算しています。
+                                                <span className="font-semibold">基礎代謝量</span>は、<a href="https://dietacademy.jp/calculate/harris.html" target="_blank" rel="noopener noreferrer" className="font-bold text-rose-500 hover:underline transition-colors">ハリス・ベネデクト方程式</a>を元に性別、年齢、身長、体重から計算しています。
                                             </span>
                                         </p>
                                         <p className="flex items-start">
-                                            <i className="fas fa-info-circle text-blue-500 mt-1 mr-2.5 flex-shrink-0"></i>
+                                            <i className="fas fa-info-circle text-rose-400 mt-1 mr-2.5 flex-shrink-0"></i>
                                             <span>
-                                                <span className="font-semibold">運動消費エネルギー</span>は、厚生労働省の定める<a href="https://dietacademy.jp/calculate/mets.html" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline transition-colors">Mets数値</a>（運動の種類によって数値は変わります）により計算しています。
+                                                <span className="font-semibold">運動消費エネルギー</span>は、厚生労働省の定める<a href="https://dietacademy.jp/calculate/mets.html" target="_blank" rel="noopener noreferrer" className="font-bold text-rose-500 hover:underline transition-colors">Mets数値</a>（運動の種類によって数値は変わります）により計算しています。
                                             </span>
                                         </p>
                                     </div>
@@ -137,8 +137,8 @@ export const HomePage: React.FC = () => {
                         <FeatureCard 
                             title="受講及びダイエット期間" 
                             icon="fa-calendar-check" 
-                            iconColorClass="text-orange-500" 
-                            borderColorClass="border-orange-500"
+                            iconColorClass="text-rose-400" 
+                            borderColorClass="border-rose-400"
                         >
                             <p>平均 半月〜3ヶ月で学んで痩せることができます。</p>
                             <p className="text-xs text-slate-500">
@@ -148,8 +148,8 @@ export const HomePage: React.FC = () => {
                         <FeatureCard 
                             title="受講及びダイエット方法" 
                             icon="fa-mobile-screen-button" 
-                            iconColorClass="text-cyan-500"
-                            borderColorClass="border-cyan-500"
+                            iconColorClass="text-pink-400"
+                            borderColorClass="border-pink-400"
                         >
                             <p>スマホやタブレットでいつでもどこでも動画中心で学習できます！</p>
                             <p className="text-xs text-slate-500">
@@ -163,14 +163,14 @@ export const HomePage: React.FC = () => {
                          <InfoButton
                             href="#"
                             title="ダイエットマスターの活躍"
-                            className="bg-gradient-to-br from-sky-500 to-blue-600"
-                            iconClassName="text-blue-200"
+                            className="bg-gradient-to-br from-fuchsia-400 to-pink-500"
+                            iconClassName="text-pink-200"
                         />
                         <InfoButton
                             href="#"
                             title={<>ダイエットマスターの理論は<br />こんな方に効果的です</>}
-                            className="bg-gradient-to-br from-teal-500 to-cyan-600"
-                            iconClassName="text-cyan-200"
+                            className="bg-gradient-to-br from-rose-400 to-red-400"
+                            iconClassName="text-red-200"
                         />
                     </div>
                 </AnimatedSection>
