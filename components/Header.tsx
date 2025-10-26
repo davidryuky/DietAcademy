@@ -13,15 +13,28 @@ const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ 
     </ul>
 );
 
-const DesktopActionButton: React.FC<{ href: string; icon: string; text: string; className?: string }> = ({ href, icon, text, className }) => (
-    <a
-        href={href}
-        className={`flex items-center justify-center px-6 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 ${className}`}
-    >
-        <i className={`fas ${icon} text-xl mr-3`}></i>
-        <span>{text}</span>
-    </a>
-);
+const DesktopActionButton: React.FC<{ href?: string; onClick?: () => void; icon: string; text: string; className?: string }> = ({ href, onClick, icon, text, className }) => {
+    const commonProps = {
+        className: `flex items-center justify-center px-6 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 ${className}`,
+        onClick: onClick
+    };
+
+    if (href) {
+        return (
+            <a href={href} {...commonProps}>
+                <i className={`fas ${icon} text-xl mr-3`}></i>
+                <span>{text}</span>
+            </a>
+        );
+    }
+
+    return (
+        <button type="button" {...commonProps}>
+            <i className={`fas ${icon} text-xl mr-3`}></i>
+            <span>{text}</span>
+        </button>
+    );
+};
 
 
 // Redesigned Mobile Action Button for a cleaner, modern look
@@ -33,7 +46,7 @@ const MobileActionButton: React.FC<{ href: string; icon: string; text: string; c
 );
 
 
-export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }> = ({ isMenuOpen, onMenuToggle }) => {
+export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, onLoginClick: () => void }> = ({ isMenuOpen, onMenuToggle, onLoginClick }) => {
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -74,7 +87,7 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void }>
                         
                         <div className="flex items-center space-x-4">
                            <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white" />
-                           <DesktopActionButton href="#" icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
+                           <DesktopActionButton onClick={onLoginClick} icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
                         </div>
                     </div>
                 </div>

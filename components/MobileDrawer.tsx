@@ -76,7 +76,7 @@ const AccordionItem: React.FC<{
     );
 };
 
-export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void; }> = ({ isOpen, onClose }) => {
+export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void; onLoginClick: () => void; }> = ({ isOpen, onClose, onLoginClick }) => {
     const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
     useEffect(() => {
@@ -92,6 +92,11 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void; }> =
 
     const handleToggleAccordion = (title: string) => {
         setOpenAccordion(openAccordion === title ? null : title);
+    };
+    
+    const handleLoginClick = () => {
+        onLoginClick();
+        onClose();
     };
 
     return (
@@ -125,10 +130,10 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void; }> =
                          <i className="fas fa-pen-to-square text-xl mr-3"></i>
                          <span>講座申込</span>
                     </a>
-                    <a href="#" className="flex items-center justify-center w-full px-6 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300">
+                    <button type="button" onClick={handleLoginClick} className="flex items-center justify-center w-full px-6 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300">
                          <i className="fas fa-right-to-bracket text-xl mr-3"></i>
                          <span>会員ログイン</span>
-                    </a>
+                    </button>
                </div>
                
                <div className="px-6 pt-4">

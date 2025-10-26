@@ -20,7 +20,7 @@ export const Hero: React.FC = () => {
                     className="w-full h-full object-cover"
                 />
                 <div 
-                    className="absolute inset-0 bg-gradient-to-br from-rose-300/40 via-fuchsia-400/30 to-pink-400/40 backdrop-blur-sm"
+                    className="absolute inset-0 bg-gradient-to-br from-rose-300/30 via-fuchsia-400/20 to-pink-400/30 backdrop-blur-sm"
                 ></div>
             </div>
 
