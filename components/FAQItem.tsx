@@ -11,7 +11,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   return (
     <div className={`bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-lg ${isOpen ? 'border-2 border-rose-400' : 'border-2 border-transparent'}`}>
       <button
-        className="w-full flex justify-between items-center text-left p-5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 rounded-lg"
+        className="w-full flex justify-between items-center text-left p-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 rounded-lg"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >
@@ -29,7 +29,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
       >
         <div className="overflow-hidden">
-          <div className="px-6 pb-6 text-slate-700 space-y-4">
+          <div className="px-4 pb-4 text-slate-700 space-y-4">
              <div className="border-t pt-4 prose prose-sm max-w-none">
                 {answer}
              </div>

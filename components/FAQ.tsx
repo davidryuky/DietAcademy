@@ -9,10 +9,10 @@ export const FAQ: React.FC = () => {
           {/* Header Title */}
           <div className="bg-gradient-to-r from-rose-300 to-pink-300 text-white p-4 flex items-center justify-center text-center shadow-md">
               <i className="fas fa-question-circle text-3xl mr-4 hidden sm:block"></i>
-              <h2 className="text-2xl md:text-3xl font-bold">ダイエットについて よくある質問</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">よくある質問</h2>
           </div>
           {/* Content Body */}
-          <div className="p-4 md:p-5">
+          <div className="p-4">
               <div className="space-y-4">
                   {faqData.map((item, index) => (
                       <FAQItem key={index} question={item.question} answer={item.answer} />
