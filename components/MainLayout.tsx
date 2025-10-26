@@ -23,7 +23,6 @@ export const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }
       <MobileDrawer 
         isOpen={isMenuOpen} 
         onClose={toggleMenu} 
-        onLoginClick={openLoginModal} 
       />
       {/* Page-specific content will be rendered here */}
       <main className={isMenuOpen ? 'hidden' : ''}>
