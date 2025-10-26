@@ -4,6 +4,7 @@ import { Footer } from './Footer';
 import { ScrollToTopButton } from './ScrollToTopButton';
 import { MobileDrawer } from './MobileDrawer';
 import { LoginModal } from './LoginModal';
+import { ContactWidget } from './ContactWidget';
 
 export const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,6 +30,7 @@ export const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }
         {children}
       </main>
       <Footer />
+      <ContactWidget />
       <ScrollToTopButton />
       <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
     </div>
