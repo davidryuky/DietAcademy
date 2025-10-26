@@ -68,6 +68,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                             </Link>
                         </li>
                         
+                        
                         {/* Dynamically generated menu items */}
                         {menuItems.map((item, index) => (
                             <li key={index}>
