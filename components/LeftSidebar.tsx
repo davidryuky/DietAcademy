@@ -27,7 +27,7 @@ const SidebarLink: React.FC<{ href: string; text: string; }> = ({ href, text }) 
 export const LeftSidebar: React.FC = () => {
     return (
         <aside className="hidden md:block w-64 flex-shrink-0 pr-8 pt-8">
-            <div className="space-y-3 sticky top-24">
+            <div className="space-y-3 sticky top-8">
                 {sidebarLinks.map((link, index) => (
                     <SidebarLink key={index} href={link.href} text={link.text} />
                 ))}
