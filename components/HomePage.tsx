@@ -31,22 +31,25 @@ const FeatureCard: React.FC<{
 const InfoButton: React.FC<{
   href: string;
   title: React.ReactNode;
-  className: string;
-  iconClassName: string;
-}> = ({ href, title, className, iconClassName }) => (
+  icon: string;
+  gradientClass: string;
+}> = ({ href, title, icon, gradientClass }) => (
   <a
     href={href}
-    className={`flex-1 block group rounded-lg shadow-md text-white overflow-hidden transition-all duration-300 transform hover:shadow-xl hover:-translate-y-1 ${className}`}
+    className={`relative flex-1 block group rounded-xl shadow-lg text-white text-center transition-all duration-300 transform hover:shadow-2xl hover:-translate-y-1.5 ${gradientClass} overflow-hidden`}
   >
-    <div className="p-6 h-full flex justify-between items-center min-h-[100px]">
-      <div className="flex-grow">
-        <h3 className="text-2xl font-bold leading-tight">{title}</h3>
+    <div className="p-8 flex flex-col items-center justify-center h-full">
+      <div className="mb-5">
+         <i className={`fas ${icon} text-5xl opacity-90 group-hover:opacity-100 transition-opacity`}></i>
       </div>
-      <div className="ml-4 flex-shrink-0">
-        <i
-          className={`fas fa-play-circle text-5xl opacity-80 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100 ${iconClassName}`}
-        ></i>
-      </div>
+      <h3 className="text-xl font-bold leading-tight" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
+        {title}
+      </h3>
+    </div>
+    
+    {/* Clickable Action Indicator */}
+    <div className="absolute bottom-5 right-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 ease-in-out">
+      <i className="fas fa-circle-chevron-right text-3xl"></i>
     </div>
   </a>
 );
@@ -160,17 +163,17 @@ export const HomePage: React.FC = () => {
 
                     {/* Bottom Buttons */}
                     <div className="flex flex-col md:flex-row gap-6">
-                         <InfoButton
+                        <InfoButton
                             href="#"
                             title="ダイエットマスターの活躍"
-                            className="bg-gradient-to-br from-fuchsia-400 to-pink-500"
-                            iconClassName="text-pink-200"
+                            icon="fa-award"
+                            gradientClass="bg-gradient-to-br from-violet-300 to-fuchsia-400"
                         />
                         <InfoButton
                             href="#"
                             title={<>ダイエットマスターの理論は<br />こんな方に効果的です</>}
-                            className="bg-gradient-to-br from-rose-400 to-red-400"
-                            iconClassName="text-red-200"
+                            icon="fa-bullseye"
+                            gradientClass="bg-gradient-to-br from-rose-300 to-pink-400"
                         />
                     </div>
                 </AnimatedSection>
