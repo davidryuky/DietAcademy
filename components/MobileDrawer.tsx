@@ -81,7 +81,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                         {/* Phone Image at the bottom */}
                         <li className="px-6 pt-6">
                            <a href="tel:0120945528">
-                              <img src="https://dietacademy.jp/img2003/common/left-menu/tel.gif" alt="電話番号: 0120-945-528" className="transition-opacity hover:opacity-80" />
+                              <img src="https://dietacademy.jp/img2023/common/left-menu/tel.gif" alt="電話番号: 0120-945-528" className="transition-opacity hover:opacity-80" />
                            </a>
                         </li>
                     </ul>
