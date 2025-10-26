@@ -41,7 +41,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="relative p-5 border-b border-slate-200 text-center">
+        <div className="relative p-5 border-b border-slate-200 flex flex-col items-center text-center">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-100 to-pink-200 flex items-center justify-center mb-3">
+                <i className="fas fa-user-lock text-3xl text-rose-500"></i>
+            </div>
             <h2 className="text-2xl font-bold text-slate-800">メンバーエリア</h2>
             <button
               onClick={onClose}
@@ -58,23 +61,33 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                     <label htmlFor="username" className="block text-sm font-bold text-slate-700 mb-2">
                         ユーザー名:
                     </label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow"
-                    />
+                    <div className="relative">
+                         <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                            <i className="fas fa-user"></i>
+                         </span>
+                         <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            className="w-full pl-12 pr-4 py-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow"
+                         />
+                    </div>
                 </div>
                 <div>
                     <label htmlFor="password"className="block text-sm font-bold text-slate-700 mb-2">
                         パスワード:
                     </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow"
-                    />
+                     <div className="relative">
+                         <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                            <i className="fas fa-lock"></i>
+                         </span>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="w-full pl-12 pr-4 py-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow"
+                        />
+                    </div>
                 </div>
                 <div className="flex items-center">
                     <input
@@ -92,7 +105,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                         type="submit"
                         className="w-full flex items-center justify-center px-8 py-4 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-rose-400/50 transform hover:-translate-y-1"
                     >
-                        ログイン
+                        <i className="fas fa-right-to-bracket mr-3"></i>
+                        <span>ログイン</span>
                     </button>
                 </div>
             </form>
