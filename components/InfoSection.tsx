@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Hero: React.FC = () => {
+export const InfoSection: React.FC = () => {
     const scrollToFaq = () => {
         const faqElement = document.getElementById('faq');
         if (faqElement) {

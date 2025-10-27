@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero } from './InfoSection';
+import { InfoSection } from './InfoSection';
 import { DietCalculator } from './DietCalculator';
 import { MoreInfo } from './MoreInfo';
 import { FAQ } from './FAQ';
@@ -58,7 +58,7 @@ const InfoButton: React.FC<{
 export const HomePage: React.FC = () => {
     return (
         <>
-            <Hero />
+            <InfoSection />
 
             {/* Mobile-only Banner - Hidden as it is redundant with the header component */}
             <div className="hidden">

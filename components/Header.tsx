@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-const NavLinks: React.FC<{ className?: string, onItemClick?: () => void }> = ({ className, onItemClick }) => (
+const NavLinks: React.FC<{ className?: string }> = ({ className }) => (
     <ul className={className}>
-        <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>Home</Link></li>
-        <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>🤖 TEST</Link></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>コース案内</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>メリット・活用法</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>受講生の声</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>よくある質問</a></li>
-        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md" onClick={onItemClick}>コラム</a></li>
+        <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">Home</Link></li>
+        <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">🤖 TEST</Link></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">コース案内</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">メリット・活用法</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">受講生の声</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">よくある質問</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">コラム</a></li>
     </ul>
 );
 
@@ -38,12 +38,37 @@ const DesktopActionButton: React.FC<{ href?: string; onClick?: () => void; icon:
 
 
 // Redesigned Mobile Action Button for a cleaner, modern look
-const MobileActionButton: React.FC<{ href: string; icon: string; text: string; colorClass: string; }> = ({ href, icon, text, colorClass }) => (
-    <a href={href} className={`flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 rounded-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-rose-400 ${colorClass}`}>
-       <i className={`fas ${icon} fa-fw text-2xl`}></i>
-       <span className="text-xs font-semibold mt-1.5 tracking-tight">{text}</span>
-    </a>
-);
+interface MobileActionButtonProps {
+    href?: string;
+    onClick?: () => void;
+    icon: string;
+    text: string;
+    colorClass: string;
+}
+
+const MobileActionButton: React.FC<MobileActionButtonProps> = ({ href, onClick, icon, text, colorClass }) => {
+    const commonClasses = `w-full flex flex-col items-center justify-center p-3 text-center transition-colors duration-300 rounded-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-rose-400 ${colorClass}`;
+    const content = (
+        <>
+            <i className={`fas ${icon} fa-fw text-2xl`}></i>
+            <span className="text-xs font-semibold mt-1.5 tracking-tight">{text}</span>
+        </>
+    );
+
+    if (href) {
+        return (
+            <a href={href} className={commonClasses}>
+                {content}
+            </a>
+        );
+    }
+    
+    return (
+        <button type="button" onClick={onClick} className={commonClasses}>
+            {content}
+        </button>
+    );
+};
 
 
 export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, onLoginClick: () => void }> = ({ isMenuOpen, onMenuToggle, onLoginClick }) => {
@@ -129,7 +154,7 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                     <MobileActionButton href="#" text="コース案内" icon="fa-book-open" colorClass="text-rose-400" />
                     <MobileActionButton href="#" text="活用法" icon="fa-lightbulb" colorClass="text-pink-400" />
                     <MobileActionButton href="#" text="資料請求" icon="fa-file-signature" colorClass="text-fuchsia-400" />
-                    <MobileActionButton href="#" text="ログイン" icon="fa-right-to-bracket" colorClass="text-slate-600" />
+                    <MobileActionButton onClick={onLoginClick} text="ログイン" icon="fa-right-to-bracket" colorClass="text-slate-600" />
                 </div>
             </div>
         </header>
