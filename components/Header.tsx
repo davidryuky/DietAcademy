@@ -144,7 +144,7 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                     <NavLinks className="w-full max-w-7xl mx-auto flex justify-center space-x-6 py-1" />
                 </nav>
             ) : (
-                 <nav className="hidden md:block bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold shadow-md">
+                 <nav className="hidden md:block bg-gradient-to-r from-sky-300 to-blue-400 text-white font-semibold shadow-md">
                     <MemberNavLinks onLogout={onLogout} className="w-full max-w-7xl mx-auto flex justify-center space-x-6 py-1" />
                 </nav>
             )}
