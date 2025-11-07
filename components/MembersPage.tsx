@@ -28,29 +28,60 @@ const SupportInfoBox: React.FC<{
   imgSrc: string;
   description: string;
 }> = ({ title, href, imgSrc, description }) => (
-  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group flex flex-col md:flex-row md:items-center transition-shadow duration-300 hover:shadow-xl min-h-0">
-    {/* Content on the left */}
-    <div className="p-6 md:p-8 flex flex-col justify-center md:w-2/5 lg:w-[30%]">
-      <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-emerald-600 transition-colors duration-300">{title}</h3>
-      <p className="text-slate-600 mb-6 flex-grow">{description}</p>
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex self-start items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
-      >
-        詳しくはこちらから <i className="fas fa-arrow-right ml-2 text-xs"></i>
-      </a>
-    </div>
-    {/* Image on the right */}
-    <div className="md:w-3/5 lg:w-[70%]">
-      <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden">
-        <img
+  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group transition-shadow duration-300 hover:shadow-xl min-h-0">
+    {/* --- Mobile Layout --- */}
+    <div className="md:hidden">
+      {/* 1. Title */}
+      <div className="p-6 pb-4">
+        <h3 className="text-2xl font-bold text-slate-800 group-hover:text-emerald-600 transition-colors duration-300">{title}</h3>
+      </div>
+      {/* 2. Image */}
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+         <img
           src={imgSrc}
           alt={title}
           className="w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
         />
       </a>
+      {/* 3. Description & Button */}
+      <div className="p-6 pt-4">
+         <p className="text-slate-600 mb-6 flex-grow">{description}</p>
+         <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex self-start items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+         >
+            詳しくはこちらから <i className="fas fa-arrow-right ml-2 text-xs"></i>
+         </a>
+      </div>
+    </div>
+
+    {/* --- Desktop Layout --- */}
+    <div className="hidden md:flex md:flex-row md:items-center">
+        {/* Content on the left */}
+        <div className="p-6 md:p-8 flex flex-col justify-center md:w-2/5 lg:w-[30%]">
+            <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-emerald-600 transition-colors duration-300">{title}</h3>
+            <p className="text-slate-600 mb-6 flex-grow">{description}</p>
+            <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex self-start items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+                詳しくはこちらから <i className="fas fa-arrow-right ml-2 text-xs"></i>
+            </a>
+        </div>
+        {/* Image on the right */}
+        <div className="md:w-3/5 lg:w-[70%]">
+            <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden">
+                <img
+                    src={imgSrc}
+                    alt={title}
+                    className="w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+            </a>
+        </div>
     </div>
   </div>
 );
