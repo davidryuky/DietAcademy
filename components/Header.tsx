@@ -13,6 +13,19 @@ const NavLinks: React.FC<{ className?: string }> = ({ className }) => (
     </ul>
 );
 
+const MemberNavLinks: React.FC<{ className?: string; onLogout: () => void }> = ({ className, onLogout }) => (
+    <ul className={className}>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">ダイエット診断</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">ダイエットサポート</a></li>
+        <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">資格取得</a></li>
+        <li>
+            <button onClick={onLogout} className="py-2 px-3 w-full text-left font-bold block transition-all duration-300 hover:bg-rose-500/50 rounded-md text-white">
+                <i className="fas fa-right-from-bracket mr-2"></i>Logout
+            </button>
+        </li>
+    </ul>
+);
+
 const DesktopActionButton: React.FC<{ href?: string; onClick?: () => void; icon: string; text: string; className?: string }> = ({ href, onClick, icon, text, className }) => {
     const commonProps = {
         className: `flex items-center justify-center px-6 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 ${className}`,
@@ -71,7 +84,7 @@ const MobileActionButton: React.FC<MobileActionButtonProps> = ({ href, onClick, 
 };
 
 
-export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, onLoginClick: () => void }> = ({ isMenuOpen, onMenuToggle, onLoginClick }) => {
+export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, onLoginClick: () => void; isAuthenticated: boolean; onLogout: () => void; }> = ({ isMenuOpen, onMenuToggle, onLoginClick, isAuthenticated, onLogout }) => {
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -105,23 +118,31 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                             <Link to="/" className="flex-shrink-0">
                                 <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" />
                             </Link>
-                             <a href="#" className="ml-5 transition-opacity hover:opacity-80">
+                             {!isAuthenticated && <a href="#" className="ml-5 transition-opacity hover:opacity-80">
                                 <img alt="ダイエットに特化した資格講座" src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" />
-                             </a>
+                             </a>}
                         </div>
                         
-                        <div className="flex items-center space-x-4">
-                           <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white" />
-                           <DesktopActionButton onClick={onLoginClick} icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
-                        </div>
+                        {!isAuthenticated && (
+                            <div className="flex items-center space-x-4">
+                               <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white" />
+                               <DesktopActionButton onClick={onLoginClick} icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
             {/* Desktop Navigation Bar */}
-            <nav className="hidden md:block bg-gradient-to-r from-rose-300 to-pink-400 text-white font-semibold shadow-md">
-                <NavLinks className="w-full max-w-7xl mx-auto flex justify-center space-x-6 py-1" />
-            </nav>
+            {!isAuthenticated ? (
+                <nav className="hidden md:block bg-gradient-to-r from-rose-300 to-pink-400 text-white font-semibold shadow-md">
+                    <NavLinks className="w-full max-w-7xl mx-auto flex justify-center space-x-6 py-1" />
+                </nav>
+            ) : (
+                 <nav className="hidden md:block bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold shadow-md">
+                    <MemberNavLinks onLogout={onLogout} className="w-full max-w-7xl mx-auto flex justify-center space-x-6 py-1" />
+                </nav>
+            )}
 
 
             {/* Mobile Header - Redesigned for a cleaner and more professional look */}
@@ -132,9 +153,11 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                         <Link to="/" className="flex-shrink-0">
                             <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-16"/>
                         </Link>
-                        <a href="#" className="transition-opacity hover:opacity-80">
-                           <img src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" alt="ダイエットに特化した資格講座" className="h-16"/>
-                        </a>
+                         {!isAuthenticated && (
+                            <a href="#" className="transition-opacity hover:opacity-80">
+                               <img src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" alt="ダイエットに特化した資格講座" className="h-16"/>
+                            </a>
+                        )}
                     </div>
                     
                     <button 
@@ -150,12 +173,14 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                 </div>
 
                 {/* Bottom Bar: Action Buttons */}
-                <div className="grid grid-cols-4 border-t border-slate-200 bg-slate-50/50">
-                    <MobileActionButton href="#" text="コース案内" icon="fa-book-open" colorClass="text-rose-400" />
-                    <MobileActionButton href="#" text="活用法" icon="fa-lightbulb" colorClass="text-pink-400" />
-                    <MobileActionButton href="#" text="資料請求" icon="fa-file-signature" colorClass="text-fuchsia-400" />
-                    <MobileActionButton onClick={onLoginClick} text="ログイン" icon="fa-right-to-bracket" colorClass="text-slate-600" />
-                </div>
+                {!isAuthenticated && (
+                    <div className="grid grid-cols-4 border-t border-slate-200 bg-slate-50/50">
+                        <MobileActionButton href="#" text="コース案内" icon="fa-book-open" colorClass="text-rose-400" />
+                        <MobileActionButton href="#" text="活用法" icon="fa-lightbulb" colorClass="text-pink-400" />
+                        <MobileActionButton href="#" text="資料請求" icon="fa-file-signature" colorClass="text-fuchsia-400" />
+                        <MobileActionButton onClick={onLoginClick} text="ログイン" icon="fa-right-to-bracket" colorClass="text-slate-600" />
+                    </div>
+                )}
             </div>
         </header>
     );

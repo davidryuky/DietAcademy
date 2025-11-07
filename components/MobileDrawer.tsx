@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const menuItems = [
+const publicMenuItems = [
     { text: 'コース案内', href: 'https://dietacademy.jp/kouza/' },
     { text: 'メリット・活用法', href: 'https://dietacademy.jp/shikaku/' },
     { text: 'いまなぜダイエットマスター資格なのか？', href: 'https://dietacademy.jp/whynow/' },
@@ -26,12 +26,30 @@ const menuItems = [
     { text: '究極のダイエットは塀の中にあった！', href: 'https://dietacademy.jp/prison/' },
 ];
 
+const memberMenuItems = [
+    { text: '会員ページトップ', href: '/#/members' },
+    { text: '動画講義', isAccordion: true, items: [
+        { text: '基礎編 動画講義', href: 'https://dietacademy.jp/members/movies-regular/' },
+        { text: '上級編 動画講義', href: 'https://dietacademy.jp/members/movies-senior/' },
+    ]},
+    { text: 'オンライン教本', isAccordion: true, items: [
+        { text: '基礎編 教本', href: 'https://dietacademy.jp/members/kyouhon-regular/' },
+        { text: '上級編 教本', href: 'https://dietacademy.jp/members/kyouhon-senior/' },
+    ]},
+    { text: 'レシピ集', href: 'https://dietacademy.jp/members/recipe/recipe.html' },
+    { text: '用語集', href: 'https://dietacademy.jp/members/words/' },
+    { text: 'ダイエット診断', href: 'https://dietacademy.jp/members-diet-shindan/' },
+    { text: 'ダイエットサポート', href: 'https://dietacademy.jp/members/support/' },
+    { text: '資格取得', href: 'https://dietacademy.jp/members/shikaku/' },
+];
+
 interface MobileDrawerProps {
     isOpen: boolean;
     onClose: () => void;
+    isAuthenticated: boolean;
 }
 
-export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) => {
+export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, isAuthenticated }) => {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -42,6 +60,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
             document.body.style.overflow = 'unset';
         };
     }, [isOpen]);
+    
+    const menuItems = isAuthenticated ? memberMenuItems : publicMenuItems;
 
     return (
         <>
@@ -64,7 +84,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                         <li>
                             <Link to="/" onClick={onClose} className="flex items-center px-6 py-4 text-base font-bold bg-rose-50 text-rose-700 transition-colors hover:bg-rose-100">
                                 <i className="fas fa-home mr-4 w-5 text-center text-rose-600"></i>
-                                Home
+                                {isAuthenticated ? 'メンバーズホーム' : 'Home'}
                             </Link>
                         </li>
                         
@@ -79,11 +99,11 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                         ))}
                         
                         {/* Phone Image at the bottom */}
-                        <li className="px-6 pt-6">
+                        {!isAuthenticated && <li className="px-6 pt-6">
                            <a href="tel:0120945528">
                               <img src="https://dietacademy.jp/img2023/common/left-menu/tel.gif" alt="電話番号: 0120-945-528" className="transition-opacity hover:opacity-80" />
                            </a>
-                        </li>
+                        </li>}
                     </ul>
                 </nav>
             </div>

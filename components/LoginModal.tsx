@@ -1,13 +1,36 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLoginSuccess: () => void;
 }
 
-export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) {
+        setUsername('');
+        setPassword('');
+        setError('');
+    }
+  }, [isOpen]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    if (username === 'test' && password === 'test') {
+      onLoginSuccess();
+    } else {
+      setError('ユーザー名またはパスワードが正しくありません。');
+    }
+  };
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -56,7 +79,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         </div>
         {/* Body */}
         <div className="p-6 sm:p-8">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username" className="block text-sm font-bold text-slate-700 mb-2">
                         ユーザー名:
@@ -69,6 +92,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                             type="text"
                             id="username"
                             name="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             className="w-full pl-12 pr-4 py-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow"
                          />
                     </div>
@@ -85,10 +110,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                             type="password"
                             id="password"
                             name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="w-full pl-12 pr-4 py-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow"
                         />
                     </div>
                 </div>
+                {error && <p className="text-red-600 text-sm font-semibold text-center" role="alert">{error}</p>}
                 <div className="flex items-center">
                     <input
                         id="remember-me"
