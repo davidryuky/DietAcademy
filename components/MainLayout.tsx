@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ScrollToTopButton } from './ScrollToTopButton';
@@ -27,6 +28,14 @@ export const MainLayout: React.FC<{
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const location = useLocation();
+
+  // Conditionally render layout based on route
+  const isVideoPage = location.pathname === '/members/movies-regular';
+
+  if (isVideoPage) {
+    return <>{children}</>; // Render only the video page component
+  }
 
   return (
     <div className="min-h-screen flex flex-col font-sans text-slate-800 bg-slate-50">
@@ -41,6 +50,7 @@ export const MainLayout: React.FC<{
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         isAuthenticated={isAuthenticated}
+        onLogout={onLogout}
       />
       <main className={isMenuOpen ? 'hidden' : ''}>{children}</main>
       <Footer />
