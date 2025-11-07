@@ -116,7 +116,7 @@ export const ContactWidget: React.FC = () => {
                 <button
                     type="button"
                     onClick={() => setIsOpen(true)}
-                    className="bg-gradient-to-br from-rose-400 to-pink-400 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
+                    className="bg-gradient-to-br from-rose-400 to-pink-400 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
                     aria-label="お問い合わせフォームを開く"
                 >
                     <i className="fas fa-comments text-2xl"></i>
