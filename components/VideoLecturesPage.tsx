@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { PageContentLayout } from './PageContentLayout';
+import { AnimatedSection } from './AnimatedSection';
 
 const BASE_URL = 'https://dietacademy.jp/members/movies-regular/';
 
@@ -110,16 +112,16 @@ const VideoModal: React.FC<{
 
     return ReactDOM.createPortal(
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
             onClick={onClose}
             role="dialog"
             aria-modal="true"
         >
             <div
-                className="bg-slate-900 rounded-lg shadow-2xl w-full max-w-4xl transform animate-scale-up flex flex-col overflow-hidden border border-slate-700"
+                className="bg-slate-800 rounded-lg shadow-2xl w-full max-w-4xl transform animate-scale-up flex flex-col overflow-hidden border border-slate-700"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="p-4 flex justify-between items-center bg-slate-900/80">
+                <div className="p-4 flex justify-between items-center bg-slate-900/50">
                     <h3 className="font-bold text-lg text-white">{video.title}</h3>
                     <button
                         onClick={onClose}
@@ -147,35 +149,41 @@ const VideoModal: React.FC<{
     );
 };
 
-const VideoChapterCard: React.FC<{
-  chapter: typeof videoLecturesData[0];
-  onPlay: () => void;
-}> = ({ chapter, onPlay }) => (
-    <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden flex flex-col md:flex-row transition-shadow duration-300 hover:shadow-xl">
-        {/* Left: Thumbnail */}
-        <div 
-          className="md:w-1/3 flex-shrink-0 relative group cursor-pointer"
-          onClick={onPlay}
-        >
-            <img src={chapter.thumbnail} alt={chapter.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                 <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/50 transform group-hover:scale-110 transition-transform duration-300">
-                    <i className="fas fa-play text-white text-3xl ml-1"></i>
+const StreamingChapterItem: React.FC<{ chapter: typeof videoLecturesData[0]; chapterNumber: number; onPlay: () => void; }> = ({ chapter, chapterNumber, onPlay }) => {
+    return (
+        <div className="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-rose-500/10 hover:border-slate-600">
+            {/* Thumbnail Section */}
+            <div 
+                className="md:w-1/3 relative group cursor-pointer flex-shrink-0"
+                onClick={onPlay}
+            >
+                <div className="aspect-video overflow-hidden">
+                    <img src={chapter.thumbnail} alt={chapter.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                </div>
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/50">
+                        <i className="fas fa-play text-white text-3xl ml-1"></i>
+                    </div>
+                </div>
+                {/* Decorative Progress Bar */}
+                <div className="absolute bottom-0 left-0 h-1 w-full bg-slate-600">
+                    <div className="h-1 bg-rose-500" style={{ width: `${Math.random() * 20 + 5}%` }}></div>
                 </div>
             </div>
+            {/* Content Section */}
+            <div className="p-6 flex-grow">
+                <p className="text-sm font-bold text-rose-400 mb-1">CHAPTER {chapterNumber}</p>
+                <h3 className="font-bold text-2xl text-white mb-4">{chapter.title}</h3>
+                <ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                    {chapter.topics.slice(0, 4).map((topic, index) => ( // Show first 4 topics for brevity
+                        <li key={index}>{topic}</li>
+                    ))}
+                    {chapter.topics.length > 4 && <li className="text-slate-500">...他</li>}
+                </ul>
+            </div>
         </div>
-
-        {/* Right: Content */}
-        <div className="p-6 flex flex-col">
-            <h3 className="text-xl font-bold text-slate-800 mb-3">{chapter.title}</h3>
-            <ol className="list-decimal list-inside text-slate-600 space-y-1.5 text-sm flex-grow">
-                {chapter.topics.map((topic, index) => (
-                    <li key={index}>{topic}</li>
-                ))}
-            </ol>
-        </div>
-    </div>
-);
+    );
+};
 
 
 export const VideoLecturesPage: React.FC = () => {
@@ -191,29 +199,29 @@ export const VideoLecturesPage: React.FC = () => {
 
     return (
         <>
-            <div className="bg-slate-50">
-                {/* Page Header */}
-                <div className="bg-gradient-to-r from-sky-100 to-blue-200 text-slate-800">
-                    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-                        <h1 className="text-4xl md:text-5xl font-extrabold">基礎編 動画講義</h1>
-                        <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-                            ダイエットの foundational knowledge を動画で学びましょう。各章のトピックを確認し、学習を始めてください。
-                        </p>
-                    </div>
-                </div>
+            <div className="bg-slate-900 text-slate-300">
+                <PageContentLayout>
+                    <div className="space-y-12">
+                        <AnimatedSection>
+                             <div className="text-center">
+                                <h1 className="text-4xl md:text-5xl font-extrabold text-white" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>基礎編 動画講義</h1>
+                                <p className="mt-3 text-lg text-slate-400 max-w-2xl mx-auto">ダイエットの基礎を体系的に学び、あなたの知識を確かなものにしましょう。</p>
+                            </div>
+                        </AnimatedSection>
 
-                {/* Content Grid */}
-                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="space-y-8">
-                        {videoLecturesData.map((chapter) => (
-                           <VideoChapterCard
-                                key={chapter.id}
-                                chapter={chapter}
-                                onPlay={() => openModal({ title: chapter.title, videoSrc: chapter.videoSrc })}
-                           />
-                        ))}
+                        <div className="space-y-8">
+                            {videoLecturesData.map((chapter, index) => (
+                                <AnimatedSection key={chapter.id}>
+                                    <StreamingChapterItem
+                                        chapter={chapter}
+                                        chapterNumber={index + 1}
+                                        onPlay={() => openModal({ title: chapter.title, videoSrc: chapter.videoSrc })}
+                                    />
+                                </AnimatedSection>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                </PageContentLayout>
             </div>
             <VideoModal
                 isOpen={!!selectedVideo}
