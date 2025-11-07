@@ -92,9 +92,9 @@ export const MembersPage: React.FC = () => {
         <PageContentLayout>
             <div className="space-y-12">
                 <AnimatedSection>
-                    <div className="bg-gradient-to-r from-sky-500 to-indigo-500 text-white rounded-lg shadow-lg p-8 text-center">
-                        <h1 className="text-4xl font-extrabold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>ようこそ、ダイエットマスターへ！</h1>
-                        <p className="mt-2 text-lg opacity-90 max-w-2xl mx-auto">あなたの健康的な未来を創るためのリソースがここにあります。さあ、学習を始めましょう。</p>
+                    <div className="bg-gradient-to-r from-sky-200 to-blue-400 text-white rounded-lg shadow-lg p-8 text-center">
+                        <h1 className="text-4xl font-extrabold" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.15)' }}>ようこそ、ダイエットマスターへ！</h1>
+                        <p className="mt-2 text-lg opacity-95 max-w-2xl mx-auto">あなたの健康的な未来を創るためのリソースがここにあります。さあ、学習を始めましょう。</p>
                     </div>
                 </AnimatedSection>
 
