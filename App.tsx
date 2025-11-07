@@ -6,18 +6,25 @@ import { TestPage } from './components/TestPage';
 import { MembersPage } from './components/MembersPage';
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Initialize authentication state from localStorage
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLoginSuccess = () => {
+    // Persist authentication state
+    localStorage.setItem('isAuthenticated', 'true');
     setIsAuthenticated(true);
     setIsLoginModalOpen(false);
     navigate('/members');
   };
 
   const handleLogout = () => {
+    // Clear persisted authentication state
+    localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
     navigate('/');
   };
