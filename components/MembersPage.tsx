@@ -21,14 +21,9 @@ const ContentCard: React.FC<{ title: string; href: string; imgSrc: string; descr
     </a>
 );
 
-const FullWidthCard: React.FC<{ title: string; href: string; imgSrc: string }> = ({ title, href, imgSrc }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="block relative group rounded-lg shadow-md border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform">
-        <img src={imgSrc} alt={title} className="w-full h-auto" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 p-4 md:p-6">
-            <h3 className="font-bold text-white text-xl md:text-2xl transition-colors" style={{textShadow: '0 1px 4px rgba(0,0,0,0.5)'}}>{title}</h3>
-            <p className="text-white/80 text-sm mt-1 group-hover:underline">詳しくはこちらから</p>
-        </div>
+const SupportCard: React.FC<{ title: string; href: string; imgSrc: string }> = ({ title, href, imgSrc }) => (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="block rounded-lg shadow-md border border-slate-200 overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform">
+        <img src={imgSrc} alt={title} className="w-full h-auto block" />
     </a>
 );
 
@@ -72,9 +67,9 @@ export const MembersPage: React.FC = () => {
                      <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                         <SectionHeader title="サポート & 資格取得" icon="fa-hands-helping" gradient="bg-gradient-to-r from-emerald-400 to-teal-500" />
                         <div className="p-4 space-y-6">
-                            <FullWidthCard title="ダイエット診断" href="https://dietacademy.jp/members-diet-shindan/" imgSrc="https://dietacademy.jp/members/img/top/shindan-img.jpg" />
-                            <FullWidthCard title="ダイエットサポート" href="https://dietacademy.jp/members/support/" imgSrc="https://dietacademy.jp/members/support/img/support-img.jpg" />
-                            <FullWidthCard title="資格取得" href="https://dietacademy.jp/members/shikaku/" imgSrc="https://dietacademy.jp/members/shikaku/img/shikaku-image.jpg" />
+                            <SupportCard title="ダイエット診断" href="https://dietacademy.jp/members-diet-shindan/" imgSrc="https://dietacademy.jp/members/img/top/shindan-img.jpg" />
+                            <SupportCard title="ダイエットサポート" href="https://dietacademy.jp/members/support/" imgSrc="https://dietacademy.jp/members/support/img/support-img.jpg" />
+                            <SupportCard title="資格取得" href="https://dietacademy.jp/members/shikaku/" imgSrc="https://dietacademy.jp/members/shikaku/img/shikaku-image.jpg" />
                         </div>
                     </div>
                 </AnimatedSection>
