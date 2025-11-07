@@ -95,7 +95,6 @@ const VideoModal: React.FC<{
         if (isOpen) {
             document.body.style.overflow = 'hidden';
             window.addEventListener('keydown', handleEsc);
-            // Autoplay when modal opens
             videoRef.current?.play().catch(e => console.error("Autoplay was prevented:", e));
         } else {
             document.body.style.overflow = 'unset';
@@ -148,28 +147,35 @@ const VideoModal: React.FC<{
     );
 };
 
-
-const VideoThumbnail: React.FC<{ chapter: typeof videoLecturesData[0]; onPlay: () => void; }> = ({ chapter, onPlay }) => {
-  return (
-    <div 
-      className="relative aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden group cursor-pointer shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-rose-500/20"
-      onClick={onPlay}
-    >
-      <img src={chapter.thumbnail} alt={chapter.title} className="w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/20 group-hover:from-black/90 transition-all duration-300"></div>
-      
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/50">
-          <i className="fas fa-play text-white text-2xl ml-1"></i>
+const VideoChapterCard: React.FC<{
+  chapter: typeof videoLecturesData[0];
+  onPlay: () => void;
+}> = ({ chapter, onPlay }) => (
+    <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden flex flex-col md:flex-row transition-shadow duration-300 hover:shadow-xl">
+        {/* Left: Thumbnail */}
+        <div 
+          className="md:w-1/3 flex-shrink-0 relative group cursor-pointer"
+          onClick={onPlay}
+        >
+            <img src={chapter.thumbnail} alt={chapter.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+                 <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/50 transform group-hover:scale-110 transition-transform duration-300">
+                    <i className="fas fa-play text-white text-3xl ml-1"></i>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <h3 className="absolute bottom-0 left-0 right-0 p-3 text-white text-sm font-bold truncate" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
-        {chapter.title}
-      </h3>
+        {/* Right: Content */}
+        <div className="p-6 flex flex-col">
+            <h3 className="text-xl font-bold text-slate-800 mb-3">{chapter.title}</h3>
+            <ol className="list-decimal list-inside text-slate-600 space-y-1.5 text-sm flex-grow">
+                {chapter.topics.map((topic, index) => (
+                    <li key={index}>{topic}</li>
+                ))}
+            </ol>
+        </div>
     </div>
-  );
-};
+);
 
 
 export const VideoLecturesPage: React.FC = () => {
@@ -182,46 +188,29 @@ export const VideoLecturesPage: React.FC = () => {
     const closeModal = () => {
         setSelectedVideo(null);
     };
-    
-    const featuredVideo = videoLecturesData[0];
 
     return (
         <>
-            <div className="bg-slate-900 text-slate-200">
-                {/* Hero Section */}
-                <div 
-                    className="relative h-[65vh] min-h-[450px] flex items-end p-6 md:p-12 text-white"
-                    style={{ 
-                        backgroundImage: `url(${featuredVideo.thumbnail})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'
-                    }}
-                >
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-                    <div className="relative z-10 max-w-3xl animate-fade-in-up">
-                        <p className="text-rose-400 font-bold text-lg">基礎編</p>
-                        <h1 className="text-4xl md:text-5xl font-extrabold my-3" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.5)' }}>{featuredVideo.title}</h1>
-                        <p className="text-slate-300 mb-6 line-clamp-2">{featuredVideo.topics.join(' / ')}</p>
-                        <button
-                            onClick={() => openModal({ title: featuredVideo.title, videoSrc: featuredVideo.videoSrc })}
-                            className="inline-flex items-center justify-center px-8 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-rose-500/30 transition-all duration-300 transform hover:-translate-y-1"
-                        >
-                            <i className="fas fa-play mr-3"></i>
-                            今すぐ再生
-                        </button>
+            <div className="bg-slate-50">
+                {/* Page Header */}
+                <div className="bg-gradient-to-r from-sky-100 to-blue-200 text-slate-800">
+                    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+                        <h1 className="text-4xl md:text-5xl font-extrabold">基礎編 動画講義</h1>
+                        <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+                            ダイエットの foundational knowledge を動画で学びましょう。各章のトピックを確認し、学習を始めてください。
+                        </p>
                     </div>
                 </div>
 
                 {/* Content Grid */}
-                <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <h2 className="text-2xl font-bold mb-6 text-slate-100">講義一覧</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div className="space-y-8">
                         {videoLecturesData.map((chapter) => (
-                            <VideoThumbnail 
+                           <VideoChapterCard
                                 key={chapter.id}
                                 chapter={chapter}
                                 onPlay={() => openModal({ title: chapter.title, videoSrc: chapter.videoSrc })}
-                            />
+                           />
                         ))}
                     </div>
                 </div>
