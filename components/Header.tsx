@@ -165,16 +165,27 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                         )}
                     </div>
                     
-                    <button 
-                        onClick={onMenuToggle} 
-                        className="relative z-50 flex flex-col items-center justify-center w-10 h-10"
-                        aria-label="メニューを開閉する"
-                        aria-expanded={isMenuOpen}
-                    >
-                        <span className={`block w-6 h-0.5 bg-slate-800 rounded-full transition-transform duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}></span>
-                        <span className={`block w-6 h-0.5 bg-slate-800 rounded-full mt-1.5 transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                        <span className={`block w-6 h-0.5 bg-slate-800 rounded-full mt-1.5 transition-transform duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}></span>
-                    </button>
+                    <div className="flex items-center space-x-2">
+                        {isAuthenticated && (
+                            <button
+                                onClick={onLogout}
+                                className="flex items-center justify-center h-10 w-10 bg-rose-50 text-rose-700 rounded-full border border-rose-200 hover:bg-rose-100 active:bg-rose-200 transition-colors"
+                                aria-label="ログアウト"
+                            >
+                                <i className="fas fa-right-from-bracket text-lg"></i>
+                            </button>
+                        )}
+                        <button 
+                            onClick={onMenuToggle} 
+                            className="relative z-50 flex flex-col items-center justify-center w-10 h-10"
+                            aria-label="メニューを開閉する"
+                            aria-expanded={isMenuOpen}
+                        >
+                            <span className={`block w-6 h-0.5 bg-slate-800 rounded-full transition-transform duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}></span>
+                            <span className={`block w-6 h-0.5 bg-slate-800 rounded-full mt-1.5 transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                            <span className={`block w-6 h-0.5 bg-slate-800 rounded-full mt-1.5 transition-transform duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}></span>
+                        </button>
+                    </div>
                 </div>
 
                 {/* Bottom Bar: Action Buttons */}
