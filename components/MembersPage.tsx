@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageContentLayout } from './PageContentLayout';
 import { AnimatedSection } from './AnimatedSection';
 
@@ -86,8 +86,21 @@ const SupportInfoBox: React.FC<{
   </div>
 );
 
+const bannerImages = [
+    'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2670&auto=format&fit=crop', // Salad bowl
+    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2670&auto=format&fit=crop', // Tying shoes
+    'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2574&auto=format&fit=crop', // Vegetables
+    'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2720&auto=format&fit=crop' // Yoga
+];
 
 export const MembersPage: React.FC = () => {
+    const [randomBannerImage, setRandomBannerImage] = useState('');
+
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * bannerImages.length);
+        setRandomBannerImage(bannerImages[randomIndex]);
+    }, []);
+
     return (
         <PageContentLayout>
             <div className="space-y-12">
@@ -96,6 +109,19 @@ export const MembersPage: React.FC = () => {
                         <h1 className="text-4xl font-extrabold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>ようこそ、ダイエットマスターへ！</h1>
                         <p className="mt-2 text-lg opacity-90 max-w-2xl mx-auto">あなたの健康的な未来を創るためのリソースがここにあります。さあ、学習を始めましょう。</p>
                     </div>
+                </AnimatedSection>
+
+                <AnimatedSection>
+                   {randomBannerImage && (
+                        <div className="relative w-full h-64 md:h-80 rounded-lg shadow-lg overflow-hidden">
+                            <img 
+                                src={randomBannerImage} 
+                                alt="健康的なライフスタイルのイメージ" 
+                                className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105" 
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+                   )}
                 </AnimatedSection>
 
                 <AnimatedSection>
