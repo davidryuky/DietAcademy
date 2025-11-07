@@ -21,34 +21,34 @@ const ContentCard: React.FC<{ title: string; href: string; imgSrc: string; descr
     </a>
 );
 
-const SupportSectionItem: React.FC<{
+// New component for the support section, designed to be more visually appealing and fit within a grid.
+const SupportCard: React.FC<{
   title: string;
   href: string;
   imgSrc: string;
-  buttonText: string;
-}> = ({ title, href, imgSrc, buttonText }) => (
-  <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-    {/* Title header for the card */}
-    <h3 className="text-xl font-bold text-slate-800 p-4 border-b-2 border-slate-100 bg-slate-50/50">
-      {title}
-    </h3>
-    {/* Card body with image and button */}
-    <div className="p-4">
-      <a href={href} target="_blank" rel="noopener noreferrer" className="block group">
-        {/* Image wrapper for hover effect */}
-        <div className="overflow-hidden rounded-md shadow-md mb-4">
-          <img 
-            src={imgSrc} 
-            alt={title} 
-            className="w-full h-auto block transition-transform duration-300 group-hover:scale-105" 
-          />
-        </div>
-        {/* Button container */}
-        <div className="text-center">
-          <span className="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 transform group-hover:-translate-y-0.5">
-            {buttonText} <i className="fas fa-arrow-right ml-2 text-sm"></i>
-          </span>
-        </div>
+  description: string;
+}> = ({ title, href, imgSrc, description }) => (
+  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    {/* Clickable image area */}
+    <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden">
+      <img 
+        src={imgSrc} 
+        alt={title} 
+        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" 
+      />
+    </a>
+    {/* Content area */}
+    <div className="p-5 flex flex-col flex-grow">
+      <h3 className="text-xl font-bold text-slate-800 mb-2">{title}</h3>
+      <p className="text-slate-600 text-sm mb-4 flex-grow">{description}</p>
+      {/* Call to action button */}
+      <a 
+        href={href} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="inline-flex self-start items-center justify-center px-5 py-2.5 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-sm rounded-md shadow-md hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-0.5"
+      >
+        詳しくはこちらから <i className="fas fa-arrow-right ml-2 text-xs"></i>
       </a>
     </div>
   </div>
@@ -93,24 +93,24 @@ export const MembersPage: React.FC = () => {
                 <AnimatedSection>
                      <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                         <SectionHeader title="サポート & 資格取得" icon="fa-hands-helping" gradient="bg-gradient-to-r from-emerald-400 to-teal-500" />
-                        <div className="p-4 space-y-6">
-                            <SupportSectionItem 
+                        <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <SupportCard 
                                 title="ダイエット診断" 
                                 href="https://dietacademy.jp/members-diet-shindan/" 
                                 imgSrc="https://dietacademy.jp/members/img/top/shindan-img.jpg"
-                                buttonText="詳しくはこちらから" 
+                                description="あなたの現状を分析し、最適なダイエットプランへの第一歩を踏み出しましょう。" 
                             />
-                            <SupportSectionItem 
+                            <SupportCard 
                                 title="ダイエットサポート" 
                                 href="https://dietacademy.jp/members/support/" 
                                 imgSrc="https://dietacademy.jp/members/support/img/support-img.jpg"
-                                buttonText="詳しくはこちらから" 
+                                description="専門家があなたのダイエットを個別にサポート。疑問や不安を解消します。" 
                             />
-                            <SupportSectionItem 
+                            <SupportCard 
                                 title="資格取得" 
                                 href="https://dietacademy.jp/members/shikaku/" 
                                 imgSrc="https://dietacademy.jp/members/shikaku/img/shikaku-image.jpg"
-                                buttonText="詳しくはこちらから" 
+                                description="ダイエットの知識を証明する資格を取得し、キャリアアップを目指しましょう。" 
                             />
                         </div>
                     </div>

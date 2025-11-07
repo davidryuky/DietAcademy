@@ -14,6 +14,7 @@ export const MainLayout: React.FC<{
   onLoginClick: () => void;
   onLoginModalClose: () => void;
   onLoginSuccess: () => void;
+  showContactWidget: boolean;
 }> = ({
   children,
   isAuthenticated,
@@ -22,6 +23,7 @@ export const MainLayout: React.FC<{
   onLoginClick,
   onLoginModalClose,
   onLoginSuccess,
+  showContactWidget,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -42,7 +44,7 @@ export const MainLayout: React.FC<{
       />
       <main className={isMenuOpen ? 'hidden' : ''}>{children}</main>
       <Footer />
-      <ContactWidget />
+      {showContactWidget && <ContactWidget />}
       <ScrollToTopButton />
       <LoginModal
         isOpen={isLoginModalOpen}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { MainLayout } from './components/MainLayout';
 import { HomePage } from './components/HomePage';
 import { TestPage } from './components/TestPage';
@@ -9,6 +9,7 @@ const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
@@ -24,6 +25,8 @@ const App: React.FC = () => {
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
+  const isMembersPage = location.pathname.startsWith('/members');
+
   return (
     <MainLayout
       isAuthenticated={isAuthenticated}
@@ -32,6 +35,7 @@ const App: React.FC = () => {
       onLoginClick={openLoginModal}
       onLoginModalClose={closeLoginModal}
       onLoginSuccess={handleLoginSuccess}
+      showContactWidget={!isMembersPage}
     >
       <Routes>
         <Route path="/" element={<HomePage />} />
