@@ -28,9 +28,9 @@ const SupportInfoBox: React.FC<{
   imgSrc: string;
   description: string;
 }> = ({ title, href, imgSrc, description }) => (
-  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group flex flex-col md:flex-row transition-shadow duration-300 hover:shadow-xl">
+  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group flex flex-col md:flex-row md:items-center transition-shadow duration-300 hover:shadow-xl">
     {/* Content on the left */}
-    <div className="p-6 md:p-8 flex flex-col justify-center md:w-1/2 lg:w-2/5">
+    <div className="p-6 md:p-8 flex flex-col justify-center md:w-2/5">
       <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-emerald-600 transition-colors duration-300">{title}</h3>
       <p className="text-slate-600 mb-6 flex-grow">{description}</p>
       <a
@@ -43,12 +43,12 @@ const SupportInfoBox: React.FC<{
       </a>
     </div>
     {/* Image on the right */}
-    <div className="md:w-1/2 lg:w-3/5 min-h-[200px] md:min-h-0">
-      <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden h-full">
+    <div className="md:w-3/5">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden">
         <img
           src={imgSrc}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
         />
       </a>
     </div>
