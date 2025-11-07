@@ -58,70 +58,109 @@ const videoLecturesData = [
 type Video = typeof videoLecturesData[0];
 
 const StreamingHeader: React.FC = () => (
-    <header className="sticky top-0 z-20 bg-slate-900/80 backdrop-blur-sm border-b border-slate-800">
-        <div className="w-full max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <Link to="/members" className="flex items-center text-slate-300 hover:text-white transition-colors">
-                <i className="fas fa-chevron-left mr-3"></i>
-                <span className="font-semibold">メンバーエリアに戻る</span>
+    <header className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/70 to-transparent transition-all duration-300">
+        <div className="w-full max-w-screen-xl mx-auto px-6 py-5 flex justify-between items-center">
+             <h1 className="text-2xl font-black tracking-widest text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                Diet Academy <span className="text-rose-300">Stream</span>
+            </h1>
+            <Link to="/members" className="flex items-center text-slate-300 hover:text-white transition-colors text-sm font-semibold bg-black/20 hover:bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">
+                <i className="fas fa-arrow-left-long mr-2"></i>
+                <span>メンバーエリアに戻る</span>
             </Link>
-            <h2 className="text-xl font-bold text-rose-300 tracking-wider">
-                Diet Academy Member Stream
-            </h2>
         </div>
     </header>
 );
 
-const ThumbnailCard: React.FC<{ video: Video; onSelect: (video: Video) => void; }> = ({ video, onSelect }) => (
-    <div
-        className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-1"
-        onClick={() => onSelect(video)}
-    >
-        <div className="relative aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-800">
-            <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <i className="fas fa-play text-white text-5xl"></i>
+const HeroSection: React.FC<{ video: Video; onPlay: (video: Video) => void; }> = ({ video, onPlay }) => (
+    <div className="relative h-[60vh] min-h-[400px] md:h-[70vh] w-full flex items-end text-white animate-fade-in">
+        <div className="absolute inset-0 overflow-hidden">
+             <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover scale-110 blur-sm" />
+             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+        </div>
+        <div className="relative w-full max-w-screen-xl mx-auto px-6 pb-12 md:pb-20">
+            <div className="max-w-xl">
+                <p className="text-rose-300 font-semibold tracking-wider">注目の講義</p>
+                <h2 className="text-4xl md:text-6xl font-extrabold my-3" style={{ textShadow: '0 3px 6px rgba(0,0,0,0.5)' }}>
+                    {video.title}
+                </h2>
+                <p className="text-slate-300 text-base md:text-lg line-clamp-3">
+                    {video.topics.slice(0, 3).join(' / ')}
+                </p>
+                <button
+                    onClick={() => onPlay(video)}
+                    className="mt-6 inline-flex items-center justify-center px-8 py-3 bg-white text-slate-900 font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-white/50 transform hover:scale-105"
+                >
+                    <i className="fas fa-play mr-3"></i>
+                    <span>今すぐ再生</span>
+                </button>
             </div>
         </div>
-        <div className="mt-3">
-            <h3 className="font-semibold text-slate-300 group-hover:text-white transition-colors text-base">{video.title}</h3>
+    </div>
+);
+
+const ThumbnailCard: React.FC<{ video: Video; onSelect: (video: Video) => void; }> = ({ video, onSelect }) => (
+    <div
+        className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-1.5 focus-within:-translate-y-1.5"
+        onClick={() => onSelect(video)}
+        onKeyUp={(e) => e.key === 'Enter' && onSelect(video)}
+        tabIndex={0}
+        role="button"
+        aria-label={`講義を再生: ${video.title}`}
+    >
+        <div className="relative aspect-video bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-800 group-hover:border-rose-400/50 transition-all duration-300">
+            <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                 <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white text-2xl opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+                    <i className="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+        <div className="mt-3 px-1">
+            <h3 className="font-semibold text-slate-300 group-hover:text-white transition-colors text-base truncate">{video.title}</h3>
         </div>
     </div>
 );
 
 
 const PlayerView: React.FC<{ video: Video; onClose: () => void }> = ({ video, onClose }) => (
-    <div className="w-full max-w-7xl mx-auto p-6 animate-fade-in">
-        <button onClick={onClose} className="mb-6 flex items-center text-slate-300 hover:text-white transition-colors">
-            <i className="fas fa-arrow-left mr-3"></i>
-            <span className="font-semibold">すべての講義に戻る</span>
-        </button>
-        <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:w-2/3 flex-shrink-0">
-                <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-slate-800">
-                    <video key={video.videoSrc} className="w-full h-full" controls autoPlay preload="auto">
-                        <source src={video.videoSrc} type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+     <div className="relative min-h-screen w-full flex items-center justify-center p-4 md:p-6 animate-fade-in">
+        <div className="absolute inset-0 overflow-hidden z-0">
+             <img src={video.thumbnail} alt="" className="w-full h-full object-cover scale-110 blur-xl brightness-50" />
+             <div className="absolute inset-0 bg-slate-900/60"></div>
+        </div>
+        <div className="relative z-10 w-full max-w-screen-xl mx-auto">
+            <button onClick={onClose} className="mb-6 flex items-center text-slate-300 hover:text-white transition-colors bg-black/20 hover:bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">
+                <i className="fas fa-arrow-left mr-3"></i>
+                <span className="font-semibold">すべての講義に戻る</span>
+            </button>
+            <div className="flex flex-col lg:flex-row gap-8">
+                <div className="lg:w-[65%] flex-shrink-0">
+                    <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-slate-700">
+                        <video key={video.videoSrc} className="w-full h-full" controls autoPlay preload="auto">
+                            <source src={video.videoSrc} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
-            </div>
-            <div className="lg:w-1/3">
-                <h2 className="text-3xl font-bold text-white mb-4">{video.title}</h2>
-                <h3 className="font-semibold text-slate-300 mb-3 border-b border-slate-700 pb-2">この講義のトピック</h3>
-                <ul className="space-y-2.5 text-slate-400">
-                    {video.topics.map((topic, index) => (
-                        <li key={index} className="flex items-start">
-                            <i className="fas fa-check-circle text-rose-400/70 mr-3 mt-1"></i>
-                            <span>{topic}</span>
-                        </li>
-                    ))}
-                </ul>
+                <div className="lg:w-[35%] bg-black/20 backdrop-blur-md p-6 rounded-xl border border-slate-800 max-h-[70vh] overflow-y-auto">
+                    <h2 className="text-3xl font-bold text-white mb-4">{video.title}</h2>
+                    <h3 className="font-semibold text-slate-300 mb-3 border-b border-slate-700 pb-2">この講義のトピック</h3>
+                    <ul className="space-y-2.5 text-slate-400">
+                        {video.topics.map((topic, index) => (
+                            <li key={index} className="flex items-start">
+                                <i className="fas fa-circle-play text-rose-400/70 mr-3 mt-1 flex-shrink-0"></i>
+                                <span>{topic}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 );
 
 const StreamingFooter: React.FC = () => (
-    <footer className="w-full max-w-7xl mx-auto px-6 py-6 text-center text-xs text-slate-500 border-t border-slate-800 mt-12">
+    <footer className="w-full text-center text-xs text-slate-500 py-8">
         <p>&copy; Nihon Diet Academy,Inc. All rights reserved.</p>
     </footer>
 );
@@ -129,23 +168,26 @@ const StreamingFooter: React.FC = () => (
 export const VideoLecturesPage: React.FC = () => {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
+    const featuredVideo = videoLecturesData[0];
+    const otherVideos = videoLecturesData.slice(0); // Show all including the first in the list below
+
+    if (selectedVideo) {
+        return <PlayerView video={selectedVideo} onClose={() => setSelectedVideo(null)} />;
+    }
+
     return (
-        <div className="bg-slate-900 text-white min-h-screen flex flex-col">
+        <div className="bg-slate-900 text-white min-h-screen">
             <StreamingHeader />
-            <main className="flex-grow">
-                {selectedVideo ? (
-                    <PlayerView video={selectedVideo} onClose={() => setSelectedVideo(null)} />
-                ) : (
-                    <div className="w-full max-w-7xl mx-auto p-6">
-                        <h1 className="text-4xl font-extrabold text-white mb-2">基礎編 動画講義</h1>
-                        <p className="text-slate-400 mb-8">視聴したい講義を選択してください。</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-8">
-                            {videoLecturesData.map((video) => (
-                                <ThumbnailCard key={video.id} video={video} onSelect={setSelectedVideo} />
-                            ))}
-                        </div>
+            <main>
+                <HeroSection video={featuredVideo} onPlay={setSelectedVideo} />
+                <div className="w-full max-w-screen-xl mx-auto p-6 mt-8">
+                    <h2 className="text-3xl font-bold text-white mb-6">すべての講義</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
+                        {otherVideos.map((video) => (
+                            <ThumbnailCard key={video.id} video={video} onSelect={setSelectedVideo} />
+                        ))}
                     </div>
-                )}
+                </div>
             </main>
             <StreamingFooter />
         </div>
