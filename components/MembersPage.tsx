@@ -21,10 +21,37 @@ const ContentCard: React.FC<{ title: string; href: string; imgSrc: string; descr
     </a>
 );
 
-const SupportCard: React.FC<{ title: string; href: string; imgSrc: string }> = ({ title, href, imgSrc }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="block rounded-lg shadow-md border border-slate-200 overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform">
-        <img src={imgSrc} alt={title} className="w-full h-auto block" />
-    </a>
+const SupportSectionItem: React.FC<{
+  title: string;
+  href: string;
+  imgSrc: string;
+  buttonText: string;
+}> = ({ title, href, imgSrc, buttonText }) => (
+  <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+    {/* Title header for the card */}
+    <h3 className="text-xl font-bold text-slate-800 p-4 border-b-2 border-slate-100 bg-slate-50/50">
+      {title}
+    </h3>
+    {/* Card body with image and button */}
+    <div className="p-4">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block group">
+        {/* Image wrapper for hover effect */}
+        <div className="overflow-hidden rounded-md shadow-md mb-4">
+          <img 
+            src={imgSrc} 
+            alt={title} 
+            className="w-full h-auto block transition-transform duration-300 group-hover:scale-105" 
+          />
+        </div>
+        {/* Button container */}
+        <div className="text-center">
+          <span className="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 transform group-hover:-translate-y-0.5">
+            {buttonText} <i className="fas fa-arrow-right ml-2 text-sm"></i>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
 );
 
 
@@ -67,9 +94,24 @@ export const MembersPage: React.FC = () => {
                      <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                         <SectionHeader title="サポート & 資格取得" icon="fa-hands-helping" gradient="bg-gradient-to-r from-emerald-400 to-teal-500" />
                         <div className="p-4 space-y-6">
-                            <SupportCard title="ダイエット診断" href="https://dietacademy.jp/members-diet-shindan/" imgSrc="https://dietacademy.jp/members/img/top/shindan-img.jpg" />
-                            <SupportCard title="ダイエットサポート" href="https://dietacademy.jp/members/support/" imgSrc="https://dietacademy.jp/members/support/img/support-img.jpg" />
-                            <SupportCard title="資格取得" href="https://dietacademy.jp/members/shikaku/" imgSrc="https://dietacademy.jp/members/shikaku/img/shikaku-image.jpg" />
+                            <SupportSectionItem 
+                                title="ダイエット診断" 
+                                href="https://dietacademy.jp/members-diet-shindan/" 
+                                imgSrc="https://dietacademy.jp/members/img/top/shindan-img.jpg"
+                                buttonText="詳しくはこちらから" 
+                            />
+                            <SupportSectionItem 
+                                title="ダイエットサポート" 
+                                href="https://dietacademy.jp/members/support/" 
+                                imgSrc="https://dietacademy.jp/members/support/img/support-img.jpg"
+                                buttonText="詳しくはこちらから" 
+                            />
+                            <SupportSectionItem 
+                                title="資格取得" 
+                                href="https://dietacademy.jp/members/shikaku/" 
+                                imgSrc="https://dietacademy.jp/members/shikaku/img/shikaku-image.jpg"
+                                buttonText="詳しくはこちらから" 
+                            />
                         </div>
                     </div>
                 </AnimatedSection>
