@@ -64,27 +64,30 @@ const StreamingHeader: React.FC = () => (
                 <i className="fas fa-chevron-left mr-3"></i>
                 <span className="font-semibold">メンバーエリアに戻る</span>
             </Link>
-            <Link to="/">
-                <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" className="h-10 opacity-80 hover:opacity-100 transition-opacity" />
-            </Link>
+            <h2 className="text-xl font-bold text-rose-300 tracking-wider">
+                Diet Academy Member Stream
+            </h2>
         </div>
     </header>
 );
 
 const ThumbnailCard: React.FC<{ video: Video; onSelect: (video: Video) => void; }> = ({ video, onSelect }) => (
     <div
-        className="group cursor-pointer aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-rose-500/20"
+        className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-1"
         onClick={() => onSelect(video)}
     >
-        <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
-            <h3 className="font-bold text-white text-sm">{video.title}</h3>
+        <div className="relative aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-800">
+            <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <i className="fas fa-play text-white text-5xl"></i>
+            </div>
         </div>
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <i className="fas fa-play text-white text-4xl"></i>
+        <div className="mt-3">
+            <h3 className="font-semibold text-slate-300 group-hover:text-white transition-colors text-base">{video.title}</h3>
         </div>
     </div>
 );
+
 
 const PlayerView: React.FC<{ video: Video; onClose: () => void }> = ({ video, onClose }) => (
     <div className="w-full max-w-7xl mx-auto p-6 animate-fade-in">
@@ -136,7 +139,7 @@ export const VideoLecturesPage: React.FC = () => {
                     <div className="w-full max-w-7xl mx-auto p-6">
                         <h1 className="text-4xl font-extrabold text-white mb-2">基礎編 動画講義</h1>
                         <p className="text-slate-400 mb-8">視聴したい講義を選択してください。</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-8">
                             {videoLecturesData.map((video) => (
                                 <ThumbnailCard key={video.id} video={video} onSelect={setSelectedVideo} />
                             ))}
