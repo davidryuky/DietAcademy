@@ -10,7 +10,7 @@ const SectionHeader: React.FC<{ title: string; icon: string; gradient: string }>
 );
 
 const ContentCard: React.FC<{ title: string; href: string; imgSrc: string; description: string }> = ({ title, href, imgSrc, description }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 transform">
+    <a href={href} className="block bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 transform">
         <div className="overflow-hidden aspect-[16/10]">
             <img src={imgSrc} alt={title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
         </div>
@@ -102,7 +102,7 @@ export const MembersPage: React.FC = () => {
                     <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                         <SectionHeader title="オンライン学習コンテンツ" icon="fa-book-open-reader" gradient="bg-gradient-to-r from-rose-400 to-pink-400" />
                         <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <ContentCard title="基礎編 動画講義" description="ダイエットの基本を動画で学ぶ" href="https://dietacademy.jp/members/movies-regular/" imgSrc="https://dietacademy.jp/members/img/top/thum-mov-reglar.jpg" />
+                            <ContentCard title="基礎編 動画講義" description="ダイエットの基本を動画で学ぶ" href="/#/members/movies-regular" imgSrc="https://dietacademy.jp/members/img/top/thum-mov-reglar.jpg" />
                             <ContentCard title="上級編 動画講義" description="より専門的な知識を深める" href="https://dietacademy.jp/members/movies-senior/" imgSrc="https://dietacademy.jp/members/img/top/thum-mov-senior.jpg" />
                             <ContentCard title="基礎編 教本" description="講義内容をテキストで復習" href="https://dietacademy.jp/members/kyouhon-regular/" imgSrc="https://dietacademy.jp/members/img/top/thum-kyouhon-reglar.jpg" />
                             <ContentCard title="上級編 教本" description="詳細な解説付きのオンライン教本" href="https://dietacademy.jp/members/kyouhon-senior/" imgSrc="https://dietacademy.jp/members/img/top/thum-kyouhon-senior.jpg" />

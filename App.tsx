@@ -4,6 +4,7 @@ import { MainLayout } from './components/MainLayout';
 import { HomePage } from './components/HomePage';
 import { TestPage } from './components/TestPage';
 import { MembersPage } from './components/MembersPage';
+import { VideoLecturesPage } from './components/VideoLecturesPage';
 
 const App: React.FC = () => {
   // Initialize authentication state from localStorage
@@ -48,6 +49,7 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/members" element={isAuthenticated ? <MembersPage /> : <Navigate to="/" replace />} />
+        <Route path="/members/movies-regular" element={isAuthenticated ? <VideoLecturesPage /> : <Navigate to="/" replace />} />
       </Routes>
     </MainLayout>
   );

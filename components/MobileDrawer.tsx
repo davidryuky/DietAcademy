@@ -29,7 +29,7 @@ const publicMenuItems = [
 const memberMenuItems = [
     { text: '会員ページトップ', href: '/#/members' },
     { text: '動画講義', isAccordion: true, items: [
-        { text: '基礎編 動画講義', href: 'https://dietacademy.jp/members/movies-regular/' },
+        { text: '基礎編 動画講義', href: '/#/members/movies-regular' },
         { text: '上級編 動画講義', href: 'https://dietacademy.jp/members/movies-senior/' },
     ]},
     { text: 'オンライン教本', isAccordion: true, items: [
