@@ -42,7 +42,7 @@ const InfoButton: React.FC<{
       <div className="mb-5">
          <i className={`fas ${icon} text-5xl opacity-90 group-hover:opacity-100 transition-opacity`}></i>
       </div>
-      <h3 className="text-xl font-bold leading-tight" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
+      <h3 className="text-2xl font-bold leading-tight" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
         {title}
       </h3>
     </div>
