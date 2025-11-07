@@ -18,11 +18,6 @@ const MemberNavLinks: React.FC<{ className?: string; onLogout: () => void }> = (
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">ダイエット診断</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">ダイエットサポート</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">資格取得</a></li>
-        <li>
-            <button onClick={onLogout} className="py-2 px-3 w-full text-left font-bold block transition-all duration-300 hover:bg-rose-500/50 rounded-md text-white">
-                <i className="fas fa-right-from-bracket mr-2"></i>Logout
-            </button>
-        </li>
     </ul>
 );
 
@@ -127,6 +122,16 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                             <div className="flex items-center space-x-4">
                                <DesktopActionButton href="#" icon="fa-pen-to-square" text="講座申込" className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white" />
                                <DesktopActionButton onClick={onLoginClick} icon="fa-right-to-bracket" text="会員ログイン" className="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300" />
+                            </div>
+                        )}
+                        {isAuthenticated && (
+                            <div className="flex items-center space-x-4">
+                                <DesktopActionButton 
+                                    onClick={onLogout} 
+                                    icon="fa-right-from-bracket" 
+                                    text="ログアウト" 
+                                    className="bg-rose-50 hover:bg-rose-100 text-rose-700 border-2 border-rose-200" 
+                                />
                             </div>
                         )}
                     </div>
