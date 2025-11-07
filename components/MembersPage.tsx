@@ -21,34 +21,35 @@ const ContentCard: React.FC<{ title: string; href: string; imgSrc: string; descr
     </a>
 );
 
-// New component for the support section, designed to be more visually appealing and fit within a grid.
-const SupportCard: React.FC<{
+// New component for the support section, with content left and image right.
+const SupportInfoBox: React.FC<{
   title: string;
   href: string;
   imgSrc: string;
   description: string;
 }> = ({ title, href, imgSrc, description }) => (
-  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-    {/* Clickable image area */}
-    <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden">
-      <img 
-        src={imgSrc} 
-        alt={title} 
-        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" 
-      />
-    </a>
-    {/* Content area */}
-    <div className="p-5 flex flex-col flex-grow">
-      <h3 className="text-xl font-bold text-slate-800 mb-2">{title}</h3>
-      <p className="text-slate-600 text-sm mb-4 flex-grow">{description}</p>
-      {/* Call to action button */}
-      <a 
-        href={href} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="inline-flex self-start items-center justify-center px-5 py-2.5 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-sm rounded-md shadow-md hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-0.5"
+  <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden group flex flex-col md:flex-row transition-shadow duration-300 hover:shadow-xl">
+    {/* Content on the left */}
+    <div className="p-6 md:p-8 flex flex-col justify-center md:w-1/2 lg:w-3/5">
+      <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-emerald-600 transition-colors duration-300">{title}</h3>
+      <p className="text-slate-600 mb-6 flex-grow">{description}</p>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex self-start items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
       >
         詳しくはこちらから <i className="fas fa-arrow-right ml-2 text-xs"></i>
+      </a>
+    </div>
+    {/* Image on the right */}
+    <div className="md:w-1/2 lg:w-2/5 min-h-[200px] md:min-h-0">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden h-full">
+        <img
+          src={imgSrc}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
       </a>
     </div>
   </div>
@@ -93,20 +94,20 @@ export const MembersPage: React.FC = () => {
                 <AnimatedSection>
                      <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                         <SectionHeader title="サポート & 資格取得" icon="fa-hands-helping" gradient="bg-gradient-to-r from-emerald-400 to-teal-500" />
-                        <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <SupportCard 
+                        <div className="p-4 space-y-6">
+                            <SupportInfoBox
                                 title="ダイエット診断" 
                                 href="https://dietacademy.jp/members-diet-shindan/" 
                                 imgSrc="https://dietacademy.jp/members/img/top/shindan-img.jpg"
                                 description="あなたの現状を分析し、最適なダイエットプランへの第一歩を踏み出しましょう。" 
                             />
-                            <SupportCard 
+                            <SupportInfoBox
                                 title="ダイエットサポート" 
                                 href="https://dietacademy.jp/members/support/" 
                                 imgSrc="https://dietacademy.jp/members/support/img/support-img.jpg"
                                 description="専門家があなたのダイエットを個別にサポート。疑問や不安を解消します。" 
                             />
-                            <SupportCard 
+                            <SupportInfoBox
                                 title="資格取得" 
                                 href="https://dietacademy.jp/members/shikaku/" 
                                 imgSrc="https://dietacademy.jp/members/shikaku/img/shikaku-image.jpg"
