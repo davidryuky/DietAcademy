@@ -149,37 +149,24 @@ const VideoModal: React.FC<{
     );
 };
 
-// Redesigned ChapterCard with a "Netflix-style" episodic layout
-const EpisodeCard: React.FC<{ chapter: typeof videoLecturesData[0]; onPlay: () => void; }> = ({ chapter, onPlay }) => (
-    <div className="bg-slate-800/50 rounded-lg shadow-lg border border-slate-700 overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:border-rose-400/50 hover:shadow-rose-400/10">
-        {/* Thumbnail Section */}
+const ChapterCard: React.FC<{ chapter: typeof videoLecturesData[0]; onPlay: () => void; }> = ({ chapter, onPlay }) => (
+    <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden flex flex-col md:flex-row">
         <div 
-            className="md:w-2/5 xl:w-1/3 relative group cursor-pointer flex-shrink-0"
+            className="md:w-1/3 relative group cursor-pointer flex-shrink-0"
             onClick={onPlay}
         >
-            <div className="aspect-video overflow-hidden">
-                <img 
-                  src={chapter.thumbnail} 
-                  alt={chapter.title} 
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
-                />
-            </div>
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/50">
+            <img src={chapter.thumbnail} alt={chapter.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-16 h-16 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center">
                     <i className="fas fa-play text-white text-3xl ml-1"></i>
                 </div>
             </div>
-            {/* Decorative Progress Bar */}
-            <div className="absolute bottom-0 left-0 h-1 bg-rose-500" style={{ width: '15%' }}></div>
         </div>
-        
-        {/* Content Section */}
-        <div className="p-5 md:p-6 flex-grow">
-            <h3 className="font-bold text-xl text-white mb-3">{chapter.title}</h3>
-            <ol className="list-decimal list-inside text-sm text-slate-400 space-y-1.5 columns-1 sm:columns-2 lg:columns-1 xl:columns-2">
+        <div className="p-4 md:p-6 flex-grow">
+            <h3 className="font-bold text-lg text-slate-800 mb-3">{chapter.title}</h3>
+            <ol className="list-decimal list-inside text-sm text-slate-600 space-y-1.5 columns-1 sm:columns-2">
                 {chapter.topics.map((topic, index) => (
-                    <li key={index} className="break-inside-avoid hover:text-slate-200 transition-colors">{topic}</li>
+                    <li key={index} className="break-inside-avoid">{topic}</li>
                 ))}
             </ol>
         </div>
@@ -198,24 +185,20 @@ export const VideoLecturesPage: React.FC = () => {
     };
 
     return (
-        <div className="bg-slate-900 text-slate-200">
+        <>
             <PageContentLayout>
                 <div className="space-y-12">
                     <AnimatedSection>
-                        <div className="text-center">
-                            <h1 className="text-4xl md:text-5xl font-extrabold text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
-                                基礎編 動画講義
-                            </h1>
-                            <p className="mt-3 text-lg text-slate-400 max-w-2xl mx-auto">
-                                ダイエットの基礎を動画で学びましょう。各エピソードをクリックして講義を開始してください。
-                            </p>
+                        <div className="bg-gradient-to-r from-rose-400 to-pink-400 text-white rounded-lg shadow-lg p-8 text-center">
+                            <h1 className="text-4xl font-extrabold" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.15)' }}>基礎編 動画講義</h1>
+                            <p className="mt-2 text-lg opacity-95 max-w-2xl mx-auto">各章のサムネイルをクリックして講義を開始してください。</p>
                         </div>
                     </AnimatedSection>
 
                     <div className="space-y-8">
-                        {videoLecturesData.map((chapter) => (
+                        {videoLecturesData.map((chapter, index) => (
                             <AnimatedSection key={chapter.id}>
-                                <EpisodeCard
+                                <ChapterCard 
                                     chapter={chapter} 
                                     onPlay={() => openModal({ title: chapter.title, videoSrc: chapter.videoSrc })} 
                                 />
@@ -229,6 +212,6 @@ export const VideoLecturesPage: React.FC = () => {
                 onClose={closeModal}
                 video={selectedVideo}
             />
-        </div>
+        </>
     );
 };
