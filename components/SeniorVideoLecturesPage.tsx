@@ -68,8 +68,8 @@ type Video = typeof videoLecturesData[0];
 const StreamingHeader: React.FC = () => (
     <header className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/70 to-transparent">
         <div className="w-full max-w-screen-xl mx-auto px-6 py-5 flex justify-between items-center">
-             <h1 className="text-3xl font-bold tracking-wider text-white uppercase" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.6)' }}>
-                Members Area
+             <h1 className="text-3xl font-bold tracking-wider text-white" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.6)' }}>
+                メンバーエリア
             </h1>
             <Link to="/members" className="flex items-center text-slate-300 hover:text-white transition-colors text-sm font-semibold bg-black/20 hover:bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">
                 <i className="fas fa-arrow-left-long mr-2"></i>
