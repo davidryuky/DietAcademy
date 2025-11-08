@@ -74,7 +74,7 @@ const StreamingHeader: React.FC = () => (
 const HeroSection: React.FC<{ video: Video; onPlay: (video: Video) => void; }> = ({ video, onPlay }) => (
     <div className="relative h-[60vh] min-h-[400px] md:h-[70vh] w-full flex items-end text-white animate-fade-in">
         <div className="absolute inset-0 overflow-hidden">
-             <img src="https://i.postimg.cc/4xHt1wzm/bgstream.png" alt="" className="w-full h-full object-cover" />
+             <img src="https://i.postimg.cc/4xHt1wzm/bgstream.png" alt="" className="w-full h-full object-cover blur-sm" />
              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
         </div>
         <div className="relative w-full max-w-screen-xl mx-auto px-6 pb-12 md:pb-20">
