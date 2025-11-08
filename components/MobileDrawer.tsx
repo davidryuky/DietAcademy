@@ -67,7 +67,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, isA
 
             {/* Drawer Panel */}
             <div 
-                className={`fixed top-0 left-0 h-screen w-3/4 max-w-[300px] bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50 md:hidden border-r border-slate-200 flex flex-col`}
+                className={`fixed top-0 left-0 h-screen w-3/4 max-w-[300px] bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50 md:hidden border-r border-slate-200 flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
                 role="dialog"
                 aria-modal="true"
             >
