@@ -107,9 +107,9 @@ const ThumbnailCard: React.FC<{ video: Video; onSelect: (video: Video) => void; 
         role="button"
         aria-label={`講義を再生: ${video.title}`}
     >
-        <div className="relative aspect-video bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-800 group-hover:border-rose-400/50 transition-all duration-300">
-            <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div className="relative bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-800 group-hover:border-rose-400/50 transition-all duration-300">
+            <img src={video.thumbnail} alt={video.title} className="w-full h-auto object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-rose-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white text-2xl opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
                     <i className="fas fa-play"></i>
                 </div>
