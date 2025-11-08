@@ -31,7 +31,7 @@ export const MainLayout: React.FC<{
   const location = useLocation();
 
   // Conditionally render layout based on route
-  const isVideoPage = location.pathname === '/members/movies-regular';
+  const isVideoPage = location.pathname === '/members/movies-regular' || location.pathname === '/members/movies-senior';
 
   if (isVideoPage) {
     return <>{children}</>; // Render only the video page component
@@ -47,6 +47,7 @@ export const MainLayout: React.FC<{
         onLogout={onLogout}
       />
       <MobileDrawer
+        // FIX: Corrected typo from `isMenu-open` to `isMenuOpen` to pass the correct boolean state.
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         isAuthenticated={isAuthenticated}

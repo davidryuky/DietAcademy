@@ -103,7 +103,7 @@ export const MembersPage: React.FC = () => {
                         <SectionHeader title="オンライン学習コンテンツ" icon="fa-book-open-reader" gradient="bg-gradient-to-r from-rose-400 to-pink-400" />
                         <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             <ContentCard title="基礎編 動画講義" description="ダイエットの基本を動画で学ぶ" href="/#/members/movies-regular" imgSrc="https://dietacademy.jp/members/img/top/thum-mov-reglar.jpg" />
-                            <ContentCard title="上級編 動画講義" description="より専門的な知識を深める" href="https://dietacademy.jp/members/movies-senior/" imgSrc="https://dietacademy.jp/members/img/top/thum-mov-senior.jpg" />
+                            <ContentCard title="上級編 動画講義" description="より専門的な知識を深める" href="/#/members/movies-senior" imgSrc="https://dietacademy.jp/members/img/top/thum-mov-senior.jpg" />
                             <ContentCard title="基礎編 教本" description="講義内容をテキストで復習" href="https://dietacademy.jp/members/kyouhon-regular/" imgSrc="https://dietacademy.jp/members/img/top/thum-kyouhon-reglar.jpg" />
                             <ContentCard title="上級編 教本" description="詳細な解説付きのオンライン教本" href="https://dietacademy.jp/members/kyouhon-senior/" imgSrc="https://dietacademy.jp/members/img/top/thum-kyouhon-senior.jpg" />
                             <ContentCard title="レシピ集" description="低カロリーメニュー300種" href="https://dietacademy.jp/members/recipe/recipe.html" imgSrc="https://dietacademy.jp/members/img/top/thum-recipe.jpg" />
