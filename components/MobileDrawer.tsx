@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const publicMenuItems = [
     { text: 'コース案内', href: 'https://dietacademy.jp/kouza/' },
@@ -40,6 +40,9 @@ interface MobileDrawerProps {
 }
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
+    const location = useLocation();
+    const isMembersPage = location.pathname.startsWith('/members');
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -51,7 +54,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, isA
         };
     }, [isOpen]);
     
-    const menuItems = isAuthenticated ? memberMenuItems : publicMenuItems;
+    const menuItems = isMembersPage ? memberMenuItems : publicMenuItems;
 
     return (
         <>
@@ -89,7 +92,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, isA
                                 </li>
                             ))}
                             
-                            {!isAuthenticated && <li className="px-6 pt-6">
+                            {!isMembersPage && <li className="px-6 pt-6">
                                <a href="tel:0120945528">
                                   <img src="https://dietacademy.jp/img2023/common/left-menu/tel.gif" alt="電話番号: 0120945528" className="transition-opacity hover:opacity-80" />
                                </a>
