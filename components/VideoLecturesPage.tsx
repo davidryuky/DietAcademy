@@ -57,8 +57,19 @@ const videoLecturesData = [
 
 type Video = typeof videoLecturesData[0];
 
-const StreamingHeader: React.FC<{ isVisible: boolean }> = ({ isVisible }) => (
-    <header className={`fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/70 to-transparent transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+const StreamingBackground: React.FC = () => (
+    <div className="fixed inset-0 z-[-1] overflow-hidden">
+        <img 
+            src="https://i.postimg.cc/4xHt1wzm/bgstream.png" 
+            alt="" 
+            className="w-full h-full object-cover" 
+        />
+        <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+    </div>
+);
+
+const StreamingHeader: React.FC = () => (
+    <header className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/70 to-transparent">
         <div className="w-full max-w-screen-xl mx-auto px-6 py-5 flex justify-between items-center">
              <h1 className="text-3xl font-bold tracking-wider text-white uppercase" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.6)' }}>
                 DietAcademy<span className="text-rose-400 font-black">Flix</span>
@@ -73,10 +84,7 @@ const StreamingHeader: React.FC<{ isVisible: boolean }> = ({ isVisible }) => (
 
 const HeroSection: React.FC<{ video: Video; onPlay: (video: Video) => void; }> = ({ video, onPlay }) => (
     <div className="relative h-[60vh] min-h-[400px] md:h-[70vh] w-full flex items-end text-white animate-fade-in">
-        <div className="absolute inset-0 overflow-hidden">
-             <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover scale-110 blur-sm" />
-             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
         <div className="relative w-full max-w-screen-xl mx-auto px-6 pb-12 md:pb-20">
             <div className="max-w-xl">
                 <p className="text-rose-300 font-semibold tracking-wider">注目の講義</p>
@@ -124,10 +132,7 @@ const ThumbnailCard: React.FC<{ video: Video; onSelect: (video: Video) => void; 
 
 const PlayerView: React.FC<{ video: Video; onClose: () => void }> = ({ video, onClose }) => (
      <div className="relative min-h-screen w-full flex items-center justify-center p-4 md:p-6 animate-fade-in">
-        <div className="absolute inset-0 overflow-hidden z-0">
-             <img src={video.thumbnail} alt="" className="w-full h-full object-cover scale-110 blur-xl brightness-50" />
-             <div className="absolute inset-0 bg-slate-900/60"></div>
-        </div>
+        <StreamingBackground />
         <div className="relative z-10 w-full max-w-screen-xl mx-auto">
             <button onClick={onClose} className="mb-6 flex items-center text-slate-300 hover:text-white transition-colors bg-black/20 hover:bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">
                 <i className="fas fa-arrow-left mr-3"></i>
@@ -167,28 +172,6 @@ const StreamingFooter: React.FC = () => (
 
 export const VideoLecturesPage: React.FC = () => {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
-    const controlHeader = useCallback(() => {
-        if (typeof window !== 'undefined') {
-            if (window.scrollY > lastScrollY && window.scrollY > 80) {
-                setIsHeaderVisible(false);
-            } else {
-                setIsHeaderVisible(true);
-            }
-            setLastScrollY(window.scrollY);
-        }
-    }, [lastScrollY]);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined' && !selectedVideo) {
-            window.addEventListener('scroll', controlHeader);
-            return () => {
-                window.removeEventListener('scroll', controlHeader);
-            };
-        }
-    }, [controlHeader, selectedVideo]);
 
     const featuredVideo = videoLecturesData[0];
     const otherVideos = videoLecturesData.slice(0);
@@ -198,8 +181,9 @@ export const VideoLecturesPage: React.FC = () => {
     }
 
     return (
-        <div className="bg-slate-900 text-white min-h-screen">
-            <StreamingHeader isVisible={isHeaderVisible} />
+        <div className="relative text-white min-h-screen">
+            <StreamingBackground />
+            <StreamingHeader />
             <main>
                 <HeroSection video={featuredVideo} onPlay={setSelectedVideo} />
                 <div className="w-full max-w-screen-xl mx-auto p-6 mt-8">
