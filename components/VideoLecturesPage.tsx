@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 const BASE_URL = 'https://dietacademy.jp/members/movies-regular/';
@@ -57,8 +57,8 @@ const videoLecturesData = [
 
 type Video = typeof videoLecturesData[0];
 
-const StreamingHeader: React.FC = () => (
-    <header className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/70 to-transparent transition-all duration-300">
+const StreamingHeader: React.FC<{ isVisible: boolean }> = ({ isVisible }) => (
+    <header className={`fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/70 to-transparent transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="w-full max-w-screen-xl mx-auto px-6 py-5 flex justify-between items-center">
              <h1 className="text-3xl font-bold tracking-wider text-white uppercase" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.6)' }}>
                 DietAcademy<span className="text-rose-400 font-black">Flix</span>
@@ -167,9 +167,31 @@ const StreamingFooter: React.FC = () => (
 
 export const VideoLecturesPage: React.FC = () => {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    const controlHeader = useCallback(() => {
+        if (typeof window !== 'undefined') {
+            if (window.scrollY > lastScrollY && window.scrollY > 80) {
+                setIsHeaderVisible(false);
+            } else {
+                setIsHeaderVisible(true);
+            }
+            setLastScrollY(window.scrollY);
+        }
+    }, [lastScrollY]);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && !selectedVideo) {
+            window.addEventListener('scroll', controlHeader);
+            return () => {
+                window.removeEventListener('scroll', controlHeader);
+            };
+        }
+    }, [controlHeader, selectedVideo]);
 
     const featuredVideo = videoLecturesData[0];
-    const otherVideos = videoLecturesData.slice(0); // Show all including the first in the list below
+    const otherVideos = videoLecturesData.slice(0);
 
     if (selectedVideo) {
         return <PlayerView video={selectedVideo} onClose={() => setSelectedVideo(null)} />;
@@ -177,7 +199,7 @@ export const VideoLecturesPage: React.FC = () => {
 
     return (
         <div className="bg-slate-900 text-white min-h-screen">
-            <StreamingHeader />
+            <StreamingHeader isVisible={isHeaderVisible} />
             <main>
                 <HeroSection video={featuredVideo} onPlay={setSelectedVideo} />
                 <div className="w-full max-w-screen-xl mx-auto p-6 mt-8">
