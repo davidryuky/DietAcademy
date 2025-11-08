@@ -1,63 +1,64 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const BASE_URL = 'https://dietacademy.jp/members/movies-senior/';
+const PAGE_BASE_URL = 'https://dietacademy.jp/members/movies-senior/';
+const VIDEO_BASE_URL = 'https://dietacademy.jp/members/movies-senior/contents/mov/';
 
 const videoLecturesData = [
     {
         id: 'mov-s-1',
         title: '第一章「運動療法の進め方」',
-        thumbnail: `${BASE_URL}img/thum-s-1.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/01.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-1.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}01.mp4`,
         topics: ['やせるための運動　まず「歩く」(1)', '事前のメディカルチェック', '運動に何を期待するか？', 'やせるための運動　まず「歩く」(2)', 'いつでも、どこでも、1人でも', '楽しく続けて一日一万歩をめざそう', '1万歩を達成できたら20〜30分のノンストップ歩行', '運動不足の解消に', '筋肉を引き締めるレジスタンス運動', 'テレビを見ながらCM体操', '赤筋（せっきん）と白筋（はっきん）とは？', '筋トレで腕が太くなる？', '筋トレをすればやせる？', '運動と体脂肪と骨と筋肉の関係', '有酸素運動とレジスタンス運動の関係', 'ストレッチング', 'ながら運動はおすすめ！', '動く習慣の習得']
     },
     {
         id: 'mov-s-2',
         title: '第二章「リバウンドの予防と対応」',
-        thumbnail: `${BASE_URL}img/thum-s-2.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/02.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-2.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}02.mp4`,
         topics: ['リバウンドの予防と対応', 'エネルギー収支を赤字にするには', '太りにくい体質に変えていく', '成功する減量曲線は、階段のようなライン', '体重が減らなくなってから', 'ウエイトサイクリングの危険性', 'ウエイトサイクリングを誘発する要因', 'リバウンドをなくすには']
     },
     {
         id: 'mov-s-3',
         title: '第三章「摂食障害」',
-        thumbnail: `${BASE_URL}img/thum-s-3.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/03.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-3.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}03.mp4`,
         topics: ['「摂食障害」', '拒食症 Anorexia Nervosa : AN', '過食症 Bulimia Nervosa : BN', '特定不能の摂食障害', '摂食障害の自己診断', '摂食障害の原因', '美への憧れとダイエット', 'スポーツ摂食障害', '摂食障害の治療', '日常生活での対処法', 'さまざまな治療法-再養育療法', 'さまざまな治療法-内観療法', 'さまざまな治療法-認知行動療法', 'さまざまな治療法-家族療法', '身体と心の関係を大切に…']
     },
     {
         id: 'mov-s-4',
         title: '第四章「アルコール依存症」',
-        thumbnail: `${BASE_URL}img/thum-s-4.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/04.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-4.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}04.mp4`,
         topics: ['様々な臓器故障', 'アルコール依存症', '適度な飲酒量(1)', '適度な飲酒量(2)']
     },
     {
         id: 'mov-s-5',
         title: '第五章「オキナワ26ショック」',
-        thumbnail: `${BASE_URL}img/thum-s-5.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/05.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-5.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}05.mp4`,
         topics: ['オキナワ26ショック', '全国平均を下回る寿命(1)', '全国平均を下回る寿命(2)', '１キロ歩いたことがない', '豆腐と昆布と豚肉', '元凶はアメリカナイズ', '油の量も多い', '泡盛も危険']
     },
     {
         id: 'mov-s-6-1',
         title: '第六章「ダイエットマスター」として」（1）',
-        thumbnail: `${BASE_URL}img/thum-s-6-1.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/06-01.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-6-1.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}06-01.mp4`,
         topics: ['「ダイエットマスターとして」', 'メタボリック・シンドローム(代謝症候群）', 'からだが錆びるのを防ぐライフスタイル', '活性酸素による老化を防ぐ', '抗酸化物質の上手なとり方', 'タバコは百害あって一利無し', 'ニコチン依存に注意！']
     },
     {
         id: 'mov-s-6-2',
         title: '第六章「ダイエットマスター」として」（2）',
-        thumbnail: `${BASE_URL}img/thum-s-6-2.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/06-02.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-6-2.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}06-02.mp4`,
         topics: ['理想的な食と酒', '赤ワインなら　からだによい?', '緑茶パワーは健康の源', 'アメリカ人も認めた大豆パワー', '納豆・豆腐はやっぱりおすすめ！', '『おふくろの味』をダイエットに', '正しい糖質の摂り方', '理想的な食と酒', '赤ワインなら　からだによい?', '緑茶パワーは健康の源', 'アメリカ人も認めた大豆パワー']
     },
     {
         id: 'mov-s-6-3',
         title: '第六章「ダイエットマスター」として」（3）',
-        thumbnail: `${BASE_URL}img/thum-s-6-3.jpg`,
-        videoSrc: `${BASE_URL}contents/mov/06-03.mp4`,
+        thumbnail: `${PAGE_BASE_URL}img/thum-s-6-3.jpg`,
+        videoSrc: `${VIDEO_BASE_URL}06-03.mp4`,
         topics: ['モナリザ（=MONALISA）症候群', '自分を抑える力を身につける', '無意識にしている生活習慣', '食べすぎになりやすい食環境を見直す', '「三多」をつねに心に留めて', 'ダイエットマスターとしてのこれから', 'モナリザ（=MONALISA）症候群', '自分を抑える力を身につける', '無意識にしている生活習慣', '食べすぎになりやすい食環境を見直す', '「三多」をつねに心に留めて']
     },
 ];
