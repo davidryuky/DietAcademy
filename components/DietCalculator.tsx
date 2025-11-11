@@ -246,7 +246,21 @@ export const DietCalculator: React.FC = () => {
                                  <button
                                      ref={infoButtonRef}
                                      type="button"
-                                     onClick={() => setIsInfoVisible(prev => !prev)}
+                                     onClick={() => {
+                                        if (window.innerWidth < 768) {
+                                            setIsInfoVisible(prev => !prev);
+                                        }
+                                     }}
+                                     onMouseEnter={() => {
+                                        if (window.innerWidth >= 768) {
+                                            setIsInfoVisible(true);
+                                        }
+                                     }}
+                                     onMouseLeave={() => {
+                                        if (window.innerWidth >= 768) {
+                                            setIsInfoVisible(false);
+                                        }
+                                     }}
                                      className="flex-shrink-0 w-10 h-10 rounded-full bg-slate-200 text-slate-600 hover:bg-slate-300 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-rose-300"
                                      aria-label="計算についての情報を表示"
                                  >
