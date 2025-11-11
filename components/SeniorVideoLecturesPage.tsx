@@ -135,7 +135,7 @@ const PlayerView: React.FC<{ video: Video; onClose: () => void }> = ({ video, on
     );
 };
 
-const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void }> = ({ video, onSelect }) => {
+const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void, onProgressUpdate: () => void }> = ({ video, onSelect, onProgressUpdate }) => {
     const savedProgressRaw = localStorage.getItem(`video-progress-${video.id}`);
     let progressPercentage = 0;
     let isCompleted = false;
@@ -152,6 +152,13 @@ const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void }
             }
         }
     }
+    
+    const handleMarkAsComplete = () => {
+        // We set a mock progress that represents 100% to mark as complete.
+        const completedProgress = { currentTime: 1, duration: 1 };
+        localStorage.setItem(`video-progress-${video.id}`, JSON.stringify(completedProgress));
+        onProgressUpdate(); // Trigger a re-render of the list
+    };
 
     return (
         <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden flex flex-col md:flex-row items-stretch group transition-shadow duration-300 hover:shadow-lg">
@@ -175,16 +182,28 @@ const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void }
                         ))}
                     </ol>
                 </div>
-                <div className="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between gap-4">
-                     <button
-                        onClick={() => onSelect(video)}
-                        className="inline-flex items-center justify-center px-6 py-2 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400 transform hover:-translate-y-0.5"
-                    >
-                        <i className={`fas ${isCompleted || progressPercentage > 0 ? 'fa-play-circle' : 'fa-play'} mr-2`}></i>
-                        {isCompleted ? 'もう一度見る' : progressPercentage > 0 ? '続きを読む' : '講義を再生'}
-                    </button>
+                <div className="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between gap-4 flex-wrap">
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => onSelect(video)}
+                            className="inline-flex items-center justify-center px-6 py-2 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold text-base rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400 transform hover:-translate-y-0.5"
+                        >
+                            <i className={`fas ${isCompleted || progressPercentage > 0 ? 'fa-play-circle' : 'fa-play'} mr-2`}></i>
+                            {isCompleted ? 'もう一度見る' : progressPercentage > 0 ? '続きを読む' : '講義を再生'}
+                        </button>
+                        {!isCompleted && (
+                            <button
+                                onClick={handleMarkAsComplete}
+                                title="この講義を完了としてマークします"
+                                className="inline-flex items-center justify-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-md shadow-sm border border-slate-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400"
+                            >
+                                <i className="fas fa-check-square mr-2"></i>
+                                <span>完了にする</span>
+                            </button>
+                        )}
+                    </div>
                     {progressPercentage > 0 && (
-                        <div className="flex-grow flex items-center gap-3">
+                        <div className="flex-grow flex items-center gap-3 min-w-[150px]">
                              <div className="w-full bg-slate-200 rounded-full h-2.5">
                                 <div className="bg-rose-500 h-2.5 rounded-full" style={{width: `${progressPercentage}%`}}></div>
                             </div>
@@ -209,9 +228,11 @@ export const SeniorVideoLecturesPage: React.FC = () => {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
     const [refreshKey, setRefreshKey] = useState(0);
 
+    const triggerRefresh = () => setRefreshKey(prevKey => prevKey + 1);
+
     const handlePlayerClose = () => {
         setSelectedVideo(null);
-        setRefreshKey(prevKey => prevKey + 1);
+        triggerRefresh();
     };
 
     return (
@@ -228,7 +249,7 @@ export const SeniorVideoLecturesPage: React.FC = () => {
                 <div className="space-y-6">
                     {videoLecturesData.map((video) => (
                         <AnimatedSection key={`${video.id}-${refreshKey}`}>
-                           <VideoListItem video={video} onSelect={setSelectedVideo} />
+                           <VideoListItem video={video} onSelect={setSelectedVideo} onProgressUpdate={triggerRefresh} />
                         </AnimatedSection>
                     ))}
                 </div>
