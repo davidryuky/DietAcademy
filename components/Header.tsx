@@ -113,7 +113,10 @@ export const Header: React.FC<{ isMenuOpen: boolean, onMenuToggle: () => void, o
                     <div className="flex items-center justify-between py-2">
                         <div className="flex items-center">
                             <Link to="/" className="flex-shrink-0">
-                                <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" />
+                                <div className="flex flex-col items-start">
+                                    <img src="https://dietacademy.jp/img2023/common/header/logo.png" alt="ダイエットマスター" />
+                                    <span className="text-[10px] text-slate-500 font-bold tracking-tight -mt-1.5 ml-1">日本ダイエットアカデミー協会</span>
+                                </div>
                             </Link>
                              {!isMembersPage && <a href="#" className="ml-5 transition-opacity hover:opacity-80">
                                 <img alt="ダイエットに特化した資格講座" src="https://dietacademy.jp/img2023/common/header/head-banner-mob-subscription.png" />
