@@ -108,14 +108,14 @@ const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void }
                 </button>
             </div>
             <div className="p-5 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-slate-800 mb-2">{video.title}</h3>
-                <div className="text-sm text-slate-600 space-y-2 flex-grow">
-                    <p className="font-semibold text-slate-700">主なトピック:</p>
-                    <ul className="list-disc list-inside space-y-1 md:columns-2 md:gap-x-6">
+                <h3 className="text-2xl font-extrabold text-slate-900 mb-3 transition-colors group-hover:text-rose-600">{video.title}</h3>
+                <div className="text-sm text-slate-700 space-y-2 flex-grow">
+                    <p className="font-semibold text-slate-800">主なトピック:</p>
+                    <ol className="list-decimal list-inside space-y-1 md:columns-2 md:gap-x-6 marker:text-rose-500 marker:font-semibold">
                         {video.topics.map((topic, index) => (
                             <li key={index}>{topic}</li>
                         ))}
-                    </ul>
+                    </ol>
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-200">
                      <button
