@@ -28,10 +28,10 @@ export const InfoSection: React.FC = () => {
             <div className="relative z-10 max-w-4xl mx-auto px-4">
                 <div className="animate-fade-in-up">
                     <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-4" style={{ textShadow: '0 2px 6px rgba(0, 0, 0, 0.6)' }}>
-                        知識で、変わる。<br className="sm:hidden" />一生モノのダイエット理論をあなたに。
+                        痩せる知識を、教える力に。
                     </h1>
                     <p className="text-lg md:text-xl max-w-3xl mx-auto font-semibold" style={{ textShadow: '0 1px 4px rgba(0, 0, 0, 0.6)' }}>
-                        もうリバウンドに悩まない。科学的根拠に基づいた指導で、健康的な美しさを手に入れ、自信に満ちた毎日を。
+                        科学的根拠に基づいた指導で、あなたも信頼されるダイエットの専門家へ。
                     </p>
                     <div className="mt-10">
                         <button
