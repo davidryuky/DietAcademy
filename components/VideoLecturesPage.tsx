@@ -97,9 +97,9 @@ const PlayerView: React.FC<{ video: Video; onClose: () => void }> = ({ video, on
 const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void }> = ({ video, onSelect }) => {
     return (
         <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden flex flex-col md:flex-row items-stretch group transition-shadow duration-300 hover:shadow-lg">
-            <div className="md:w-1/3 lg:w-1/4 flex-shrink-0">
-                <button onClick={() => onSelect(video)} className="block w-full h-full relative overflow-hidden">
-                    <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <div className="md:w-1/3 lg:w-1/4 flex-shrink-0 bg-slate-100">
+                <button onClick={() => onSelect(video)} className="block w-full h-full relative overflow-hidden group">
+                    <img src={video.thumbnail} alt={video.title} className="w-full h-full object-contain transition-transform duration-300" />
                     <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                          <div className="w-12 h-12 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-xl">
                             <i className="fas fa-play"></i>
@@ -111,11 +111,10 @@ const VideoListItem: React.FC<{ video: Video, onSelect: (video: Video) => void }
                 <h3 className="text-xl font-bold text-slate-800 mb-2">{video.title}</h3>
                 <div className="text-sm text-slate-600 space-y-2 flex-grow">
                     <p className="font-semibold text-slate-700">主なトピック:</p>
-                    <ul className="list-disc list-inside space-y-1">
-                        {video.topics.slice(0, 3).map((topic, index) => (
+                    <ul className="list-disc list-inside space-y-1 md:columns-2 md:gap-x-6">
+                        {video.topics.map((topic, index) => (
                             <li key={index}>{topic}</li>
                         ))}
-                        {video.topics.length > 3 && <li>...他</li>}
                     </ul>
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-200">
