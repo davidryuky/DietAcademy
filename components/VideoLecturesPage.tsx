@@ -80,14 +80,11 @@ const PlayerView: React.FC<{ video: Video; onClose: () => void }> = ({ video, on
                 <div className="lg:w-[35%] bg-black/20 backdrop-blur-md p-6 rounded-xl border border-slate-800 max-h-[70vh] overflow-y-auto">
                     <h2 className="text-3xl font-bold text-white mb-4">{video.title}</h2>
                     <h3 className="font-semibold text-slate-300 mb-3 border-b border-slate-700 pb-2">この講義のトピック</h3>
-                    <ul className="space-y-2.5 text-slate-400">
+                    <ol className="space-y-2.5 text-slate-400 list-decimal list-inside marker:text-rose-400/80 marker:font-semibold">
                         {video.topics.map((topic, index) => (
-                            <li key={index} className="flex items-start">
-                                <i className="fas fa-circle-play text-rose-400/70 mr-3 mt-1 flex-shrink-0"></i>
-                                <span>{topic}</span>
-                            </li>
+                            <li key={index}>{topic}</li>
                         ))}
-                    </ul>
+                    </ol>
                 </div>
             </div>
         </div>
