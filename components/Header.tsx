@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 const NavLinks: React.FC<{ className?: string }> = ({ className }) => (
     <ul className={className}>
         <li><Link to="/" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">Home</Link></li>
-        <li><Link to="/test" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">🤖 TEST</Link></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">コース案内</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">メリット・活用法</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">受講生の声</a></li>
@@ -15,6 +14,7 @@ const NavLinks: React.FC<{ className?: string }> = ({ className }) => (
 
 const MemberNavLinks: React.FC<{ className?: string; onLogout: () => void }> = ({ className, onLogout }) => (
     <ul className={className}>
+        <li><Link to="/members" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">メンバーズホーム</Link></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">ダイエット診断</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">ダイエットサポート</a></li>
         <li><a href="#" className="py-2 px-3 block transition-all duration-300 hover:bg-white/25 rounded-md">資格取得</a></li>

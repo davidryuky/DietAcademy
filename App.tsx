@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { MainLayout } from './components/MainLayout';
 import { HomePage } from './components/HomePage';
-import { TestPage } from './components/TestPage';
 import { MembersPage } from './components/MembersPage';
 import { VideoLecturesPage } from './components/VideoLecturesPage';
 import { SeniorVideoLecturesPage } from './components/SeniorVideoLecturesPage';
@@ -48,7 +47,6 @@ const App: React.FC = () => {
     >
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/test" element={<TestPage />} />
         <Route path="/members" element={isAuthenticated ? <MembersPage /> : <Navigate to="/" replace />} />
         <Route path="/members/movies-regular" element={isAuthenticated ? <VideoLecturesPage /> : <Navigate to="/" replace />} />
         <Route path="/members/movies-senior" element={isAuthenticated ? <SeniorVideoLecturesPage /> : <Navigate to="/" replace />} />
