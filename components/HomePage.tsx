@@ -128,8 +128,8 @@ export const HomePage: React.FC = () => {
                 
                 <AnimatedSection className="space-y-12">
                      <div className="text-center space-y-4">
-                        <a href="#" className="inline-block transition-transform duration-300 hover:scale-105"><img src="https://dietacademy.jp/img2023/toppage/btn-faq-wide.jpg" alt="ダイエットマスターよくある質問ボタン" className="mx-auto hidden md:block max-w-full h-auto"/></a> 
-                        <a href="#" className="inline-block transition-transform duration-300 hover:scale-105"><img src="https://dietacademy.jp/img2023/toppage/btn-voices-wide.jpg" alt="受講生の喜びの声" className="mx-auto hidden md:block max-w-full h-auto"/></a>
+                        <a href="#" className="inline-block transition-transform duration-300 hover:scale-105"><img src="https://i.postimg.cc/0NKyrsH8/btn-faq-wide.jpg" alt="ダイエットマスターよくある質問ボタン" className="mx-auto hidden md:block max-w-full h-auto"/></a> 
+                        <a href="#" className="inline-block transition-transform duration-300 hover:scale-105"><img src="https://i.postimg.cc/ydqYZbws/btn-voices-wide.jpg" alt="受講生の喜びの声" className="mx-auto hidden md:block max-w-full h-auto"/></a>
                         
                         <a href="#" className="inline-block transition-opacity hover:opacity-80"><img src="https://dietacademy.jp/img2023/toppage/btn-faq.jpg" alt="ダイエットマスターよくある質問" className="mx-auto md:hidden max-w-full h-auto"/></a> 
                         <a href="#" className="inline-block transition-opacity hover:opacity-80"><img src="https://dietacademy.jp/img2023/toppage/btn-voices.jpg" alt="受講生の体験談" className="mx-auto md:hidden max-w-full h-auto"/></a>
